@@ -1,0 +1,4143 @@
+From: <Saved by Blink>
+Subject: 500 Lines or Less | A Simple Object Model
+Date: Tue, 11 Feb 2019 01:54:46 -0000
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--IEKVAqurQXdCcvGCAwqzmjMKCMIHo6sa7eHiZtfkdP----"
+
+------MultipartBoundary--IEKVAqurQXdCcvGCAwqzmjMKCMIHo6sa7eHiZtfkdP----
+Content-Type: text/html
+Content-ID: <frame-60-5eb8b8ac-56e0-4146-a1dc-4eb366f1370a@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://aosabook.org/en/500L/a-simple-object-model.html
+
+<!DOCTYPE html><html lang=3D"en"><head><meta http-equiv=3D"Content-Type" co=
+ntent=3D"text/html; charset=3DUTF-8">
+   =20
+    <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=
+=3D1.0">
+    <meta name=3D"provenance" content=3D"$Id: index.html 1472 2012-09-21 22=
+:17:41Z audrey $">
+    <link rel=3D"stylesheet" href=3D"http://aosabook.org/en/500L/theme/css/=
+bootstrap.css" type=3D"text/css">
+    <link rel=3D"stylesheet" href=3D"http://aosabook.org/en/500L/theme/css/=
+bootstrap-responsive.css" type=3D"text/css">
+    <link rel=3D"stylesheet" href=3D"http://aosabook.org/en/500L/theme/css/=
+code.css" type=3D"text/css">
+    <link rel=3D"stylesheet" href=3D"http://aosabook.org/en/500L/theme/css/=
+500L.css" type=3D"text/css">
+    <title>500 Lines or Less | A Simple Object Model</title>
+   =20
+   =20
+<style type=3D"text/css">.MathJax_Hover_Frame {border-radius: .25em; -webki=
+t-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .2=
+5em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; =
+-moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; b=
+order: 1px solid #A6D ! important; display: inline-block; position: absolut=
+e}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: poin=
+ter; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -we=
+bkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px=
+; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-=
+color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding=
+: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!=
+important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type=3D"text/css">#MathJax_About {position: fixed; left: 50%=
+; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; ba=
+ckground-color: #DDDDDD; color: black; cursor: default; font-family: messag=
+e-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform:=
+ none; line-height: normal; letter-spacing: normal; word-spacing: normal; w=
+ord-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-ra=
+dius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-b=
+order-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: =
+0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-s=
+hadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dro=
+pshadow(OffX=3D2, OffY=3D2, Color=3D'gray', Positive=3D'true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; w=
+idth: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: def=
+ault; font: menu; text-align: left; text-indent: 0; text-transform: none; l=
+ine-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap=
+: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 1=
+0px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shado=
+w: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter:=
+ progid:DXImageTransform.Microsoft.dropshadow(OffX=3D2, OffY=3D2, Color=3D'=
+gray', Positive=3D'true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; co=
+lor: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E=
+8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-bl=
+ock; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18=
+px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Cou=
+rier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.=
+5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-ra=
+dius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!im=
+portant}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type=3D"text/css">.MathJax_Preview .MJXf-math {color: inheri=
+t!important}
+</style><style type=3D"text/css">.MJX_Assistive_MathML {position: absolute!=
+important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 =
+0 0!important; border: 0!important; height: 1px!important; width: 1px!impor=
+tant; overflow: hidden!important; display: block!important; -webkit-touch-c=
+allout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-use=
+r-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type=3D"text/css">#MathJax_Zoom {position: absolute; backgro=
+und-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: =
+.5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: =
+normal; text-align: left; text-indent: 0; text-transform: none; line-height=
+: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; =
+white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box=
+-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AA=
+AAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15=
+px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImage=
+Transform.Microsoft.dropshadow(OffX=3D2, OffY=3D2, Color=3D'gray', Positive=
+=3D'true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; di=
+splay: inline-block; width: 100%; height: 100%; border: 0; padding: 0; marg=
+in: 0; background-color: white; opacity: 0; filter: alpha(opacity=3D0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; w=
+idth: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; =
+display: inline-block; border: 0; padding: 0; margin: 0; background-color: =
+white; opacity: 0; filter: alpha(opacity=3D0)}
+</style><style type=3D"text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-col=
+or: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-in=
+dex: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-ind=
+ex: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type=3D"text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right;=
+ -ms-transform-origin: right; -o-transform-origin: right; transform-origin:=
+ right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,=
+serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGenera=
+l,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGenera=
+l,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGen=
+eral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGen=
+eral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-f=
+amily: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; bord=
+er-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: to=
+p}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em=
+ 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid =
+#CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -m=
+s-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -m=
+s-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -m=
+s-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -m=
+s-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -m=
+s-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -m=
+s-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -m=
+s-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -m=
+s-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -m=
+s-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -m=
+s-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left=
+; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+  <body><div id=3D"MathJax_Message" style=3D"display: none;"></div>
+    <div class=3D"container">
+      <div class=3D"row">
+        <div class=3D"hero-unit">
+	  <a class=3D"pull-right" href=3D"http://aosabook.org/en/index.html"></a>
+          <h1>A Simple Object Model</h1>
+          <h2 class=3D"author">Carl Friedrich Bolz</h2>
+          <blockquote class=3D"pull-right">
+            </blockquote>
+
+        </div>
+      </div>
+      <div class=3D"row">
+        <div class=3D"span10 offset1" id=3D"content">
+          <p><em>Carl Friedrich Bolz is a researcher at King's College Lond=
+on and is broadly interested in the implementation and optimization of all =
+kinds of dynamic languages. He is one of the core authors of PyPy/RPython a=
+nd has worked on implementations of Prolog, Racket, Smalltalk, PHP and Ruby=
+. He's <a href=3D"https://twitter.com/cfbolz">@cfbolz</a> on Twitter.</em><=
+/p>
+
+<h2 id=3D"introduction">Introduction</h2>
+
+<p>Object-oriented programming is one of the major programming paradigms in=
+ use today, with a lot of languages providing some form of object-orientati=
+on. While on the surface the mechanisms that different object-oriented prog=
+ramming languages provide to the programmer are very similar, the details c=
+an vary a lot. Commonalities of most languages are the presence of objects =
+and some kind of inheritance mechanism. Classes, however, are a feature tha=
+t not every language supports directly. For example, in prototype-based lan=
+guages like Self or JavaScript, the concept of class does not exist and obj=
+ects instead inherit directly from each other.</p>
+
+<p>Understanding the differences between different object models can be int=
+eresting. They often reveal the family resemblance between different langua=
+ges. It can be useful to put the model of a new language into the context o=
+f the models of other languages, both to quickly understand the new model, =
+and to get a better feeling for the programming language design space.</p>
+
+<p>This chapter explores the implementation of a series of very simple obje=
+ct models. It starts out with simple instances and classes, and the ability=
+ to call methods on instances. This is the "classical" object-oriented appr=
+oach that was established in early OO languages such as Simula 67 and Small=
+talk. This model is then extended step by step, the next two steps explorin=
+g different language design choices, and the last step improving the effici=
+ency of the object model. The final model is not that of a real language, b=
+ut an idealized, simplified version of Python's object model.</p>
+
+<p>The object models presented in this chapter will be implemented in Pytho=
+n. The code works on both Python 2.7 and 3.4. To understand the behaviour a=
+nd the design choices better, the chapter will also present tests for the o=
+bject model. The tests can be run with either py.test or nose.</p>
+
+<p>The choice of Python as an implementation language is quite unrealistic.=
+ A "real" VM is typically implemented in a low-level language like C/C++ an=
+d needs a lot of attention to engineering detail to make it efficient. Howe=
+ver, the simpler implementation language makes it easier to focus on actual=
+ behaviour differences instead of getting bogged down by implementation det=
+ails.</p>
+
+<h2 id=3D"method-based-model">Method-Based Model</h2>
+
+<p>The object model we will start out with is an extremely simplified versi=
+on of that of Smalltalk. Smalltalk was an object-oriented programming langu=
+age designed by Alan Kay's group at Xerox PARC in the 1970s. It popularized=
+ object-oriented programming, and is the source of many features found in t=
+oday's programming languages. One of the core tenets of Smalltalk's languag=
+e design was "everything is an object". Smalltalk's most immediate successo=
+r in use today is Ruby, which uses a more C-like syntax but retains most of=
+ Smalltalk's object model.</p>
+
+<p>The object model in this section will have classes and instances of them=
+, the ability to read and write attributes into objects, the ability to cal=
+l methods on objects, and the ability for a class to be a subclass of anoth=
+er class. Right from the beginning, classes will be completely ordinary obj=
+ects that can themselves have attributes and methods.</p>
+
+<p>A note on terminology: In this chapter I will use the word "instance" to=
+ mean -"an object that is not a class".</p>
+
+<p>A good approach to start with is to write a test to specify what the to-=
+be-implemented behaviour should be. All tests presented in this chapter wil=
+l consist of two parts. First, a bit of regular Python code defining and us=
+ing a few classes, and making use of increasingly advanced features of the =
+Python object model. Second, the corresponding test using the object model =
+we will implement in this chapter, instead of normal Python classes.</p>
+
+<p>The mapping between using normal Python classes and using our object mod=
+el will be done manually in the tests. For example, instead of writing <cod=
+e>obj.attribute</code> in Python, in the object model we would use a method=
+ <code>obj.read_attr("attribute")</code>. This mapping would, in a real lan=
+guage implementation, be done by the interpreter of the language, or a comp=
+iler.</p>
+
+<p>A further simplification in this chapter is that we make no sharp distin=
+ction between the code that implements the object model and the code that i=
+s used to write the methods used in the objects. In a real system, the two =
+would often be implemented in different programming languages.</p>
+
+<p>Let us start with a simple test for reading and writing object fields.</=
+p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">def</span> test_read_write_field():
+    <span class=3D"co"># Python code</span>
+    <span class=3D"kw">class</span> A(<span class=3D"dt">object</span>):
+        <span class=3D"kw">pass</span>
+    obj =3D A()
+    obj.a =3D <span class=3D"dv">1</span>
+    <span class=3D"kw">assert</span> obj.a =3D=3D <span class=3D"dv">1</spa=
+n>
+
+    obj.b =3D <span class=3D"dv">5</span>
+    <span class=3D"kw">assert</span> obj.a =3D=3D <span class=3D"dv">1</spa=
+n>
+    <span class=3D"kw">assert</span> obj.b =3D=3D <span class=3D"dv">5</spa=
+n>
+
+    obj.a =3D <span class=3D"dv">2</span>
+    <span class=3D"kw">assert</span> obj.a =3D=3D <span class=3D"dv">2</spa=
+n>
+    <span class=3D"kw">assert</span> obj.b =3D=3D <span class=3D"dv">5</spa=
+n>
+
+    <span class=3D"co"># Object model code</span>
+    A =3D Class(name=3D<span class=3D"st">"A"</span>, base_class=3DOBJECT, =
+fields=3D{}, metaclass=3DTYPE)
+    obj =3D Instance(A)
+    obj.write_attr(<span class=3D"st">"a"</span>, <span class=3D"dv">1</spa=
+n>)
+    <span class=3D"kw">assert</span> obj.read_attr(<span class=3D"st">"a"</=
+span>) =3D=3D <span class=3D"dv">1</span>
+
+    obj.write_attr(<span class=3D"st">"b"</span>, <span class=3D"dv">5</spa=
+n>)
+    <span class=3D"kw">assert</span> obj.read_attr(<span class=3D"st">"a"</=
+span>) =3D=3D <span class=3D"dv">1</span>
+    <span class=3D"kw">assert</span> obj.read_attr(<span class=3D"st">"b"</=
+span>) =3D=3D <span class=3D"dv">5</span>
+
+    obj.write_attr(<span class=3D"st">"a"</span>, <span class=3D"dv">2</spa=
+n>)
+    <span class=3D"kw">assert</span> obj.read_attr(<span class=3D"st">"a"</=
+span>) =3D=3D <span class=3D"dv">2</span>
+    <span class=3D"kw">assert</span> obj.read_attr(<span class=3D"st">"b"</=
+span>) =3D=3D <span class=3D"dv">5</span></code></pre>
+
+<p>The test uses three things that we have to implement. The classes <code>=
+Class</code> and <code>Instance</code> represent classes and instances of o=
+ur object model, respectively. There are two special instances of class: <c=
+ode>OBJECT</code> and <code>TYPE</code>. <code>OBJECT</code> corresponds to=
+ <code>object</code> in Python and is the ultimate base class of the inheri=
+tance hierarchy. <code>TYPE</code> corresponds to <code>type</code> in Pyth=
+on and is the type of all classes.</p>
+
+<p>To do anything with instances of <code>Class</code> and <code>Instance</=
+code>, they implement a shared interface by inheriting from a shared base c=
+lass <code>Base</code> that exposes a number of methods:</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">class</span> Base(<span class=3D"dt">object</span>):
+    <span class=3D"co">""" The base class that all of the object model clas=
+ses inherit from. """</span>
+
+    <span class=3D"kw">def</span> <span class=3D"ot">__init__</span>(<span =
+class=3D"ot">self</span>, cls, fields):
+        <span class=3D"co">""" Every object has a class. """</span>
+        <span class=3D"ot">self</span>.cls =3D cls
+        <span class=3D"ot">self</span>._fields =3D fields
+
+    <span class=3D"kw">def</span> read_attr(<span class=3D"ot">self</span>,=
+ fieldname):
+        <span class=3D"co">""" read field 'fieldname' out of the object """=
+</span>
+        <span class=3D"kw">return</span> <span class=3D"ot">self</span>._re=
+ad_dict(fieldname)
+
+    <span class=3D"kw">def</span> write_attr(<span class=3D"ot">self</span>=
+, fieldname, value):
+        <span class=3D"co">""" write field 'fieldname' into the object """<=
+/span>
+        <span class=3D"ot">self</span>._write_dict(fieldname, value)
+
+    <span class=3D"kw">def</span> <span class=3D"dt">isinstance</span>(<spa=
+n class=3D"ot">self</span>, cls):
+        <span class=3D"co">""" return True if the object is an instance of =
+class cls """</span>
+        <span class=3D"kw">return</span> <span class=3D"ot">self</span>.cls=
+.<span class=3D"dt">issubclass</span>(cls)
+
+    <span class=3D"kw">def</span> callmethod(<span class=3D"ot">self</span>=
+, methname, *args):
+        <span class=3D"co">""" call method 'methname' with arguments 'args'=
+ on object """</span>
+        meth =3D <span class=3D"ot">self</span>.cls._read_from_class(methna=
+me)
+        <span class=3D"kw">return</span> meth(<span class=3D"ot">self</span=
+>, *args)
+
+    <span class=3D"kw">def</span> _read_dict(<span class=3D"ot">self</span>=
+, fieldname):
+        <span class=3D"co">""" read an field 'fieldname' out of the object'=
+s dict """</span>
+        <span class=3D"kw">return</span> <span class=3D"ot">self</span>._fi=
+elds.get(fieldname, MISSING)
+
+    <span class=3D"kw">def</span> _write_dict(<span class=3D"ot">self</span=
+>, fieldname, value):
+        <span class=3D"co">""" write a field 'fieldname' into the object's =
+dict """</span>
+        <span class=3D"ot">self</span>._fields[fieldname] =3D value
+
+MISSING =3D <span class=3D"dt">object</span>()</code></pre>
+
+<p>The <code>Base</code> class implements storing the class of an object, a=
+nd a dictionary containing the field values of the object. Now we need to i=
+mplement <code>Class</code> and <code>Instance</code>. The constructor of <=
+code>Instance</code> takes the class to be instantiated and initializes the=
+ <code>fields</code> <code>dict</code> as an empty dictionary. Otherwise <c=
+ode>Instance</code> is just a very thin subclass around <code>Base</code> t=
+hat does not add any extra functionality.</p>
+
+<p>The constructor of <code>Class</code> takes the name of the class, the b=
+ase class, the dictionary of the class and the metaclass. For classes, the =
+fields are passed into the constructor by the user of the object model. The=
+ class constructor also takes a base class, which the tests so far don't ne=
+ed but which we will make use of in the next section.</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">class</span> Instance(Base):
+    <span class=3D"co">"""Instance of a user-defined class. """</span>
+
+    <span class=3D"kw">def</span> <span class=3D"ot">__init__</span>(<span =
+class=3D"ot">self</span>, cls):
+        <span class=3D"kw">assert</span> <span class=3D"dt">isinstance</spa=
+n>(cls, Class)
+        Base.<span class=3D"ot">__init__</span>(<span class=3D"ot">self</sp=
+an>, cls, {})
+
+
+<span class=3D"kw">class</span> Class(Base):
+    <span class=3D"co">""" A User-defined class. """</span>
+
+    <span class=3D"kw">def</span> <span class=3D"ot">__init__</span>(<span =
+class=3D"ot">self</span>, name, base_class, fields, metaclass):
+        Base.<span class=3D"ot">__init__</span>(<span class=3D"ot">self</sp=
+an>, metaclass, fields)
+        <span class=3D"ot">self</span>.name =3D name
+        <span class=3D"ot">self</span>.base_class =3D base_class</code></pr=
+e>
+
+<p>Since classes are also a kind of object, they (indirectly) inherit from =
+<code>Base</code>. Thus, the class needs to be an instance of another class=
+: its metaclass.</p>
+
+<p>Now our first test almost passes. The only missing bit is the definition=
+ of the base classes <code>TYPE</code> and <code>OBJECT</code>, which are b=
+oth instances of <code>Class</code>. For these we will make a major departu=
+re from the Smalltalk model, which has a fairly complex metaclass system. I=
+nstead we will use the model introduced in ObjVlisp<a href=3D"http://aosabo=
+ok.org/en/500L/a-simple-object-model.html#fn1" class=3D"footnoteRef" id=3D"=
+fnref1"><sup>1</sup></a>, which Python adopted.</p>
+
+<p>In the ObjVlisp model, <code>OBJECT</code> and <code>TYPE</code> are int=
+ertwined. <code>OBJECT</code> is the base class of all classes, meaning it =
+has no base class. <code>TYPE</code> is a subclass of <code>OBJECT</code>. =
+By default, every class is an instance of <code>TYPE</code>. In particular,=
+ both <code>TYPE</code> and <code>OBJECT</code> are instances of <code>TYPE=
+</code>. However, the programmer can also subclass <code>TYPE</code> to mak=
+e a new metaclass:</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"co"># set up the base hierarchy as in Python (the ObjVLisp model)</s=
+pan>
+<span class=3D"co"># the ultimate base class is OBJECT</span>
+OBJECT =3D Class(name=3D<span class=3D"st">"object"</span>, base_class=3D<s=
+pan class=3D"ot">None</span>, fields=3D{}, metaclass=3D<span class=3D"ot">N=
+one</span>)
+<span class=3D"co"># TYPE is a subclass of OBJECT</span>
+TYPE =3D Class(name=3D<span class=3D"st">"type"</span>, base_class=3DOBJECT=
+, fields=3D{}, metaclass=3D<span class=3D"ot">None</span>)
+<span class=3D"co"># TYPE is an instance of itself</span>
+TYPE.cls =3D TYPE
+<span class=3D"co"># OBJECT is an instance of TYPE</span>
+OBJECT.cls =3D TYPE</code></pre>
+
+<p>To define new metaclasses, it is enough to subclass <code>TYPE</code>. H=
+owever, in the rest of this chapter we won't do that; we'll simply always u=
+se <code>TYPE</code> as the metaclass of every class.</p>
+
+<div class=3D"center figure">
+<a name=3D"figure-14.1"></a><img src=3D"http://aosabook.org/en/500L/objmode=
+l-images/inheritance.png" alt=3D"Figure 14.1 - Inheritance" title=3D"Figure=
+ 14.1 - Inheritance">
+</div>
+
+<p class=3D"center figcaption">
+<small>Figure 14.1 - Inheritance</small>
+</p>
+
+<p>Now the first test passes. The second test checks that reading and writi=
+ng attributes works on classes as well. It's easy to write, and passes imme=
+diately. </p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">def</span> test_read_write_field_class():
+    <span class=3D"co"># classes are objects too</span>
+    <span class=3D"co"># Python code</span>
+    <span class=3D"kw">class</span> A(<span class=3D"dt">object</span>):
+        <span class=3D"kw">pass</span>
+    A.a =3D <span class=3D"dv">1</span>
+    <span class=3D"kw">assert</span> A.a =3D=3D <span class=3D"dv">1</span>
+    A.a =3D <span class=3D"dv">6</span>
+    <span class=3D"kw">assert</span> A.a =3D=3D <span class=3D"dv">6</span>
+
+    <span class=3D"co"># Object model code</span>
+    A =3D Class(name=3D<span class=3D"st">"A"</span>, base_class=3DOBJECT, =
+fields=3D{<span class=3D"st">"a"</span>: <span class=3D"dv">1</span>}, meta=
+class=3DTYPE)
+    <span class=3D"kw">assert</span> A.read_attr(<span class=3D"st">"a"</sp=
+an>) =3D=3D <span class=3D"dv">1</span>
+    A.write_attr(<span class=3D"st">"a"</span>, <span class=3D"dv">5</span>=
+)
+    <span class=3D"kw">assert</span> A.read_attr(<span class=3D"st">"a"</sp=
+an>) =3D=3D <span class=3D"dv">5</span></code></pre>
+
+<h3 id=3D"isinstance-checking"><code>isinstance</code> Checking</h3>
+
+<p>So far we haven't taken advantage of the fact that objects have classes.=
+ The next test implements the <code>isinstance</code> machinery:</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">def</span> test_isinstance():
+    <span class=3D"co"># Python code</span>
+    <span class=3D"kw">class</span> A(<span class=3D"dt">object</span>):
+        <span class=3D"kw">pass</span>
+    <span class=3D"kw">class</span> B(A):
+        <span class=3D"kw">pass</span>
+    b =3D B()
+    <span class=3D"kw">assert</span> <span class=3D"dt">isinstance</span>(b=
+, B)
+    <span class=3D"kw">assert</span> <span class=3D"dt">isinstance</span>(b=
+, A)
+    <span class=3D"kw">assert</span> <span class=3D"dt">isinstance</span>(b=
+, <span class=3D"dt">object</span>)
+    <span class=3D"kw">assert</span> not <span class=3D"dt">isinstance</spa=
+n>(b, <span class=3D"dt">type</span>)
+
+    <span class=3D"co"># Object model code</span>
+    A =3D Class(name=3D<span class=3D"st">"A"</span>, base_class=3DOBJECT, =
+fields=3D{}, metaclass=3DTYPE)
+    B =3D Class(name=3D<span class=3D"st">"B"</span>, base_class=3DA, field=
+s=3D{}, metaclass=3DTYPE)
+    b =3D Instance(B)
+    <span class=3D"kw">assert</span> b.<span class=3D"dt">isinstance</span>=
+(B)
+    <span class=3D"kw">assert</span> b.<span class=3D"dt">isinstance</span>=
+(A)
+    <span class=3D"kw">assert</span> b.<span class=3D"dt">isinstance</span>=
+(OBJECT)
+    <span class=3D"kw">assert</span> not b.<span class=3D"dt">isinstance</s=
+pan>(TYPE)</code></pre>
+
+<p>To check whether an object <code>obj</code> is an instance of a certain =
+class <code>cls</code>, it is enough to check whether <code>cls</code> is a=
+ superclass of the class of <code>obj</code>, or the class itself. To check=
+ whether a class is a superclass of another class, the chain of superclasse=
+s of that class is walked. If and only if the other class is found in that =
+chain, it is a superclass. The chain of superclasses of a class, including =
+the class itself, is called the "method resolution order" of that class. It=
+ can easily be computed recursively:</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">class</span> Class(Base):
+    ...
+
+    <span class=3D"kw">def</span> method_resolution_order(<span class=3D"ot=
+">self</span>):
+        <span class=3D"co">""" compute the method resolution order of the c=
+lass """</span>
+        <span class=3D"kw">if</span> <span class=3D"ot">self</span>.base_cl=
+ass is <span class=3D"ot">None</span>:
+            <span class=3D"kw">return</span> [<span class=3D"ot">self</span=
+>]
+        <span class=3D"kw">else</span>:
+            <span class=3D"kw">return</span> [<span class=3D"ot">self</span=
+>] + <span class=3D"ot">self</span>.base_class.method_resolution_order()
+
+    <span class=3D"kw">def</span> <span class=3D"dt">issubclass</span>(<spa=
+n class=3D"ot">self</span>, cls):
+        <span class=3D"co">""" is self a subclass of cls? """</span>
+        <span class=3D"kw">return</span> cls in <span class=3D"ot">self</sp=
+an>.method_resolution_order()</code></pre>
+
+<p>With that code, the test passes.</p>
+
+<h3 id=3D"calling-methods">Calling Methods</h3>
+
+<p>The remaining missing feature for this first version of the object model=
+ is the ability to call methods on objects. In this chapter we will impleme=
+nt a simple single inheritance model.</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">def</span> test_callmethod_simple():
+    <span class=3D"co"># Python code</span>
+    <span class=3D"kw">class</span> A(<span class=3D"dt">object</span>):
+        <span class=3D"kw">def</span> f(<span class=3D"ot">self</span>):
+            <span class=3D"kw">return</span> <span class=3D"ot">self</span>=
+.x + <span class=3D"dv">1</span>
+    obj =3D A()
+    obj.x =3D <span class=3D"dv">1</span>
+    <span class=3D"kw">assert</span> obj.f() =3D=3D <span class=3D"dv">2</s=
+pan>
+
+    <span class=3D"kw">class</span> B(A):
+        <span class=3D"kw">pass</span>
+    obj =3D B()
+    obj.x =3D <span class=3D"dv">1</span>
+    <span class=3D"kw">assert</span> obj.f() =3D=3D <span class=3D"dv">2</s=
+pan> <span class=3D"co"># works on subclass too</span>
+
+    <span class=3D"co"># Object model code</span>
+    <span class=3D"kw">def</span> f_A(<span class=3D"ot">self</span>):
+        <span class=3D"kw">return</span> <span class=3D"ot">self</span>.rea=
+d_attr(<span class=3D"st">"x"</span>) + <span class=3D"dv">1</span>
+    A =3D Class(name=3D<span class=3D"st">"A"</span>, base_class=3DOBJECT, =
+fields=3D{<span class=3D"st">"f"</span>: f_A}, metaclass=3DTYPE)
+    obj =3D Instance(A)
+    obj.write_attr(<span class=3D"st">"x"</span>, <span class=3D"dv">1</spa=
+n>)
+    <span class=3D"kw">assert</span> obj.callmethod(<span class=3D"st">"f"<=
+/span>) =3D=3D <span class=3D"dv">2</span>
+
+    B =3D Class(name=3D<span class=3D"st">"B"</span>, base_class=3DA, field=
+s=3D{}, metaclass=3DTYPE)
+    obj =3D Instance(B)
+    obj.write_attr(<span class=3D"st">"x"</span>, <span class=3D"dv">2</spa=
+n>)
+    <span class=3D"kw">assert</span> obj.callmethod(<span class=3D"st">"f"<=
+/span>) =3D=3D <span class=3D"dv">3</span></code></pre>
+
+<p>To find the correct implementation of a method that is sent to an object=
+, we walk the method resolution order of the class of the object. The first=
+ method found in the dictionary of one of the classes in the method resolut=
+ion order is called:</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">class</span> Class(Base):
+    ...
+
+    <span class=3D"kw">def</span> _read_from_class(<span class=3D"ot">self<=
+/span>, methname):
+        <span class=3D"kw">for</span> cls in <span class=3D"ot">self</span>=
+.method_resolution_order():
+            <span class=3D"kw">if</span> methname in cls._fields:
+                <span class=3D"kw">return</span> cls._fields[methname]
+        <span class=3D"kw">return</span> MISSING</code></pre>
+
+<p>Together with the code for <code>callmethod</code> in the <code>Base</co=
+de> implementation, this passes the test.</p>
+
+<p>To make sure that methods with arguments work as well, and that overridi=
+ng of methods is implemented correctly, we can use the following slightly m=
+ore complex test, which already passes:</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">def</span> test_callmethod_subclassing_and_arguments():
+    <span class=3D"co"># Python code</span>
+    <span class=3D"kw">class</span> A(<span class=3D"dt">object</span>):
+        <span class=3D"kw">def</span> g(<span class=3D"ot">self</span>, arg=
+):
+            <span class=3D"kw">return</span> <span class=3D"ot">self</span>=
+.x + arg
+    obj =3D A()
+    obj.x =3D <span class=3D"dv">1</span>
+    <span class=3D"kw">assert</span> obj.g(<span class=3D"dv">4</span>) =3D=
+=3D <span class=3D"dv">5</span>
+
+    <span class=3D"kw">class</span> B(A):
+        <span class=3D"kw">def</span> g(<span class=3D"ot">self</span>, arg=
+):
+            <span class=3D"kw">return</span> <span class=3D"ot">self</span>=
+.x + arg * <span class=3D"dv">2</span>
+    obj =3D B()
+    obj.x =3D <span class=3D"dv">4</span>
+    <span class=3D"kw">assert</span> obj.g(<span class=3D"dv">4</span>) =3D=
+=3D <span class=3D"dv">12</span>
+
+    <span class=3D"co"># Object model code</span>
+    <span class=3D"kw">def</span> g_A(<span class=3D"ot">self</span>, arg):
+        <span class=3D"kw">return</span> <span class=3D"ot">self</span>.rea=
+d_attr(<span class=3D"st">"x"</span>) + arg
+    A =3D Class(name=3D<span class=3D"st">"A"</span>, base_class=3DOBJECT, =
+fields=3D{<span class=3D"st">"g"</span>: g_A}, metaclass=3DTYPE)
+    obj =3D Instance(A)
+    obj.write_attr(<span class=3D"st">"x"</span>, <span class=3D"dv">1</spa=
+n>)
+    <span class=3D"kw">assert</span> obj.callmethod(<span class=3D"st">"g"<=
+/span>, <span class=3D"dv">4</span>) =3D=3D <span class=3D"dv">5</span>
+
+    <span class=3D"kw">def</span> g_B(<span class=3D"ot">self</span>, arg):
+        <span class=3D"kw">return</span> <span class=3D"ot">self</span>.rea=
+d_attr(<span class=3D"st">"x"</span>) + arg * <span class=3D"dv">2</span>
+    B =3D Class(name=3D<span class=3D"st">"B"</span>, base_class=3DA, field=
+s=3D{<span class=3D"st">"g"</span>: g_B}, metaclass=3DTYPE)
+    obj =3D Instance(B)
+    obj.write_attr(<span class=3D"st">"x"</span>, <span class=3D"dv">4</spa=
+n>)
+    <span class=3D"kw">assert</span> obj.callmethod(<span class=3D"st">"g"<=
+/span>, <span class=3D"dv">4</span>) =3D=3D <span class=3D"dv">12</span></c=
+ode></pre>
+
+<h2 id=3D"attribute-based-model">Attribute-Based Model</h2>
+
+<p>Now that the simplest version of our object model is working, we can thi=
+nk of ways to change it. This section will introduce the distinction betwee=
+n a method-based model and an attribute-based model. This is one of the cor=
+e differences between Smalltalk, Ruby, and JavaScript on the one hand and P=
+ython and Lua on the other hand.</p>
+
+<p>The method-based model has the method-calling as the primitive of progra=
+m execution:</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python">result =
+=3D obj.f(arg1, arg2)</code></pre>
+
+<p>The attribute-based model splits up method calling into two steps: looki=
+ng up an attribute and calling the result:</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python">method =
+=3D obj.f
+result =3D method(arg1, arg2)</code></pre>
+
+<p>This difference can be shown in the following test:</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">def</span> test_bound_method():
+    <span class=3D"co"># Python code</span>
+    <span class=3D"kw">class</span> A(<span class=3D"dt">object</span>):
+        <span class=3D"kw">def</span> f(<span class=3D"ot">self</span>, a):
+            <span class=3D"kw">return</span> <span class=3D"ot">self</span>=
+.x + a + <span class=3D"dv">1</span>
+    obj =3D A()
+    obj.x =3D <span class=3D"dv">2</span>
+    m =3D obj.f
+    <span class=3D"kw">assert</span> m(<span class=3D"dv">4</span>) =3D=3D =
+<span class=3D"dv">7</span>
+
+    <span class=3D"kw">class</span> B(A):
+        <span class=3D"kw">pass</span>
+    obj =3D B()
+    obj.x =3D <span class=3D"dv">1</span>
+    m =3D obj.f
+    <span class=3D"kw">assert</span> m(<span class=3D"dv">10</span>) =3D=3D=
+ <span class=3D"dv">12</span> <span class=3D"co"># works on subclass too</s=
+pan>
+
+    <span class=3D"co"># Object model code</span>
+    <span class=3D"kw">def</span> f_A(<span class=3D"ot">self</span>, a):
+        <span class=3D"kw">return</span> <span class=3D"ot">self</span>.rea=
+d_attr(<span class=3D"st">"x"</span>) + a + <span class=3D"dv">1</span>
+    A =3D Class(name=3D<span class=3D"st">"A"</span>, base_class=3DOBJECT, =
+fields=3D{<span class=3D"st">"f"</span>: f_A}, metaclass=3DTYPE)
+    obj =3D Instance(A)
+    obj.write_attr(<span class=3D"st">"x"</span>, <span class=3D"dv">2</spa=
+n>)
+    m =3D obj.read_attr(<span class=3D"st">"f"</span>)
+    <span class=3D"kw">assert</span> m(<span class=3D"dv">4</span>) =3D=3D =
+<span class=3D"dv">7</span>
+
+    B =3D Class(name=3D<span class=3D"st">"B"</span>, base_class=3DA, field=
+s=3D{}, metaclass=3DTYPE)
+    obj =3D Instance(B)
+    obj.write_attr(<span class=3D"st">"x"</span>, <span class=3D"dv">1</spa=
+n>)
+    m =3D obj.read_attr(<span class=3D"st">"f"</span>)
+    <span class=3D"kw">assert</span> m(<span class=3D"dv">10</span>) =3D=3D=
+ <span class=3D"dv">12</span></code></pre>
+
+<p>While the setup is the same as the corresponding test for method calls, =
+the way that the methods are called is different. First, the attribute with=
+ the name of the method is looked up on the object. The result of that look=
+up operation is a <em>bound method</em>, an object that encapsulates both t=
+he object as well as the function found in the class. Next, that bound meth=
+od is called with a call operation<a href=3D"http://aosabook.org/en/500L/a-=
+simple-object-model.html#fn2" class=3D"footnoteRef" id=3D"fnref2"><sup>2</s=
+up></a>.</p>
+
+<p>To implement this behaviour, we need to change the <code>Base.read_attr<=
+/code> implementation. If the attribute is not found in the dictionary, it =
+is looked for in the class. If it is found in the class, and the attribute =
+is a callable, it needs to be turned into a bound method. To emulate a boun=
+d method we simply use a closure. In addition to changing <code>Base.read_a=
+ttr</code> we can also change <code>Base.callmethod</code> to use the new a=
+pproach to calling methods to make sure all the tests still pass.</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">class</span> Base(<span class=3D"dt">object</span>):
+    ...
+    <span class=3D"kw">def</span> read_attr(<span class=3D"ot">self</span>,=
+ fieldname):
+        <span class=3D"co">""" read field 'fieldname' out of the object """=
+</span>
+        result =3D <span class=3D"ot">self</span>._read_dict(fieldname)
+        <span class=3D"kw">if</span> result is not MISSING:
+            <span class=3D"kw">return</span> result
+        result =3D <span class=3D"ot">self</span>.cls._read_from_class(fiel=
+dname)
+        <span class=3D"kw">if</span> _is_bindable(result):
+            <span class=3D"kw">return</span> _make_boundmethod(result, <spa=
+n class=3D"ot">self</span>)
+        <span class=3D"kw">if</span> result is not MISSING:
+            <span class=3D"kw">return</span> result
+        <span class=3D"kw">raise</span> <span class=3D"ot">AttributeError</=
+span>(fieldname)
+
+    <span class=3D"kw">def</span> callmethod(<span class=3D"ot">self</span>=
+, methname, *args):
+        <span class=3D"co">""" call method 'methname' with arguments 'args'=
+ on object """</span>
+        meth =3D <span class=3D"ot">self</span>.read_attr(methname)
+        <span class=3D"kw">return</span> meth(*args)
+
+<span class=3D"kw">def</span> _is_bindable(meth):
+    <span class=3D"kw">return</span> <span class=3D"dt">callable</span>(met=
+h)
+
+<span class=3D"kw">def</span> _make_boundmethod(meth, <span class=3D"ot">se=
+lf</span>):
+    <span class=3D"kw">def</span> bound(*args):
+        <span class=3D"kw">return</span> meth(<span class=3D"ot">self</span=
+>, *args)
+    <span class=3D"kw">return</span> bound</code></pre>
+
+<p>The rest of the code does not need to be changed at all.</p>
+
+<h2 id=3D"meta-object-protocols">Meta-Object Protocols</h2>
+
+<p>In addition to "normal" methods that are called directly by the program,=
+ many dynamic languages support <em>special methods</em>. These are methods=
+ that aren't meant to be called directly but will be called by the object s=
+ystem. In Python those special methods usually have names that start and en=
+d with two underscores; e.g., <code>__init__</code>. Special methods can be=
+ used to override primitive operations and provide custom behaviour for the=
+m instead. Thus, they are hooks that tell the object model machinery exactl=
+y how to do certain things. Python's object model has <a href=3D"https://do=
+cs.python.org/2/reference/datamodel.html#special-method-names">dozens of sp=
+ecial methods</a>.</p>
+
+<p>Meta-object protocols were introduced by Smalltalk, but were used even m=
+ore by the object systems for Common Lisp, such as CLOS. That is also where=
+ the name <em>meta-object protocol</em>, for collections of special methods=
+, was coined<a href=3D"http://aosabook.org/en/500L/a-simple-object-model.ht=
+ml#fn3" class=3D"footnoteRef" id=3D"fnref3"><sup>3</sup></a>.</p>
+
+<p>In this chapter we will add three such meta-hooks to our object model. T=
+hey are used to fine-tune what exactly happens when reading and writing att=
+ributes. The special methods we will add first are <code>__getattr__</code>=
+ and <code>__setattr__</code>, which closely follow the behaviour of Python=
+'s namesakes.</p>
+
+<h3 id=3D"customizing-reading-and-writing-and-attribute">Customizing Readin=
+g and Writing and Attribute</h3>
+
+<p>The method <code>__getattr__</code> is called by the object model when t=
+he attribute that is being looked up is not found by normal means; i.e., ne=
+ither on the instance nor on the class. It gets the name of the attribute b=
+eing looked up as an argument. An equivalent of the <code>__getattr__</code=
+> special method was part of early Smalltalk<a href=3D"http://aosabook.org/=
+en/500L/a-simple-object-model.html#fn4" class=3D"footnoteRef" id=3D"fnref4"=
+><sup>4</sup></a> systems under the name <code>doesNotUnderstand:</code>.</=
+p>
+
+<p>The case of <code>__setattr__</code> is a bit different. Since setting a=
+n attribute always creates it, <code>__setattr__</code> is always called wh=
+en setting an attribute. To make sure that a <code>__setattr__</code> metho=
+d always exists, the <code>OBJECT</code> class has a definition of <code>__=
+setattr__</code>. This base implementation simply does what setting an attr=
+ibute did so far, which is write the attribute into the object's dictionary=
+. This also makes it possible for a user-defined <code>__setattr__</code> t=
+o delegate to the base <code>OBJECT.__setattr__</code> in some cases.</p>
+
+<p>A test for these two special methods is the following:</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">def</span> test_getattr():
+    <span class=3D"co"># Python code</span>
+    <span class=3D"kw">class</span> A(<span class=3D"dt">object</span>):
+        <span class=3D"kw">def</span> <span class=3D"ot">__getattr__</span>=
+(<span class=3D"ot">self</span>, name):
+            <span class=3D"kw">if</span> name =3D=3D <span class=3D"st">"fa=
+hrenheit"</span>:
+                <span class=3D"kw">return</span> <span class=3D"ot">self</s=
+pan>.celsius * <span class=3D"dv">9</span>. / <span class=3D"dv">5</span>. =
++ <span class=3D"dv">32</span>
+            <span class=3D"kw">raise</span> <span class=3D"ot">AttributeErr=
+or</span>(name)
+
+        <span class=3D"kw">def</span> <span class=3D"ot">__setattr__</span>=
+(<span class=3D"ot">self</span>, name, value):
+            <span class=3D"kw">if</span> name =3D=3D <span class=3D"st">"fa=
+hrenheit"</span>:
+                <span class=3D"ot">self</span>.celsius =3D (value - <span c=
+lass=3D"dv">32</span>) * <span class=3D"dv">5</span>. / <span class=3D"dv">=
+9</span>.
+            <span class=3D"kw">else</span>:
+                <span class=3D"co"># call the base implementation</span>
+                <span class=3D"dt">object</span>.<span class=3D"ot">__setat=
+tr__</span>(<span class=3D"ot">self</span>, name, value)
+    obj =3D A()
+    obj.celsius =3D <span class=3D"dv">30</span>
+    <span class=3D"kw">assert</span> obj.fahrenheit =3D=3D <span class=3D"d=
+v">86</span> <span class=3D"co"># test __getattr__</span>
+    obj.celsius =3D <span class=3D"dv">40</span>
+    <span class=3D"kw">assert</span> obj.fahrenheit =3D=3D <span class=3D"d=
+v">104</span>
+
+    obj.fahrenheit =3D <span class=3D"dv">86</span> <span class=3D"co"># te=
+st __setattr__</span>
+    <span class=3D"kw">assert</span> obj.celsius =3D=3D <span class=3D"dv">=
+30</span>
+    <span class=3D"kw">assert</span> obj.fahrenheit =3D=3D <span class=3D"d=
+v">86</span>
+
+    <span class=3D"co"># Object model code</span>
+    <span class=3D"kw">def</span> <span class=3D"ot">__getattr__</span>(<sp=
+an class=3D"ot">self</span>, name):
+        <span class=3D"kw">if</span> name =3D=3D <span class=3D"st">"fahren=
+heit"</span>:
+            <span class=3D"kw">return</span> <span class=3D"ot">self</span>=
+.read_attr(<span class=3D"st">"celsius"</span>) * <span class=3D"dv">9</spa=
+n>. / <span class=3D"dv">5</span>. + <span class=3D"dv">32</span>
+        <span class=3D"kw">raise</span> <span class=3D"ot">AttributeError</=
+span>(name)
+    <span class=3D"kw">def</span> <span class=3D"ot">__setattr__</span>(<sp=
+an class=3D"ot">self</span>, name, value):
+        <span class=3D"kw">if</span> name =3D=3D <span class=3D"st">"fahren=
+heit"</span>:
+            <span class=3D"ot">self</span>.write_attr(<span class=3D"st">"c=
+elsius"</span>, (value - <span class=3D"dv">32</span>) * <span class=3D"dv"=
+>5</span>. / <span class=3D"dv">9</span>.)
+        <span class=3D"kw">else</span>:
+            <span class=3D"co"># call the base implementation</span>
+            OBJECT.read_attr(<span class=3D"st">"__setattr__"</span>)(<span=
+ class=3D"ot">self</span>, name, value)
+
+    A =3D Class(name=3D<span class=3D"st">"A"</span>, base_class=3DOBJECT,
+              fields=3D{<span class=3D"st">"__getattr__"</span>: <span clas=
+s=3D"ot">__getattr__</span>, <span class=3D"st">"__setattr__"</span>: <span=
+ class=3D"ot">__setattr__</span>},
+              metaclass=3DTYPE)
+    obj =3D Instance(A)
+    obj.write_attr(<span class=3D"st">"celsius"</span>, <span class=3D"dv">=
+30</span>)
+    <span class=3D"kw">assert</span> obj.read_attr(<span class=3D"st">"fahr=
+enheit"</span>) =3D=3D <span class=3D"dv">86</span> <span class=3D"co"># te=
+st __getattr__</span>
+    obj.write_attr(<span class=3D"st">"celsius"</span>, <span class=3D"dv">=
+40</span>)
+    <span class=3D"kw">assert</span> obj.read_attr(<span class=3D"st">"fahr=
+enheit"</span>) =3D=3D <span class=3D"dv">104</span>
+    obj.write_attr(<span class=3D"st">"fahrenheit"</span>, <span class=3D"d=
+v">86</span>) <span class=3D"co"># test __setattr__</span>
+    <span class=3D"kw">assert</span> obj.read_attr(<span class=3D"st">"cels=
+ius"</span>) =3D=3D <span class=3D"dv">30</span>
+    <span class=3D"kw">assert</span> obj.read_attr(<span class=3D"st">"fahr=
+enheit"</span>) =3D=3D <span class=3D"dv">86</span></code></pre>
+
+<p>To pass these tests, the <code>Base.read_attr</code> and <code>Base.writ=
+e_attr</code> methods need to be changed:</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">class</span> Base(<span class=3D"dt">object</span>):
+    ...
+
+    <span class=3D"kw">def</span> read_attr(<span class=3D"ot">self</span>,=
+ fieldname):
+        <span class=3D"co">""" read field 'fieldname' out of the object """=
+</span>
+        result =3D <span class=3D"ot">self</span>._read_dict(fieldname)
+        <span class=3D"kw">if</span> result is not MISSING:
+            <span class=3D"kw">return</span> result
+        result =3D <span class=3D"ot">self</span>.cls._read_from_class(fiel=
+dname)
+        <span class=3D"kw">if</span> _is_bindable(result):
+            <span class=3D"kw">return</span> _make_boundmethod(result, <spa=
+n class=3D"ot">self</span>)
+        <span class=3D"kw">if</span> result is not MISSING:
+            <span class=3D"kw">return</span> result
+        meth =3D <span class=3D"ot">self</span>.cls._read_from_class(<span =
+class=3D"st">"__getattr__"</span>)
+        <span class=3D"kw">if</span> meth is not MISSING:
+            <span class=3D"kw">return</span> meth(<span class=3D"ot">self</=
+span>, fieldname)
+        <span class=3D"kw">raise</span> <span class=3D"ot">AttributeError</=
+span>(fieldname)
+
+    <span class=3D"kw">def</span> write_attr(<span class=3D"ot">self</span>=
+, fieldname, value):
+        <span class=3D"co">""" write field 'fieldname' into the object """<=
+/span>
+        meth =3D <span class=3D"ot">self</span>.cls._read_from_class(<span =
+class=3D"st">"__setattr__"</span>)
+        <span class=3D"kw">return</span> meth(<span class=3D"ot">self</span=
+>, fieldname, value)</code></pre>
+
+<p>The procedure for reading an attribute is changed to call the <code>__ge=
+tattr__</code> method with the fieldname as an argument, if the method exis=
+ts, instead of raising an error. Note that <code>__getattr__</code> (and in=
+deed all special methods in Python) is looked up on the class only, instead=
+ of recursively calling <code>self.read_attr("__getattr__")</code>. That is=
+ because the latter would lead to an infinite recursion of <code>read_attr<=
+/code> if <code>__getattr__</code> were not defined on the object.</p>
+
+<p>Writing of attributes is fully deferred to the <code>__setattr__</code> =
+method. To make this work, <code>OBJECT</code> needs to have a <code>__seta=
+ttr__</code> method that calls the default behaviour, as follows:</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">def</span> OBJECT__setattr__(<span class=3D"ot">self</span>, fie=
+ldname, value):
+    <span class=3D"ot">self</span>._write_dict(fieldname, value)
+OBJECT =3D Class(<span class=3D"st">"object"</span>, <span class=3D"ot">Non=
+e</span>, {<span class=3D"st">"__setattr__"</span>: OBJECT__setattr__}, <sp=
+an class=3D"ot">None</span>)</code></pre>
+
+<p>The behaviour of <code>OBJECT__setattr__</code> is like the previous beh=
+aviour of <code>write_attr</code>. With these modifications, the new test p=
+asses.</p>
+
+<h3 id=3D"descriptor-protocol">Descriptor Protocol</h3>
+
+<p>The above test to provide automatic conversion between different tempera=
+ture scales worked but was annoying to write, as the attribute name needed =
+to be checked explicitly in the <code>__getattr__</code> and <code>__setatt=
+r__</code> methods. To get around this, the <em>descriptor protocol</em> wa=
+s introduced in Python.</p>
+
+<p>While <code>__getattr__</code> and <code>__setattr__</code> are called o=
+n the object the attribute is being read from, the descriptor protocol call=
+s a special method on the <em>result</em> of getting an attribute from an o=
+bject. It can be seen as the generalization of binding a method to an objec=
+t =E2=80=93 and indeed, binding a method to an object is done using the des=
+criptor protocol. In addition to bound methods, the most important use case=
+ for the descriptor protocol in Python is the implementation of <code>stati=
+cmethod</code>, <code>classmethod</code> and <code>property</code>.</p>
+
+<p>In this subsection we will introduce the subset of the descriptor protoc=
+ol which deals with binding objects. This is done using the special method =
+<code>__get__</code>, and is best explained with an example test:</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">def</span> test_get():
+    <span class=3D"co"># Python code</span>
+    <span class=3D"kw">class</span> FahrenheitGetter(<span class=3D"dt">obj=
+ect</span>):
+        <span class=3D"kw">def</span> <span class=3D"ot">__get__</span>(<sp=
+an class=3D"ot">self</span>, inst, cls):
+            <span class=3D"kw">return</span> inst.celsius * <span class=3D"=
+dv">9</span>. / <span class=3D"dv">5</span>. + <span class=3D"dv">32</span>
+
+    <span class=3D"kw">class</span> A(<span class=3D"dt">object</span>):
+        fahrenheit =3D FahrenheitGetter()
+    obj =3D A()
+    obj.celsius =3D <span class=3D"dv">30</span>
+    <span class=3D"kw">assert</span> obj.fahrenheit =3D=3D <span class=3D"d=
+v">86</span>
+
+    <span class=3D"co"># Object model code</span>
+    <span class=3D"kw">class</span> FahrenheitGetter(<span class=3D"dt">obj=
+ect</span>):
+        <span class=3D"kw">def</span> <span class=3D"ot">__get__</span>(<sp=
+an class=3D"ot">self</span>, inst, cls):
+            <span class=3D"kw">return</span> inst.read_attr(<span class=3D"=
+st">"celsius"</span>) * <span class=3D"dv">9</span>. / <span class=3D"dv">5=
+</span>. + <span class=3D"dv">32</span>
+
+    A =3D Class(name=3D<span class=3D"st">"A"</span>, base_class=3DOBJECT,
+              fields=3D{<span class=3D"st">"fahrenheit"</span>: FahrenheitG=
+etter()},
+              metaclass=3DTYPE)
+    obj =3D Instance(A)
+    obj.write_attr(<span class=3D"st">"celsius"</span>, <span class=3D"dv">=
+30</span>)
+    <span class=3D"kw">assert</span> obj.read_attr(<span class=3D"st">"fahr=
+enheit"</span>) =3D=3D <span class=3D"dv">86</span></code></pre>
+
+<p>The <code>__get__</code> method is called on the <code>FahrenheitGetter<=
+/code> instance after that has been looked up in the class of <code>obj</co=
+de>. The arguments to <code>__get__</code> are the instance where the looku=
+p was done<a href=3D"http://aosabook.org/en/500L/a-simple-object-model.html=
+#fn5" class=3D"footnoteRef" id=3D"fnref5"><sup>5</sup></a>.</p>
+
+<p>Implementing this behaviour is easy. We simply need to change <code>_is_=
+bindable</code> and <code>_make_boundmethod</code>:</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">def</span> _is_bindable(meth):
+    <span class=3D"kw">return</span> <span class=3D"dt">hasattr</span>(meth=
+, <span class=3D"st">"__get__"</span>)
+
+<span class=3D"kw">def</span> _make_boundmethod(meth, <span class=3D"ot">se=
+lf</span>):
+    <span class=3D"kw">return</span> meth.<span class=3D"ot">__get__</span>=
+(<span class=3D"ot">self</span>, <span class=3D"ot">None</span>)</code></pr=
+e>
+
+<p>This makes the test pass. The previous tests about bound methods also st=
+ill pass, as Python's functions have a <code>__get__</code> method that ret=
+urns a bound method object.</p>
+
+<p>In practice, the descriptor protocol is quite a lot more complex. It als=
+o supports <code>__set__</code> to override what setting an attribute means=
+ on a per-attribute basis. Also, the current implementation is cutting a fe=
+w corners. Note that <code>_make_boundmethod</code> calls the method <code>=
+__get__</code> on the implementation level, instead of using <code>meth.rea=
+d_attr("__get__")</code>. This is necessary since our object model borrows =
+functions and thus methods from Python, instead of having a representation =
+for them that uses the object model. A more complete object model would hav=
+e to solve this problem.</p>
+
+<h2 id=3D"instance-optimization">Instance Optimization</h2>
+
+<p>While the first three variants of the object model were concerned with b=
+ehavioural variation, in this last section we will look at an optimization =
+without any behavioural impact. This optimization is called <em>maps</em> a=
+nd was pioneered in the VM for the Self programming language<a href=3D"http=
+://aosabook.org/en/500L/a-simple-object-model.html#fn6" class=3D"footnoteRe=
+f" id=3D"fnref6"><sup>6</sup></a>. It is still one of the most important ob=
+ject model optimizations: it's used in PyPy and all modern JavaScript VMs, =
+such as V8 (where the optimization is called <em>hidden classes</em>).</p>
+
+<p>The optimization starts from the following observation: In the object mo=
+del as implemented so far all instances use a full dictionary to store thei=
+r attributes. A dictionary is implemented using a hash map, which takes a l=
+ot of memory. In addition, the dictionaries of instances of the same class =
+typically have the same keys as well. For example, given a class <code>Poin=
+t</code>, the keys of all its instances' dictionaries are likely <code>"x"<=
+/code> and <code>"y"</code>.</p>
+
+<p>The maps optimization exploits this fact. It effectively splits up the d=
+ictionary of every instance into two parts. A part storing the keys (the ma=
+p) that can be shared between all instances with the same set of attribute =
+names. The instance then only stores a reference to the shared map and the =
+values of the attributes in a list (which is a lot more compact in memory t=
+han a dictionary). The map stores a mapping from attribute names to indexes=
+ into that list.</p>
+
+<p>A simple test of that behaviour looks like this:</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">def</span> test_maps():
+    <span class=3D"co"># white box test inspecting the implementation</span=
+>
+    Point =3D Class(name=3D<span class=3D"st">"Point"</span>, base_class=3D=
+OBJECT, fields=3D{}, metaclass=3DTYPE)
+    p1 =3D Instance(Point)
+    p1.write_attr(<span class=3D"st">"x"</span>, <span class=3D"dv">1</span=
+>)
+    p1.write_attr(<span class=3D"st">"y"</span>, <span class=3D"dv">2</span=
+>)
+    <span class=3D"kw">assert</span> p1.storage =3D=3D [<span class=3D"dv">=
+1</span>, <span class=3D"dv">2</span>]
+    <span class=3D"kw">assert</span> p1.<span class=3D"dt">map</span>.attrs=
+ =3D=3D {<span class=3D"st">"x"</span>: <span class=3D"dv">0</span>, <span =
+class=3D"st">"y"</span>: <span class=3D"dv">1</span>}
+
+    p2 =3D Instance(Point)
+    p2.write_attr(<span class=3D"st">"x"</span>, <span class=3D"dv">5</span=
+>)
+    p2.write_attr(<span class=3D"st">"y"</span>, <span class=3D"dv">6</span=
+>)
+    <span class=3D"kw">assert</span> p1.<span class=3D"dt">map</span> is p2=
+.<span class=3D"dt">map</span>
+    <span class=3D"kw">assert</span> p2.storage =3D=3D [<span class=3D"dv">=
+5</span>, <span class=3D"dv">6</span>]
+
+    p1.write_attr(<span class=3D"st">"x"</span>, -<span class=3D"dv">1</spa=
+n>)
+    p1.write_attr(<span class=3D"st">"y"</span>, -<span class=3D"dv">2</spa=
+n>)
+    <span class=3D"kw">assert</span> p1.<span class=3D"dt">map</span> is p2=
+.<span class=3D"dt">map</span>
+    <span class=3D"kw">assert</span> p1.storage =3D=3D [-<span class=3D"dv"=
+>1</span>, -<span class=3D"dv">2</span>]
+
+    p3 =3D Instance(Point)
+    p3.write_attr(<span class=3D"st">"x"</span>, <span class=3D"dv">100</sp=
+an>)
+    p3.write_attr(<span class=3D"st">"z"</span>, -<span class=3D"dv">343</s=
+pan>)
+    <span class=3D"kw">assert</span> p3.<span class=3D"dt">map</span> is no=
+t p1.<span class=3D"dt">map</span>
+    <span class=3D"kw">assert</span> p3.<span class=3D"dt">map</span>.attrs=
+ =3D=3D {<span class=3D"st">"x"</span>: <span class=3D"dv">0</span>, <span =
+class=3D"st">"z"</span>: <span class=3D"dv">1</span>}</code></pre>
+
+<p>Note that this is a different flavour of test than the ones we've writte=
+n before. All previous tests just tested the behaviour of the classes via t=
+he exposed interfaces. This test instead checks the implementation details =
+of the <code>Instance</code> class by reading internal attributes and compa=
+ring them to predefined values. Therefore this test can be called a <em>whi=
+te-box</em> test.</p>
+
+<p>The <code>attrs</code> attribute of the map of <code>p1</code> describes=
+ the layout of the instance as having two attributes <code>"x"</code> and <=
+code>"y"</code> which are stored at position 0 and 1 of the <code>storage</=
+code> of <code>p1</code>. Making a second instance <code>p2</code> and addi=
+ng to it the same attributes in the same order will make it end up with the=
+ same map. If, on the other hand, a different attribute is added, the map c=
+an of course not be shared.</p>
+
+<p>The <code>Map</code> class looks like this:</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">class</span> Map(<span class=3D"dt">object</span>):
+    <span class=3D"kw">def</span> <span class=3D"ot">__init__</span>(<span =
+class=3D"ot">self</span>, attrs):
+        <span class=3D"ot">self</span>.attrs =3D attrs
+        <span class=3D"ot">self</span>.next_maps =3D {}
+
+    <span class=3D"kw">def</span> get_index(<span class=3D"ot">self</span>,=
+ fieldname):
+        <span class=3D"kw">return</span> <span class=3D"ot">self</span>.att=
+rs.get(fieldname, -<span class=3D"dv">1</span>)
+
+    <span class=3D"kw">def</span> next_map(<span class=3D"ot">self</span>, =
+fieldname):
+        <span class=3D"kw">assert</span> fieldname not in <span class=3D"ot=
+">self</span>.attrs
+        <span class=3D"kw">if</span> fieldname in <span class=3D"ot">self</=
+span>.next_maps:
+            <span class=3D"kw">return</span> <span class=3D"ot">self</span>=
+.next_maps[fieldname]
+        attrs =3D <span class=3D"ot">self</span>.attrs.copy()
+        attrs[fieldname] =3D <span class=3D"dt">len</span>(attrs)
+        result =3D <span class=3D"ot">self</span>.next_maps[fieldname] =3D =
+Map(attrs)
+        <span class=3D"kw">return</span> result
+
+EMPTY_MAP =3D Map({})</code></pre>
+
+<p>Maps have two methods, <code>get_index</code> and <code>next_map</code>.=
+ The former is used to find the index of an attribute name in the object's =
+storage. The latter is used when a new attribute is added to an object. In =
+that case the object needs to use a different map, which <code>next_map</co=
+de> computes. The method uses the <code>next_maps</code> dictionary to cach=
+e already created maps. That way, objects that have the same layout also en=
+d up using the same <code>Map</code> object.</p>
+
+<div class=3D"center figure">
+<a name=3D"figure-14.2"></a><img src=3D"http://aosabook.org/en/500L/objmode=
+l-images/maptransition.png" alt=3D"Figure 14.2 - Map transitions" title=3D"=
+Figure 14.2 - Map transitions">
+</div>
+
+<p class=3D"center figcaption">
+<small>Figure 14.2 - Map transitions</small>
+</p>
+
+<p>The <code>Instance</code> implementation that uses maps looks like this:=
+</p>
+
+<pre class=3D"sourceCode python"><code class=3D"sourceCode python"><span cl=
+ass=3D"kw">class</span> Instance(Base):
+    <span class=3D"co">"""Instance of a user-defined class. """</span>
+
+    <span class=3D"kw">def</span> <span class=3D"ot">__init__</span>(<span =
+class=3D"ot">self</span>, cls):
+        <span class=3D"kw">assert</span> <span class=3D"dt">isinstance</spa=
+n>(cls, Class)
+        Base.<span class=3D"ot">__init__</span>(<span class=3D"ot">self</sp=
+an>, cls, <span class=3D"ot">None</span>)
+        <span class=3D"ot">self</span>.<span class=3D"dt">map</span> =3D EM=
+PTY_MAP
+        <span class=3D"ot">self</span>.storage =3D []
+
+    <span class=3D"kw">def</span> _read_dict(<span class=3D"ot">self</span>=
+, fieldname):
+        index =3D <span class=3D"ot">self</span>.<span class=3D"dt">map</sp=
+an>.get_index(fieldname)
+        <span class=3D"kw">if</span> index =3D=3D -<span class=3D"dv">1</sp=
+an>:
+            <span class=3D"kw">return</span> MISSING
+        <span class=3D"kw">return</span> <span class=3D"ot">self</span>.sto=
+rage[index]
+
+    <span class=3D"kw">def</span> _write_dict(<span class=3D"ot">self</span=
+>, fieldname, value):
+        index =3D <span class=3D"ot">self</span>.<span class=3D"dt">map</sp=
+an>.get_index(fieldname)
+        <span class=3D"kw">if</span> index !=3D -<span class=3D"dv">1</span=
+>:
+            <span class=3D"ot">self</span>.storage[index] =3D value
+        <span class=3D"kw">else</span>:
+            new_map =3D <span class=3D"ot">self</span>.<span class=3D"dt">m=
+ap</span>.next_map(fieldname)
+            <span class=3D"ot">self</span>.storage.append(value)
+            <span class=3D"ot">self</span>.<span class=3D"dt">map</span> =
+=3D new_map</code></pre>
+
+<p>The class now passes <code>None</code> as the fields dictionary to <code=
+>Base</code>, as <code>Instance</code> will store the content of the dictio=
+nary in another way. Therefore it needs to override the <code>_read_dict</c=
+ode> and <code>_write_dict</code> methods. In a real implementation, we wou=
+ld refactor the <code>Base</code> class so that it is no longer responsible=
+ for storing the fields dictionary, but for now having instances store <cod=
+e>None</code> there is good enough.</p>
+
+<p>A newly created instance starts out using the <code>EMPTY_MAP</code>, wh=
+ich has no attributes, and empty storage. To implement <code>_read_dict</co=
+de>, the instance's map is asked for the index of the attribute name. Then =
+the corresponding entry of the storage list is returned.</p>
+
+<p>Writing into the fields dictionary has two cases. On the one hand the va=
+lue of an existing attribute can be changed. This is done by simply changin=
+g the storage at the corresponding index. On the other hand, if the attribu=
+te does not exist yet, a <em>map transition</em> (<a href=3D"http://aosaboo=
+k.org/en/500L/a-simple-object-model.html#figure-14.2">Figure 14.2</a>) is n=
+eeded using the <code>next_map</code> method. The value of the new attribut=
+e is appended to the storage list.</p>
+
+<p>What does this optimization achieve? It optimizes use of memory in the c=
+ommon case where there are many instances with the same layout. It is not a=
+ universal optimization: code that creates instances with wildly different =
+sets of attributes will have a larger memory footprint than if we just use =
+dictionaries.</p>
+
+<p>This is a common problem when optimizing dynamic languages. It is often =
+not possible to find optimizations that are faster or use less memory in al=
+l cases. In practice, the optimizations chosen apply to how the language is=
+ <em>typically</em> used, while potentially making behaviour worse for prog=
+rams that use extremely dynamic features.</p>
+
+<p>Another interesting aspect of maps is that, while here they only optimiz=
+e for memory use, in actual VMs that use a just-in-time (JIT) compiler they=
+ also improve the performance of the program. To achieve that, the JIT uses=
+ the maps to compile attribute lookups to a lookup in the objects' storage =
+at a fixed offset, getting rid of all dictionary lookups completely<a href=
+=3D"http://aosabook.org/en/500L/a-simple-object-model.html#fn7" class=3D"fo=
+otnoteRef" id=3D"fnref7"><sup>7</sup></a>.</p>
+
+<h2 id=3D"potential-extensions">Potential Extensions</h2>
+
+<p>It is easy to extend our object model and experiment with various langua=
+ge design choices. Here are some possibilities:</p>
+
+<ul>
+<li><p>The easiest thing to do is to add further special methods. Some easy=
+ and interesting ones to add are <code>__init__</code>, <code>__getattribut=
+e__</code>, <code>__set__</code>.</p></li>
+<li><p>The model can be very easily extended to support multiple inheritanc=
+e. To do this, every class would get a list of base classes. Then the <code=
+>Class.method_resolution_order</code> method would need to be changed to su=
+pport looking up methods. A simple method resolution order could be compute=
+d using a depth-first search with removal of duplicates. A more complicated=
+ but better one is the <a href=3D"https://www.python.org/download/releases/=
+2.3/mro/">C3 algorithm</a>, which adds better handling in the base of diamo=
+nd-shaped multiple inheritance hierarchies and rejects insensible inheritan=
+ce patterns.</p></li>
+<li><p>A more radical change is to switch to a prototype model, which invol=
+ves the removal of the distinction between classes and instances.</p></li>
+</ul>
+
+<h2 id=3D"conclusions">Conclusions</h2>
+
+<p>Some of the core aspects of the design of an object-oriented programming=
+ language are the details of its object model. Writing small object model p=
+rototypes is an easy and fun way to understand the inner workings of existi=
+ng languages better and to get insights into the design space of object-ori=
+ented languages. Playing with object models is a good way to experiment wit=
+h different language design ideas without having to worry about the more bo=
+ring parts of language implementation, such as parsing and executing code.<=
+/p>
+
+<p>Such object models can also be useful in practice, not just as vehicles =
+for experimentation. They can be embedded in and used from other languages.=
+ Examples of this approach are common: the GObject object model, written in=
+ C, that's used in GLib and other Gnome libraries; or the various class sys=
+tem implementations in JavaScript.</p>
+
+<div class=3D"footnotes">
+<hr>
+<ol>
+<li id=3D"fn1"><p>P. Cointe, =E2=80=9CMetaclasses are first class: The ObjV=
+lisp Model,=E2=80=9D SIGPLAN Not, vol. 22, no. 12, pp. 156=E2=80=93162, 198=
+7.<a href=3D"http://aosabook.org/en/500L/a-simple-object-model.html#fnref1"=
+>=E2=86=A9</a></p></li>
+<li id=3D"fn2"><p>It seems that the attribute-based model is conceptually m=
+ore complex, because it needs both method lookup and call. In practice, cal=
+ling something is defined by looking up and calling a special attribute <co=
+de>__call__</code>, so conceptual simplicity is regained. This won't be imp=
+lemented in this chapter, however.)<a href=3D"http://aosabook.org/en/500L/a=
+-simple-object-model.html#fnref2">=E2=86=A9</a></p></li>
+<li id=3D"fn3"><p>G. Kiczales, J. des Rivieres, and D. G. Bobrow, The Art o=
+f the Metaobject Protocol. Cambridge, Mass: The MIT Press, 1991.<a href=3D"=
+http://aosabook.org/en/500L/a-simple-object-model.html#fnref3">=E2=86=A9</a=
+></p></li>
+<li id=3D"fn4"><p>A. Goldberg, Smalltalk-80: The Language and its Implement=
+ation. Addison-Wesley, 1983, page 61.<a href=3D"http://aosabook.org/en/500L=
+/a-simple-object-model.html#fnref4">=E2=86=A9</a></p></li>
+<li id=3D"fn5"><p>In Python the second argument is the class where the attr=
+ibute was found, though we will ignore that here.<a href=3D"http://aosabook=
+.org/en/500L/a-simple-object-model.html#fnref5">=E2=86=A9</a></p></li>
+<li id=3D"fn6"><p>C. Chambers, D. Ungar, and E. Lee, =E2=80=9CAn efficient =
+implementation of SELF, a dynamically-typed object-oriented language based =
+on prototypes,=E2=80=9D in OOPSLA, 1989, vol. 24.<a href=3D"http://aosabook=
+.org/en/500L/a-simple-object-model.html#fnref6">=E2=86=A9</a></p></li>
+<li id=3D"fn7"><p>How that works is beyond the scope of this chapter. I tri=
+ed to give a reasonably readable account of it in a paper I wrote a few yea=
+rs ago. It uses an object model that is basically a variant of the one in t=
+his chapter: C. F. Bolz, A. Cuni, M. Fija=C5=82kowski, M. Leuschel, S. Pedr=
+oni, and A. Rigo, =E2=80=9CRuntime feedback in a meta-tracing JIT for effic=
+ient dynamic languages,=E2=80=9D in Proceedings of the 6th Workshop on Impl=
+ementation, Compilation, Optimization of Object-Oriented Languages, Program=
+s and Systems, New York, NY, USA, 2011, pp. 9:1=E2=80=939:8.<a href=3D"http=
+://aosabook.org/en/500L/a-simple-object-model.html#fnref7">=E2=86=A9</a></p=
+></li>
+</ol>
+</div>
+        </div>
+      </div>
+    </div>
+ =20
+<div id=3D"cntvlive2-is-installed"></div><div id=3D"qb-sougou-search" style=
+=3D"display: none; opacity: 0;"><p>=E6=90=9C=E7=B4=A2</p><p class=3D"last-b=
+tn">=E5=A4=8D=E5=88=B6</p><iframe src=3D"cid:frame-106-1b5f7d02-1097-4b2b-8=
+3fd-6155e2e742e8@mhtml.blink"></iframe></div></body></html>
+------MultipartBoundary--IEKVAqurQXdCcvGCAwqzmjMKCMIHo6sa7eHiZtfkdP----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://aosabook.org/en/500L/theme/css/bootstrap.css
+
+@charset "utf-8";
+
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, s=
+ection { display: block; }
+
+audio, canvas, video { display: inline-block; }
+
+audio:not([controls]) { display: none; }
+
+html { font-size: 100%; text-size-adjust: 100%; }
+
+a:focus { outline: -webkit-focus-ring-color auto 5px; outline-offset: -2px;=
+ }
+
+a:hover, a:active { outline: 0px; }
+
+sub, sup { position: relative; font-size: 75%; line-height: 0; vertical-ali=
+gn: baseline; }
+
+sup { top: -0.5em; }
+
+sub { bottom: -0.25em; }
+
+img { max-width: 100%; height: auto; border: 0px; }
+
+button, input, select, textarea { margin: 0px; font-size: 100%; vertical-al=
+ign: middle; }
+
+button, input { line-height: normal; }
+
+button, input[type=3D"button"], input[type=3D"reset"], input[type=3D"submit=
+"] { cursor: pointer; -webkit-appearance: button; }
+
+input[type=3D"search"] { -webkit-appearance: textfield; box-sizing: content=
+-box; }
+
+input[type=3D"search"]::-webkit-search-decoration, input[type=3D"search"]::=
+-webkit-search-cancel-button { -webkit-appearance: none; }
+
+textarea { overflow: auto; vertical-align: top; }
+
+.clearfix { }
+
+.clearfix::before, .clearfix::after { display: table; content: ""; }
+
+.clearfix::after { clear: both; }
+
+body { margin: 0px; font-family: "Helvetica Neue", Helvetica, Arial, sans-s=
+erif; font-size: 13px; line-height: 18px; color: rgb(51, 51, 51); backgroun=
+d-color: rgb(255, 255, 255); }
+
+a { color: rgb(0, 136, 204); text-decoration: none; }
+
+a:hover { color: rgb(0, 85, 128); text-decoration: underline; }
+
+.row { margin-left: -20px; }
+
+.row::before, .row::after { display: table; content: ""; }
+
+.row::after { clear: both; }
+
+[class*=3D"span"] { float: left; margin-left: 20px; }
+
+.span1 { width: 60px; }
+
+.span2 { width: 140px; }
+
+.span3 { width: 220px; }
+
+.span4 { width: 300px; }
+
+.span5 { width: 380px; }
+
+.span6 { width: 460px; }
+
+.span7 { width: 540px; }
+
+.span8 { width: 620px; }
+
+.span9 { width: 700px; }
+
+.span10 { width: 780px; }
+
+.span11 { width: 860px; }
+
+.span12, .container { width: 940px; }
+
+.offset1 { margin-left: 100px; }
+
+.offset2 { margin-left: 180px; }
+
+.offset3 { margin-left: 260px; }
+
+.offset4 { margin-left: 340px; }
+
+.offset5 { margin-left: 420px; }
+
+.offset6 { margin-left: 500px; }
+
+.offset7 { margin-left: 580px; }
+
+.offset8 { margin-left: 660px; }
+
+.offset9 { margin-left: 740px; }
+
+.offset10 { margin-left: 820px; }
+
+.offset11 { margin-left: 900px; }
+
+.row-fluid { width: 100%; }
+
+.row-fluid::before, .row-fluid::after { display: table; content: ""; }
+
+.row-fluid::after { clear: both; }
+
+.row-fluid > [class*=3D"span"] { float: left; margin-left: 2.12766%; }
+
+.row-fluid > [class*=3D"span"]:first-child { margin-left: 0px; }
+
+.row-fluid > .span1 { width: 6.38298%; }
+
+.row-fluid > .span2 { width: 14.8936%; }
+
+.row-fluid > .span3 { width: 23.4043%; }
+
+.row-fluid > .span4 { width: 31.9149%; }
+
+.row-fluid > .span5 { width: 40.4255%; }
+
+.row-fluid > .span6 { width: 48.9362%; }
+
+.row-fluid > .span7 { width: 57.4468%; }
+
+.row-fluid > .span8 { width: 65.9574%; }
+
+.row-fluid > .span9 { width: 74.4681%; }
+
+.row-fluid > .span10 { width: 82.9787%; }
+
+.row-fluid > .span11 { width: 91.4894%; }
+
+.row-fluid > .span12 { width: 100%; }
+
+.container { width: 940px; margin-left: auto; margin-right: auto; }
+
+.container::before, .container::after { display: table; content: ""; }
+
+.container::after { clear: both; }
+
+.container-fluid { padding-left: 20px; padding-right: 20px; }
+
+.container-fluid::before, .container-fluid::after { display: table; content=
+: ""; }
+
+.container-fluid::after { clear: both; }
+
+p { margin: 0px 0px 9px; font-family: "Helvetica Neue", Helvetica, Arial, s=
+ans-serif; font-size: 13px; line-height: 18px; }
+
+p small { font-size: 11px; color: rgb(153, 153, 153); }
+
+.lead { margin-bottom: 18px; font-size: 20px; font-weight: 200; line-height=
+: 27px; }
+
+h1, h2, h3, h4, h5, h6 { margin: 0px; font-weight: bold; color: rgb(51, 51,=
+ 51); text-rendering: optimizeLegibility; }
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small { font-weight: n=
+ormal; color: rgb(153, 153, 153); }
+
+h1 { font-size: 30px; line-height: 36px; }
+
+h1 small { font-size: 18px; }
+
+h2 { font-size: 24px; line-height: 36px; }
+
+h2 small { font-size: 18px; }
+
+h3 { line-height: 27px; font-size: 18px; }
+
+h3 small { font-size: 14px; }
+
+h4, h5, h6 { line-height: 18px; }
+
+h4 { font-size: 14px; }
+
+h4 small { font-size: 12px; }
+
+h5 { font-size: 12px; }
+
+h6 { font-size: 11px; color: rgb(153, 153, 153); text-transform: uppercase;=
+ }
+
+.page-header { padding-bottom: 17px; margin: 18px 0px; border-bottom: 1px s=
+olid rgb(238, 238, 238); }
+
+.page-header h1 { line-height: 1; }
+
+ul, ol { padding: 0px; margin: 0px 0px 9px 25px; }
+
+ul ul, ul ol, ol ol, ol ul { margin-bottom: 0px; }
+
+ul { list-style: disc; }
+
+ol { list-style: decimal; }
+
+li { line-height: 18px; }
+
+ul.unstyled, ol.unstyled { margin-left: 0px; list-style: none; }
+
+dl { margin-bottom: 18px; }
+
+dt, dd { line-height: 18px; }
+
+dt { font-weight: bold; }
+
+dd { margin-left: 9px; }
+
+hr { margin: 18px 0px; border-width: 1px 0px; border-right-style: initial; =
+border-left-style: initial; border-right-color: initial; border-left-color:=
+ initial; border-image: initial; border-top-style: solid; border-top-color:=
+ rgb(238, 238, 238); border-bottom-style: solid; border-bottom-color: rgb(2=
+55, 255, 255); }
+
+strong { font-weight: bold; }
+
+em { font-style: italic; }
+
+.muted { color: rgb(153, 153, 153); }
+
+abbr { font-size: 90%; text-transform: uppercase; border-bottom: 1px dotted=
+ rgb(221, 221, 221); cursor: help; }
+
+blockquote { padding: 0px 0px 0px 15px; margin: 0px 0px 18px; border-left: =
+5px solid rgb(238, 238, 238); }
+
+blockquote p { margin-bottom: 0px; font-size: 16px; font-weight: 300; line-=
+height: 22.5px; }
+
+blockquote small { display: block; line-height: 18px; color: rgb(153, 153, =
+153); }
+
+blockquote small::before { content: "=E2=80=94=C2=A0"; }
+
+blockquote.pull-right { float: right; padding-left: 0px; padding-right: 15p=
+x; border-left: 0px; border-right: 5px solid rgb(238, 238, 238); }
+
+blockquote.pull-right p, blockquote.pull-right small { text-align: right; }
+
+q::before, q::after, blockquote::before, blockquote::after { content: ""; }
+
+address { display: block; margin-bottom: 18px; line-height: 18px; font-styl=
+e: normal; }
+
+small { font-size: 100%; }
+
+cite { font-style: normal; }
+
+code, pre { padding: 0px 3px 2px; font-family: Menlo, Monaco, "Courier New"=
+, monospace; font-size: 12px; color: rgb(51, 51, 51); border-radius: 3px; }
+
+code { padding: 3px 4px; background-color: rgb(247, 247, 249); border: 1px =
+solid rgb(225, 225, 232); }
+
+pre { display: block; padding: 8.5px; margin: 0px 0px 9px; font-size: 12px;=
+ line-height: 18px; background-color: rgb(245, 245, 245); border: 1px solid=
+ rgba(0, 0, 0, 0.14902); border-radius: 4px; overflow-x: auto; overflow-y: =
+hidden; width: auto; }
+
+pre.prettyprint { margin-bottom: 18px; }
+
+pre code { padding: 0px; color: inherit; background-color: transparent; bor=
+der: 0px; }
+
+.pre-scrollable { max-height: 340px; overflow-y: scroll; }
+
+form { margin: 0px 0px 18px; }
+
+fieldset { padding: 0px; margin: 0px; border: 0px; }
+
+legend { display: block; width: 100%; padding: 0px; margin-bottom: 27px; fo=
+nt-size: 19.5px; line-height: 36px; color: rgb(51, 51, 51); border-width: 0=
+px 0px 1px; border-top-style: initial; border-right-style: initial; border-=
+left-style: initial; border-top-color: initial; border-right-color: initial=
+; border-left-color: initial; border-image: initial; border-bottom-style: s=
+olid; border-bottom-color: rgb(238, 238, 238); }
+
+legend small { font-size: 13.5px; color: rgb(153, 153, 153); }
+
+label, input, button, select, textarea { font-size: 13px; font-weight: norm=
+al; line-height: 18px; }
+
+input, button, select, textarea { font-family: "Helvetica Neue", Helvetica,=
+ Arial, sans-serif; }
+
+label { display: block; margin-bottom: 5px; color: rgb(51, 51, 51); }
+
+input, textarea, select, .uneditable-input { display: inline-block; width: =
+210px; height: 18px; padding: 4px; margin-bottom: 9px; font-size: 13px; lin=
+e-height: 18px; color: rgb(85, 85, 85); border: 1px solid rgb(204, 204, 204=
+); border-radius: 3px; }
+
+.uneditable-textarea { width: auto; height: auto; }
+
+label input, label textarea, label select { display: block; }
+
+input[type=3D"image"], input[type=3D"checkbox"], input[type=3D"radio"] { wi=
+dth: auto; height: auto; padding: 0px; margin: 3px 0px; line-height: normal=
+; cursor: pointer; border-radius: 0px; }
+
+input[type=3D"image"] { border: 0px; }
+
+input[type=3D"file"] { width: auto; padding: initial; line-height: initial;=
+ border: initial; background-color: initial; box-shadow: none; }
+
+input[type=3D"button"], input[type=3D"reset"], input[type=3D"submit"] { wid=
+th: auto; height: auto; }
+
+select, input[type=3D"file"] { height: 28px; line-height: 28px; }
+
+input[type=3D"file"] { }
+
+select { width: 220px; background-color: rgb(255, 255, 255); }
+
+select[multiple], select[size] { height: auto; }
+
+input[type=3D"image"] { box-shadow: none; }
+
+textarea { height: auto; }
+
+input[type=3D"hidden"] { display: none; }
+
+.radio, .checkbox { padding-left: 18px; }
+
+.radio input[type=3D"radio"], .checkbox input[type=3D"checkbox"] { float: l=
+eft; margin-left: -18px; }
+
+.controls > .radio:first-child, .controls > .checkbox:first-child { padding=
+-top: 5px; }
+
+.radio.inline, .checkbox.inline { display: inline-block; padding-top: 5px; =
+margin-bottom: 0px; vertical-align: middle; }
+
+.radio.inline + .radio.inline, .checkbox.inline + .checkbox.inline { margin=
+-left: 10px; }
+
+input, textarea { box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px inset; t=
+ransition: border 0.2s linear, box-shadow 0.2s linear; }
+
+input:focus, textarea:focus { border-color: rgba(82, 168, 236, 0.8); box-sh=
+adow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px inset, rgba(82, 168, 236, 0.6) 0=
+px 0px 8px; outline: 0px; }
+
+input[type=3D"file"]:focus, input[type=3D"radio"]:focus, input[type=3D"chec=
+kbox"]:focus, select:focus { box-shadow: none; outline: -webkit-focus-ring-=
+color auto 5px; outline-offset: -2px; }
+
+.input-mini { width: 60px; }
+
+.input-small { width: 90px; }
+
+.input-medium { width: 150px; }
+
+.input-large { width: 210px; }
+
+.input-xlarge { width: 270px; }
+
+.input-xxlarge { width: 530px; }
+
+input[class*=3D"span"], select[class*=3D"span"], textarea[class*=3D"span"],=
+ .uneditable-input { float: none; margin-left: 0px; }
+
+input.span1, textarea.span1, .uneditable-input.span1 { width: 50px; }
+
+input.span2, textarea.span2, .uneditable-input.span2 { width: 130px; }
+
+input.span3, textarea.span3, .uneditable-input.span3 { width: 210px; }
+
+input.span4, textarea.span4, .uneditable-input.span4 { width: 290px; }
+
+input.span5, textarea.span5, .uneditable-input.span5 { width: 370px; }
+
+input.span6, textarea.span6, .uneditable-input.span6 { width: 450px; }
+
+input.span7, textarea.span7, .uneditable-input.span7 { width: 530px; }
+
+input.span8, textarea.span8, .uneditable-input.span8 { width: 610px; }
+
+input.span9, textarea.span9, .uneditable-input.span9 { width: 690px; }
+
+input.span10, textarea.span10, .uneditable-input.span10 { width: 770px; }
+
+input.span11, textarea.span11, .uneditable-input.span11 { width: 850px; }
+
+input.span12, textarea.span12, .uneditable-input.span12 { width: 930px; }
+
+input[disabled], select[disabled], textarea[disabled], input[readonly], sel=
+ect[readonly], textarea[readonly] { background-color: rgb(245, 245, 245); b=
+order-color: rgb(221, 221, 221); cursor: not-allowed; }
+
+.control-group.warning > label, .control-group.warning .help-block, .contro=
+l-group.warning .help-inline { color: rgb(192, 152, 83); }
+
+.control-group.warning input, .control-group.warning select, .control-group=
+.warning textarea { color: rgb(192, 152, 83); border-color: rgb(192, 152, 8=
+3); }
+
+.control-group.warning input:focus, .control-group.warning select:focus, .c=
+ontrol-group.warning textarea:focus { border-color: rgb(164, 126, 60); box-=
+shadow: rgb(219, 197, 158) 0px 0px 6px; }
+
+.control-group.warning .input-prepend .add-on, .control-group.warning .inpu=
+t-append .add-on { color: rgb(192, 152, 83); background-color: rgb(252, 248=
+, 227); border-color: rgb(192, 152, 83); }
+
+.control-group.error > label, .control-group.error .help-block, .control-gr=
+oup.error .help-inline { color: rgb(185, 74, 72); }
+
+.control-group.error input, .control-group.error select, .control-group.err=
+or textarea { color: rgb(185, 74, 72); border-color: rgb(185, 74, 72); }
+
+.control-group.error input:focus, .control-group.error select:focus, .contr=
+ol-group.error textarea:focus { border-color: rgb(149, 59, 57); box-shadow:=
+ rgb(213, 147, 146) 0px 0px 6px; }
+
+.control-group.error .input-prepend .add-on, .control-group.error .input-ap=
+pend .add-on { color: rgb(185, 74, 72); background-color: rgb(242, 222, 222=
+); border-color: rgb(185, 74, 72); }
+
+.control-group.success > label, .control-group.success .help-block, .contro=
+l-group.success .help-inline { color: rgb(70, 136, 71); }
+
+.control-group.success input, .control-group.success select, .control-group=
+.success textarea { color: rgb(70, 136, 71); border-color: rgb(70, 136, 71)=
+; }
+
+.control-group.success input:focus, .control-group.success select:focus, .c=
+ontrol-group.success textarea:focus { border-color: rgb(53, 102, 53); box-s=
+hadow: rgb(122, 186, 123) 0px 0px 6px; }
+
+.control-group.success .input-prepend .add-on, .control-group.success .inpu=
+t-append .add-on { color: rgb(70, 136, 71); background-color: rgb(223, 240,=
+ 216); border-color: rgb(70, 136, 71); }
+
+input:focus:required:invalid, textarea:focus:required:invalid, select:focus=
+:required:invalid { color: rgb(185, 74, 72); border-color: rgb(238, 95, 91)=
+; }
+
+input:focus:required:invalid:focus, textarea:focus:required:invalid:focus, =
+select:focus:required:invalid:focus { border-color: rgb(233, 50, 45); box-s=
+hadow: rgb(248, 185, 183) 0px 0px 6px; }
+
+.form-actions { padding: 17px 20px 18px; margin-top: 18px; margin-bottom: 1=
+8px; background-color: rgb(245, 245, 245); border-top: 1px solid rgb(221, 2=
+21, 221); }
+
+.uneditable-input { display: block; background-color: rgb(255, 255, 255); b=
+order-color: rgb(238, 238, 238); box-shadow: rgba(0, 0, 0, 0.0235294) 0px 1=
+px 2px inset; cursor: not-allowed; }
+
+::-webkit-input-placeholder { color: rgb(153, 153, 153); }
+
+.help-block { display: block; margin-top: 5px; margin-bottom: 0px; color: r=
+gb(153, 153, 153); }
+
+.help-inline { display: inline-block; margin-bottom: 9px; vertical-align: m=
+iddle; padding-left: 5px; }
+
+.input-prepend, .input-append { margin-bottom: 5px; }
+
+.input-prepend::before, .input-append::before, .input-prepend::after, .inpu=
+t-append::after { display: table; content: ""; }
+
+.input-prepend::after, .input-append::after { clear: both; }
+
+.input-prepend input, .input-append input, .input-prepend .uneditable-input=
+, .input-append .uneditable-input { border-radius: 0px 3px 3px 0px; }
+
+.input-prepend input:focus, .input-append input:focus, .input-prepend .uned=
+itable-input:focus, .input-append .uneditable-input:focus { position: relat=
+ive; z-index: 2; }
+
+.input-prepend .uneditable-input, .input-append .uneditable-input { border-=
+left-color: rgb(204, 204, 204); }
+
+.input-prepend .add-on, .input-append .add-on { float: left; display: block=
+; width: auto; min-width: 16px; height: 18px; margin-right: -1px; padding: =
+4px 5px; font-weight: normal; line-height: 18px; color: rgb(153, 153, 153);=
+ text-align: center; text-shadow: rgb(255, 255, 255) 0px 1px 0px; backgroun=
+d-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-r=
+adius: 3px 0px 0px 3px; }
+
+.input-prepend .active, .input-append .active { background-color: rgb(169, =
+219, 169); border-color: rgb(70, 165, 70); }
+
+.input-prepend .add-on { }
+
+.input-append input, .input-append .uneditable-input { float: left; border-=
+radius: 3px 0px 0px 3px; }
+
+.input-append .uneditable-input { border-left-color: rgb(238, 238, 238); bo=
+rder-right-color: rgb(204, 204, 204); }
+
+.input-append .add-on { margin-right: 0px; margin-left: -1px; border-radius=
+: 0px 3px 3px 0px; }
+
+.input-append input:first-child { }
+
+.input-append input:first-child + .add-on { }
+
+.search-query { padding-left: 14px; padding-right: 14px; margin-bottom: 0px=
+; border-radius: 14px; }
+
+.form-search input, .form-inline input, .form-horizontal input, .form-searc=
+h textarea, .form-inline textarea, .form-horizontal textarea, .form-search =
+select, .form-inline select, .form-horizontal select, .form-search .help-in=
+line, .form-inline .help-inline, .form-horizontal .help-inline, .form-searc=
+h .uneditable-input, .form-inline .uneditable-input, .form-horizontal .uned=
+itable-input { display: inline-block; margin-bottom: 0px; }
+
+.form-search .hide, .form-inline .hide, .form-horizontal .hide { display: n=
+one; }
+
+.form-search label, .form-inline label, .form-search .input-append, .form-i=
+nline .input-append, .form-search .input-prepend, .form-inline .input-prepe=
+nd { display: inline-block; }
+
+.form-search .input-append .add-on, .form-inline .input-prepend .add-on, .f=
+orm-search .input-append .add-on, .form-inline .input-prepend .add-on { ver=
+tical-align: middle; }
+
+.form-search .radio, .form-inline .radio, .form-search .checkbox, .form-inl=
+ine .checkbox { margin-bottom: 0px; vertical-align: middle; }
+
+.control-group { margin-bottom: 9px; }
+
+legend + .control-group { margin-top: 18px; -webkit-margin-top-collapse: se=
+parate; }
+
+.form-horizontal .control-group { margin-bottom: 18px; }
+
+.form-horizontal .control-group::before, .form-horizontal .control-group::a=
+fter { display: table; content: ""; }
+
+.form-horizontal .control-group::after { clear: both; }
+
+.form-horizontal .control-label { float: left; width: 140px; padding-top: 5=
+px; text-align: right; }
+
+.form-horizontal .controls { margin-left: 160px; }
+
+.form-horizontal .form-actions { padding-left: 160px; }
+
+table { max-width: 100%; border-collapse: collapse; border-spacing: 0px; }
+
+.table { width: 100%; margin-bottom: 18px; }
+
+.table th, .table td { padding: 8px; line-height: 18px; text-align: left; v=
+ertical-align: top; border-top: 1px solid rgb(221, 221, 221); }
+
+.table th { font-weight: bold; }
+
+.table thead th { vertical-align: bottom; }
+
+.table thead:first-child tr th, .table thead:first-child tr td { border-top=
+: 0px; }
+
+.table tbody + tbody { border-top: 2px solid rgb(221, 221, 221); }
+
+.table-condensed th, .table-condensed td { padding: 4px 5px; }
+
+.table-bordered { border: 1px solid rgb(221, 221, 221); border-collapse: se=
+parate; border-radius: 4px; }
+
+.table-bordered th + th, .table-bordered td + td, .table-bordered th + td, =
+.table-bordered td + th { border-left: 1px solid rgb(221, 221, 221); }
+
+.table-bordered thead:first-child tr:first-child th, .table-bordered tbody:=
+first-child tr:first-child th, .table-bordered tbody:first-child tr:first-c=
+hild td { border-top: 0px; }
+
+.table-bordered thead:first-child tr:first-child th:first-child, .table-bor=
+dered tbody:first-child tr:first-child td:first-child { border-radius: 4px =
+0px 0px; }
+
+.table-bordered thead:first-child tr:first-child th:last-child, .table-bord=
+ered tbody:first-child tr:first-child td:last-child { border-radius: 0px 4p=
+x 0px 0px; }
+
+.table-bordered thead:last-child tr:last-child th:first-child, .table-borde=
+red tbody:last-child tr:last-child td:first-child { border-radius: 0px 0px =
+0px 4px; }
+
+.table-bordered thead:last-child tr:last-child th:last-child, .table-border=
+ed tbody:last-child tr:last-child td:last-child { border-radius: 0px 0px 4p=
+x; }
+
+.table-striped tbody tr:nth-child(2n+1) td, .table-striped tbody tr:nth-chi=
+ld(2n+1) th { background-color: rgb(249, 249, 249); }
+
+.table tbody tr:hover td, .table tbody tr:hover th { background-color: rgb(=
+245, 245, 245); }
+
+table .span1 { float: none; width: 44px; margin-left: 0px; }
+
+table .span2 { float: none; width: 124px; margin-left: 0px; }
+
+table .span3 { float: none; width: 204px; margin-left: 0px; }
+
+table .span4 { float: none; width: 284px; margin-left: 0px; }
+
+table .span5 { float: none; width: 364px; margin-left: 0px; }
+
+table .span6 { float: none; width: 444px; margin-left: 0px; }
+
+table .span7 { float: none; width: 524px; margin-left: 0px; }
+
+table .span8 { float: none; width: 604px; margin-left: 0px; }
+
+table .span9 { float: none; width: 684px; margin-left: 0px; }
+
+table .span10 { float: none; width: 764px; margin-left: 0px; }
+
+table .span11 { float: none; width: 844px; margin-left: 0px; }
+
+table .span12 { float: none; width: 924px; margin-left: 0px; }
+
+[class^=3D"icon-"], [class*=3D" icon-"] { display: inline-block; width: 14p=
+x; height: 14px; line-height: 14px; vertical-align: text-top; background-im=
+age: url("../img/glyphicons-halflings.png"); background-position: 14px 14px=
+; background-repeat: no-repeat; }
+
+[class^=3D"icon-"]:last-child, [class*=3D" icon-"]:last-child { }
+
+.icon-white { background-image: url("../img/glyphicons-halflings-white.png"=
+); }
+
+.icon-glass { background-position: 0px 0px; }
+
+.icon-music { background-position: -24px 0px; }
+
+.icon-search { background-position: -48px 0px; }
+
+.icon-envelope { background-position: -72px 0px; }
+
+.icon-heart { background-position: -96px 0px; }
+
+.icon-star { background-position: -120px 0px; }
+
+.icon-star-empty { background-position: -144px 0px; }
+
+.icon-user { background-position: -168px 0px; }
+
+.icon-film { background-position: -192px 0px; }
+
+.icon-th-large { background-position: -216px 0px; }
+
+.icon-th { background-position: -240px 0px; }
+
+.icon-th-list { background-position: -264px 0px; }
+
+.icon-ok { background-position: -288px 0px; }
+
+.icon-remove { background-position: -312px 0px; }
+
+.icon-zoom-in { background-position: -336px 0px; }
+
+.icon-zoom-out { background-position: -360px 0px; }
+
+.icon-off { background-position: -384px 0px; }
+
+.icon-signal { background-position: -408px 0px; }
+
+.icon-cog { background-position: -432px 0px; }
+
+.icon-trash { background-position: -456px 0px; }
+
+.icon-home { background-position: 0px -24px; }
+
+.icon-file { background-position: -24px -24px; }
+
+.icon-time { background-position: -48px -24px; }
+
+.icon-road { background-position: -72px -24px; }
+
+.icon-download-alt { background-position: -96px -24px; }
+
+.icon-download { background-position: -120px -24px; }
+
+.icon-upload { background-position: -144px -24px; }
+
+.icon-inbox { background-position: -168px -24px; }
+
+.icon-play-circle { background-position: -192px -24px; }
+
+.icon-repeat { background-position: -216px -24px; }
+
+.icon-refresh { background-position: -240px -24px; }
+
+.icon-list-alt { background-position: -264px -24px; }
+
+.icon-lock { background-position: -287px -24px; }
+
+.icon-flag { background-position: -312px -24px; }
+
+.icon-headphones { background-position: -336px -24px; }
+
+.icon-volume-off { background-position: -360px -24px; }
+
+.icon-volume-down { background-position: -384px -24px; }
+
+.icon-volume-up { background-position: -408px -24px; }
+
+.icon-qrcode { background-position: -432px -24px; }
+
+.icon-barcode { background-position: -456px -24px; }
+
+.icon-tag { background-position: 0px -48px; }
+
+.icon-tags { background-position: -25px -48px; }
+
+.icon-book { background-position: -48px -48px; }
+
+.icon-bookmark { background-position: -72px -48px; }
+
+.icon-print { background-position: -96px -48px; }
+
+.icon-camera { background-position: -120px -48px; }
+
+.icon-font { background-position: -144px -48px; }
+
+.icon-bold { background-position: -167px -48px; }
+
+.icon-italic { background-position: -192px -48px; }
+
+.icon-text-height { background-position: -216px -48px; }
+
+.icon-text-width { background-position: -240px -48px; }
+
+.icon-align-left { background-position: -264px -48px; }
+
+.icon-align-center { background-position: -288px -48px; }
+
+.icon-align-right { background-position: -312px -48px; }
+
+.icon-align-justify { background-position: -336px -48px; }
+
+.icon-list { background-position: -360px -48px; }
+
+.icon-indent-left { background-position: -384px -48px; }
+
+.icon-indent-right { background-position: -408px -48px; }
+
+.icon-facetime-video { background-position: -432px -48px; }
+
+.icon-picture { background-position: -456px -48px; }
+
+.icon-pencil { background-position: 0px -72px; }
+
+.icon-map-marker { background-position: -24px -72px; }
+
+.icon-adjust { background-position: -48px -72px; }
+
+.icon-tint { background-position: -72px -72px; }
+
+.icon-edit { background-position: -96px -72px; }
+
+.icon-share { background-position: -120px -72px; }
+
+.icon-check { background-position: -144px -72px; }
+
+.icon-move { background-position: -168px -72px; }
+
+.icon-step-backward { background-position: -192px -72px; }
+
+.icon-fast-backward { background-position: -216px -72px; }
+
+.icon-backward { background-position: -240px -72px; }
+
+.icon-play { background-position: -264px -72px; }
+
+.icon-pause { background-position: -288px -72px; }
+
+.icon-stop { background-position: -312px -72px; }
+
+.icon-forward { background-position: -336px -72px; }
+
+.icon-fast-forward { background-position: -360px -72px; }
+
+.icon-step-forward { background-position: -384px -72px; }
+
+.icon-eject { background-position: -408px -72px; }
+
+.icon-chevron-left { background-position: -432px -72px; }
+
+.icon-chevron-right { background-position: -456px -72px; }
+
+.icon-plus-sign { background-position: 0px -96px; }
+
+.icon-minus-sign { background-position: -24px -96px; }
+
+.icon-remove-sign { background-position: -48px -96px; }
+
+.icon-ok-sign { background-position: -72px -96px; }
+
+.icon-question-sign { background-position: -96px -96px; }
+
+.icon-info-sign { background-position: -120px -96px; }
+
+.icon-screenshot { background-position: -144px -96px; }
+
+.icon-remove-circle { background-position: -168px -96px; }
+
+.icon-ok-circle { background-position: -192px -96px; }
+
+.icon-ban-circle { background-position: -216px -96px; }
+
+.icon-arrow-left { background-position: -240px -96px; }
+
+.icon-arrow-right { background-position: -264px -96px; }
+
+.icon-arrow-up { background-position: -289px -96px; }
+
+.icon-arrow-down { background-position: -312px -96px; }
+
+.icon-share-alt { background-position: -336px -96px; }
+
+.icon-resize-full { background-position: -360px -96px; }
+
+.icon-resize-small { background-position: -384px -96px; }
+
+.icon-plus { background-position: -408px -96px; }
+
+.icon-minus { background-position: -433px -96px; }
+
+.icon-asterisk { background-position: -456px -96px; }
+
+.icon-exclamation-sign { background-position: 0px -120px; }
+
+.icon-gift { background-position: -24px -120px; }
+
+.icon-leaf { background-position: -48px -120px; }
+
+.icon-fire { background-position: -72px -120px; }
+
+.icon-eye-open { background-position: -96px -120px; }
+
+.icon-eye-close { background-position: -120px -120px; }
+
+.icon-warning-sign { background-position: -144px -120px; }
+
+.icon-plane { background-position: -168px -120px; }
+
+.icon-calendar { background-position: -192px -120px; }
+
+.icon-random { background-position: -216px -120px; }
+
+.icon-comment { background-position: -240px -120px; }
+
+.icon-magnet { background-position: -264px -120px; }
+
+.icon-chevron-up { background-position: -288px -120px; }
+
+.icon-chevron-down { background-position: -313px -119px; }
+
+.icon-retweet { background-position: -336px -120px; }
+
+.icon-shopping-cart { background-position: -360px -120px; }
+
+.icon-folder-close { background-position: -384px -120px; }
+
+.icon-folder-open { background-position: -408px -120px; }
+
+.icon-resize-vertical { background-position: -432px -119px; }
+
+.icon-resize-horizontal { background-position: -456px -118px; }
+
+.dropdown { position: relative; }
+
+.dropdown-toggle { }
+
+.dropdown-toggle:active, .open .dropdown-toggle { outline: 0px; }
+
+.caret { display: inline-block; width: 0px; height: 0px; text-indent: -9999=
+9px; vertical-align: top; border-left: 4px solid transparent; border-right:=
+ 4px solid transparent; border-top: 4px solid rgb(0, 0, 0); opacity: 0.3; c=
+ontent: "=E2=86=93"; }
+
+.dropdown .caret { margin-top: 8px; margin-left: 2px; }
+
+.dropdown:hover .caret, .open.dropdown .caret { opacity: 1; }
+
+.dropdown-menu { position: absolute; top: 100%; left: 0px; z-index: 1000; f=
+loat: left; display: none; min-width: 160px; padding: 4px 0px; margin: 0px;=
+ list-style: none; background-color: rgb(255, 255, 255); border-color: rgba=
+(0, 0, 0, 0.2); border-style: solid; border-width: 1px; border-radius: 0px =
+0px 5px 5px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px; -webkit-backgroun=
+d-clip: padding-box; background-clip: padding-box; }
+
+.dropdown-menu.bottom-up { top: auto; bottom: 100%; margin-bottom: 2px; }
+
+.dropdown-menu .divider { height: 1px; margin: 5px 1px; overflow: hidden; b=
+ackground-color: rgb(229, 229, 229); border-bottom: 1px solid rgb(255, 255,=
+ 255); }
+
+.dropdown-menu a { display: block; padding: 3px 15px; clear: both; font-wei=
+ght: normal; line-height: 18px; color: rgb(85, 85, 85); white-space: nowrap=
+; }
+
+.dropdown-menu li > a:hover, .dropdown-menu .active > a, .dropdown-menu .ac=
+tive > a:hover { color: rgb(255, 255, 255); text-decoration: none; backgrou=
+nd-color: rgb(0, 136, 204); }
+
+.dropdown.open { }
+
+.dropdown.open .dropdown-toggle { color: rgb(255, 255, 255); background: rg=
+ba(0, 0, 0, 0.298039); }
+
+.dropdown.open .dropdown-menu { display: block; }
+
+.typeahead { margin-top: 2px; border-radius: 4px; }
+
+.well { min-height: 20px; padding: 19px; margin-bottom: 20px; background-co=
+lor: rgb(245, 245, 245); border: 1px solid rgba(0, 0, 0, 0.0470588); border=
+-radius: 4px; box-shadow: rgba(0, 0, 0, 0.0470588) 0px 1px 1px inset; }
+
+.well blockquote { border-color: rgba(0, 0, 0, 0.14902); }
+
+.fade { transition: opacity 0.15s linear; opacity: 0; }
+
+.fade.in { opacity: 1; }
+
+.collapse { transition: height 0.35s ease; position: relative; overflow: hi=
+dden; height: 0px; }
+
+.collapse.in { height: auto; }
+
+.close { float: right; font-size: 20px; font-weight: bold; line-height: 18p=
+x; color: rgb(0, 0, 0); text-shadow: rgb(255, 255, 255) 0px 1px 0px; opacit=
+y: 0.2; }
+
+.close:hover { color: rgb(0, 0, 0); text-decoration: none; opacity: 0.4; cu=
+rsor: pointer; }
+
+.btn { display: inline-block; padding: 4px 10px; margin-bottom: 0px; font-s=
+ize: 13px; line-height: 18px; color: rgb(51, 51, 51); text-align: center; t=
+ext-shadow: rgba(255, 255, 255, 0.74902) 0px 1px 1px; vertical-align: middl=
+e; background-color: rgb(245, 245, 245); background-image: -webkit-linear-g=
+radient(top, rgb(255, 255, 255), rgb(230, 230, 230)); background-repeat: re=
+peat-x; border-width: 1px; border-style: solid; border-color: rgb(204, 204,=
+ 204) rgb(204, 204, 204) rgb(187, 187, 187); border-image: initial; border-=
+radius: 4px; box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px inset, rgba(0=
+, 0, 0, 0.0470588) 0px 1px 2px; cursor: pointer; }
+
+.btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled] { backg=
+round-color: rgb(230, 230, 230); }
+
+.btn:active, .btn.active { }
+
+.btn:first-child { }
+
+.btn:hover { color: rgb(51, 51, 51); text-decoration: none; background-colo=
+r: rgb(230, 230, 230); background-position: 0px -15px; transition: backgrou=
+nd-position 0.1s linear; }
+
+.btn:focus { outline: -webkit-focus-ring-color auto 5px; outline-offset: -2=
+px; }
+
+.btn.active, .btn:active { background-image: none; box-shadow: rgba(0, 0, 0=
+, 0.14902) 0px 2px 4px inset, rgba(0, 0, 0, 0.0470588) 0px 1px 2px; backgro=
+und-color: rgb(230, 230, 230); outline: 0px; }
+
+.btn.disabled, .btn[disabled] { cursor: default; background-image: none; ba=
+ckground-color: rgb(230, 230, 230); opacity: 0.65; box-shadow: none; }
+
+.btn-large { padding: 9px 14px; font-size: 15px; line-height: normal; borde=
+r-radius: 5px; }
+
+.btn-large [class^=3D"icon-"] { margin-top: 1px; }
+
+.btn-small { padding: 5px 9px; font-size: 11px; line-height: 16px; }
+
+.btn-small [class^=3D"icon-"] { margin-top: -1px; }
+
+.btn-mini { padding: 2px 6px; font-size: 11px; line-height: 14px; }
+
+.btn-primary, .btn-primary:hover, .btn-warning, .btn-warning:hover, .btn-da=
+nger, .btn-danger:hover, .btn-success, .btn-success:hover, .btn-info, .btn-=
+info:hover, .btn-inverse, .btn-inverse:hover { text-shadow: rgba(0, 0, 0, 0=
+.247059) 0px -1px 0px; color: rgb(255, 255, 255); }
+
+.btn-primary.active, .btn-warning.active, .btn-danger.active, .btn-success.=
+active, .btn-info.active, .btn-dark.active { color: rgba(255, 255, 255, 0.7=
+4902); }
+
+.btn-primary { background-color: rgb(0, 109, 204); background-image: -webki=
+t-linear-gradient(top, rgb(0, 136, 204), rgb(0, 68, 204)); background-repea=
+t: repeat-x; border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.0980392=
+) rgba(0, 0, 0, 0.247059); }
+
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.=
+disabled, .btn-primary[disabled] { background-color: rgb(0, 68, 204); }
+
+.btn-primary:active, .btn-primary.active { }
+
+.btn-warning { background-color: rgb(250, 167, 50); background-image: -webk=
+it-linear-gradient(top, rgb(251, 180, 80), rgb(248, 148, 6)); background-re=
+peat: repeat-x; border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.0980=
+392) rgba(0, 0, 0, 0.247059); }
+
+.btn-warning:hover, .btn-warning:active, .btn-warning.active, .btn-warning.=
+disabled, .btn-warning[disabled] { background-color: rgb(248, 148, 6); }
+
+.btn-warning:active, .btn-warning.active { }
+
+.btn-danger { background-color: rgb(218, 79, 73); background-image: -webkit=
+-linear-gradient(top, rgb(238, 95, 91), rgb(189, 54, 47)); background-repea=
+t: repeat-x; border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.0980392=
+) rgba(0, 0, 0, 0.247059); }
+
+.btn-danger:hover, .btn-danger:active, .btn-danger.active, .btn-danger.disa=
+bled, .btn-danger[disabled] { background-color: rgb(189, 54, 47); }
+
+.btn-danger:active, .btn-danger.active { }
+
+.btn-success { background-color: rgb(91, 183, 91); background-image: -webki=
+t-linear-gradient(top, rgb(98, 196, 98), rgb(81, 163, 81)); background-repe=
+at: repeat-x; border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.098039=
+2) rgba(0, 0, 0, 0.247059); }
+
+.btn-success:hover, .btn-success:active, .btn-success.active, .btn-success.=
+disabled, .btn-success[disabled] { background-color: rgb(81, 163, 81); }
+
+.btn-success:active, .btn-success.active { }
+
+.btn-info { background-color: rgb(73, 175, 205); background-image: -webkit-=
+linear-gradient(top, rgb(91, 192, 222), rgb(47, 150, 180)); background-repe=
+at: repeat-x; border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.098039=
+2) rgba(0, 0, 0, 0.247059); }
+
+.btn-info:hover, .btn-info:active, .btn-info.active, .btn-info.disabled, .b=
+tn-info[disabled] { background-color: rgb(47, 150, 180); }
+
+.btn-info:active, .btn-info.active { }
+
+.btn-inverse { background-color: rgb(57, 57, 57); background-image: -webkit=
+-linear-gradient(top, rgb(69, 69, 69), rgb(38, 38, 38)); background-repeat:=
+ repeat-x; border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.0980392) =
+rgba(0, 0, 0, 0.247059); }
+
+.btn-inverse:hover, .btn-inverse:active, .btn-inverse.active, .btn-inverse.=
+disabled, .btn-inverse[disabled] { background-color: rgb(38, 38, 38); }
+
+.btn-inverse:active, .btn-inverse.active { }
+
+button.btn, input[type=3D"submit"].btn { }
+
+button.btn.large, input[type=3D"submit"].btn.large { }
+
+button.btn.small, input[type=3D"submit"].btn.small { }
+
+.btn-group { position: relative; }
+
+.btn-group::before, .btn-group::after { display: table; content: ""; }
+
+.btn-group::after { clear: both; }
+
+.btn-group:first-child { }
+
+.btn-group + .btn-group { margin-left: 5px; }
+
+.btn-toolbar { margin-top: 9px; margin-bottom: 9px; }
+
+.btn-toolbar .btn-group { display: inline-block; }
+
+.btn-group .btn { position: relative; float: left; margin-left: -1px; borde=
+r-radius: 0px; }
+
+.btn-group .btn:first-child { margin-left: 0px; border-top-left-radius: 4px=
+; border-bottom-left-radius: 4px; }
+
+.btn-group .btn:last-child, .btn-group .dropdown-toggle { border-top-right-=
+radius: 4px; border-bottom-right-radius: 4px; }
+
+.btn-group .btn.large:first-child { margin-left: 0px; border-top-left-radiu=
+s: 6px; border-bottom-left-radius: 6px; }
+
+.btn-group .btn.large:last-child, .btn-group .large.dropdown-toggle { borde=
+r-top-right-radius: 6px; border-bottom-right-radius: 6px; }
+
+.btn-group .btn:hover, .btn-group .btn:focus, .btn-group .btn:active, .btn-=
+group .btn.active { z-index: 2; }
+
+.btn-group .dropdown-toggle:active, .btn-group.open .dropdown-toggle { outl=
+ine: 0px; }
+
+.btn-group .dropdown-toggle { padding-left: 8px; padding-right: 8px; box-sh=
+adow: rgba(255, 255, 255, 0.121569) 1px 0px 0px inset, rgba(255, 255, 255, =
+0.2) 0px 1px 0px inset, rgba(0, 0, 0, 0.0470588) 0px 1px 2px; }
+
+.btn-group.open { }
+
+.btn-group.open .dropdown-menu { display: block; margin-top: 1px; border-ra=
+dius: 5px; }
+
+.btn-group.open .dropdown-toggle { background-image: none; box-shadow: rgba=
+(0, 0, 0, 0.14902) 0px 1px 6px inset, rgba(0, 0, 0, 0.0470588) 0px 1px 2px;=
+ }
+
+.btn .caret { margin-top: 7px; margin-left: 0px; }
+
+.btn:hover .caret, .open.btn-group .caret { opacity: 1; }
+
+.btn-primary .caret, .btn-danger .caret, .btn-info .caret, .btn-success .ca=
+ret, .btn-inverse .caret { border-top-color: rgb(255, 255, 255); opacity: 0=
+.75; }
+
+.btn-small .caret { margin-top: 4px; }
+
+.alert { padding: 8px 35px 8px 14px; margin-bottom: 18px; text-shadow: rgba=
+(255, 255, 255, 0.498039) 0px 1px 0px; background-color: rgb(252, 248, 227)=
+; border: 1px solid rgb(251, 238, 213); border-radius: 4px; }
+
+.alert, .alert-heading { color: rgb(192, 152, 83); }
+
+.alert .close { position: relative; top: -2px; right: -21px; line-height: 1=
+8px; }
+
+.alert-success { background-color: rgb(223, 240, 216); border-color: rgb(21=
+4, 233, 198); }
+
+.alert-success, .alert-success .alert-heading { color: rgb(70, 136, 71); }
+
+.alert-danger, .alert-error { background-color: rgb(242, 222, 222); border-=
+color: rgb(238, 211, 215); }
+
+.alert-danger, .alert-error, .alert-danger .alert-heading, .alert-error .al=
+ert-heading { color: rgb(185, 74, 72); }
+
+.alert-info { background-color: rgb(217, 237, 247); border-color: rgb(188, =
+232, 241); }
+
+.alert-info, .alert-info .alert-heading { color: rgb(58, 135, 173); }
+
+.alert-block { padding-top: 14px; padding-bottom: 14px; }
+
+.alert-block > p, .alert-block > ul { margin-bottom: 0px; }
+
+.alert-block p + p { margin-top: 5px; }
+
+.nav { margin-left: 0px; margin-bottom: 18px; list-style: none; }
+
+.nav > li > a { display: block; }
+
+.nav > li > a:hover { text-decoration: none; background-color: rgb(238, 238=
+, 238); }
+
+.nav .nav-header { display: block; padding: 3px 15px; font-size: 11px; font=
+-weight: bold; line-height: 18px; color: rgb(153, 153, 153); text-shadow: r=
+gba(255, 255, 255, 0.498039) 0px 1px 0px; text-transform: uppercase; }
+
+.nav li + .nav-header { margin-top: 9px; }
+
+.nav-list { padding-left: 14px; padding-right: 14px; margin-bottom: 0px; }
+
+.nav-list > li > a, .nav-list .nav-header { margin-left: -15px; margin-righ=
+t: -15px; text-shadow: rgba(255, 255, 255, 0.498039) 0px 1px 0px; }
+
+.nav-list > li > a { padding: 3px 15px; }
+
+.nav-list .active > a, .nav-list .active > a:hover { color: rgb(255, 255, 2=
+55); text-shadow: rgba(0, 0, 0, 0.2) 0px -1px 0px; background-color: rgb(0,=
+ 136, 204); }
+
+.nav-list [class^=3D"icon-"] { margin-right: 2px; }
+
+.nav-tabs, .nav-pills { }
+
+.nav-tabs::before, .nav-pills::before, .nav-tabs::after, .nav-pills::after =
+{ display: table; content: ""; }
+
+.nav-tabs::after, .nav-pills::after { clear: both; }
+
+.nav-tabs > li, .nav-pills > li { float: left; }
+
+.nav-tabs > li > a, .nav-pills > li > a { padding-right: 12px; padding-left=
+: 12px; margin-right: 2px; line-height: 14px; }
+
+.nav-tabs { border-bottom: 1px solid rgb(221, 221, 221); }
+
+.nav-tabs > li { margin-bottom: -1px; }
+
+.nav-tabs > li > a { padding-top: 9px; padding-bottom: 9px; border: 1px sol=
+id transparent; border-radius: 4px 4px 0px 0px; }
+
+.nav-tabs > li > a:hover { border-color: rgb(238, 238, 238) rgb(238, 238, 2=
+38) rgb(221, 221, 221); }
+
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover { color: rgb(85, 85,=
+ 85); background-color: rgb(255, 255, 255); border-width: 1px; border-style=
+: solid; border-color: rgb(221, 221, 221) rgb(221, 221, 221) transparent; b=
+order-image: initial; cursor: default; }
+
+.nav-pills > li > a { padding-top: 8px; padding-bottom: 8px; margin-top: 2p=
+x; margin-bottom: 2px; border-radius: 5px; }
+
+.nav-pills .active > a, .nav-pills .active > a:hover { color: rgb(255, 255,=
+ 255); background-color: rgb(0, 136, 204); }
+
+.nav-stacked > li { float: none; }
+
+.nav-stacked > li > a { margin-right: 0px; }
+
+.nav-tabs.nav-stacked { border-bottom: 0px; }
+
+.nav-tabs.nav-stacked > li > a { border: 1px solid rgb(221, 221, 221); bord=
+er-radius: 0px; }
+
+.nav-tabs.nav-stacked > li:first-child > a { border-radius: 4px 4px 0px 0px=
+; }
+
+.nav-tabs.nav-stacked > li:last-child > a { border-radius: 0px 0px 4px 4px;=
+ }
+
+.nav-tabs.nav-stacked > li > a:hover { border-color: rgb(221, 221, 221); z-=
+index: 2; }
+
+.nav-pills.nav-stacked > li > a { margin-bottom: 3px; }
+
+.nav-pills.nav-stacked > li:last-child > a { margin-bottom: 1px; }
+
+.nav-tabs .dropdown-menu, .nav-pills .dropdown-menu { margin-top: 1px; bord=
+er-width: 1px; }
+
+.nav-pills .dropdown-menu { border-radius: 4px; }
+
+.nav-tabs .dropdown-toggle .caret, .nav-pills .dropdown-toggle .caret { bor=
+der-top-color: rgb(0, 136, 204); margin-top: 6px; }
+
+.nav-tabs .dropdown-toggle:hover .caret, .nav-pills .dropdown-toggle:hover =
+.caret { border-top-color: rgb(0, 85, 128); }
+
+.nav-tabs .active .dropdown-toggle .caret, .nav-pills .active .dropdown-tog=
+gle .caret { border-top-color: rgb(51, 51, 51); }
+
+.nav > .dropdown.active > a:hover { color: rgb(0, 0, 0); cursor: pointer; }
+
+.nav-tabs .open .dropdown-toggle, .nav-pills .open .dropdown-toggle, .nav >=
+ .open.active > a:hover { color: rgb(255, 255, 255); background-color: rgb(=
+153, 153, 153); border-color: rgb(153, 153, 153); }
+
+.nav .open .caret, .nav .open.active .caret, .nav .open a:hover .caret { bo=
+rder-top-color: rgb(255, 255, 255); opacity: 1; }
+
+.tabs-stacked .open > a:hover { border-color: rgb(153, 153, 153); }
+
+.tabbable { }
+
+.tabbable::before, .tabbable::after { display: table; content: ""; }
+
+.tabbable::after { clear: both; }
+
+.tab-content { overflow: hidden; }
+
+.tabs-below .nav-tabs, .tabs-right .nav-tabs, .tabs-left .nav-tabs { border=
+-bottom: 0px; }
+
+.tab-content > .tab-pane, .pill-content > .pill-pane { display: none; }
+
+.tab-content > .active, .pill-content > .active { display: block; }
+
+.tabs-below .nav-tabs { border-top: 1px solid rgb(221, 221, 221); }
+
+.tabs-below .nav-tabs > li { margin-top: -1px; margin-bottom: 0px; }
+
+.tabs-below .nav-tabs > li > a { border-radius: 0px 0px 4px 4px; }
+
+.tabs-below .nav-tabs > li > a:hover { border-bottom-color: transparent; bo=
+rder-top-color: rgb(221, 221, 221); }
+
+.tabs-below .nav-tabs .active > a, .tabs-below .nav-tabs .active > a:hover =
+{ border-color: transparent rgb(221, 221, 221) rgb(221, 221, 221); }
+
+.tabs-left .nav-tabs > li, .tabs-right .nav-tabs > li { float: none; }
+
+.tabs-left .nav-tabs > li > a, .tabs-right .nav-tabs > li > a { min-width: =
+74px; margin-right: 0px; margin-bottom: 3px; }
+
+.tabs-left .nav-tabs { float: left; margin-right: 19px; border-right: 1px s=
+olid rgb(221, 221, 221); }
+
+.tabs-left .nav-tabs > li > a { margin-right: -1px; border-radius: 4px 0px =
+0px 4px; }
+
+.tabs-left .nav-tabs > li > a:hover { border-color: rgb(238, 238, 238) rgb(=
+221, 221, 221) rgb(238, 238, 238) rgb(238, 238, 238); }
+
+.tabs-left .nav-tabs .active > a, .tabs-left .nav-tabs .active > a:hover { =
+border-color: rgb(221, 221, 221) transparent rgb(221, 221, 221) rgb(221, 22=
+1, 221); }
+
+.tabs-right .nav-tabs { float: right; margin-left: 19px; border-left: 1px s=
+olid rgb(221, 221, 221); }
+
+.tabs-right .nav-tabs > li > a { margin-left: -1px; border-radius: 0px 4px =
+4px 0px; }
+
+.tabs-right .nav-tabs > li > a:hover { border-color: rgb(238, 238, 238) rgb=
+(238, 238, 238) rgb(238, 238, 238) rgb(221, 221, 221); }
+
+.tabs-right .nav-tabs .active > a, .tabs-right .nav-tabs .active > a:hover =
+{ border-color: rgb(221, 221, 221) rgb(221, 221, 221) rgb(221, 221, 221) tr=
+ansparent; }
+
+.navbar { overflow: visible; margin-bottom: 18px; }
+
+.navbar-inner { padding-left: 20px; padding-right: 20px; background-color: =
+rgb(44, 44, 44); background-image: -webkit-linear-gradient(top, rgb(51, 51,=
+ 51), rgb(34, 34, 34)); background-repeat: repeat-x; border-radius: 4px; bo=
+x-shadow: rgba(0, 0, 0, 0.247059) 0px 1px 3px, rgba(0, 0, 0, 0.0980392) 0px=
+ -1px 0px inset; }
+
+.btn-navbar { display: none; float: right; padding: 7px 10px; margin-left: =
+5px; margin-right: 5px; background-color: rgb(44, 44, 44); background-image=
+: -webkit-linear-gradient(top, rgb(51, 51, 51), rgb(34, 34, 34)); backgroun=
+d-repeat: repeat-x; border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.=
+0980392) rgba(0, 0, 0, 0.247059); box-shadow: rgba(255, 255, 255, 0.0980392=
+) 0px 1px 0px inset, rgba(255, 255, 255, 0.0745098) 0px 1px 0px; }
+
+.btn-navbar:hover, .btn-navbar:active, .btn-navbar.active, .btn-navbar.disa=
+bled, .btn-navbar[disabled] { background-color: rgb(34, 34, 34); }
+
+.btn-navbar:active, .btn-navbar.active { }
+
+.btn-navbar .icon-bar { display: block; width: 18px; height: 2px; backgroun=
+d-color: rgb(245, 245, 245); border-radius: 1px; box-shadow: rgba(0, 0, 0, =
+0.247059) 0px 1px 0px; }
+
+.btn-navbar .icon-bar + .icon-bar { margin-top: 3px; }
+
+.nav-collapse.collapse { height: auto; }
+
+.navbar .brand:hover { text-decoration: none; }
+
+.navbar .brand { float: left; display: block; padding: 8px 20px 12px; margi=
+n-left: -20px; font-size: 20px; font-weight: 200; line-height: 1; color: rg=
+b(255, 255, 255); }
+
+.navbar .navbar-text { margin-bottom: 0px; line-height: 40px; color: rgb(15=
+3, 153, 153); }
+
+.navbar .navbar-text a:hover { color: rgb(255, 255, 255); background-color:=
+ transparent; }
+
+.navbar .btn, .navbar .btn-group { margin-top: 5px; }
+
+.navbar .btn-group .btn { margin-top: 0px; }
+
+.navbar-form { margin-bottom: 0px; }
+
+.navbar-form::before, .navbar-form::after { display: table; content: ""; }
+
+.navbar-form::after { clear: both; }
+
+.navbar-form input, .navbar-form select { display: inline-block; margin-top=
+: 5px; margin-bottom: 0px; }
+
+.navbar-form .radio, .navbar-form .checkbox { margin-top: 5px; }
+
+.navbar-form input[type=3D"image"], .navbar-form input[type=3D"checkbox"], =
+.navbar-form input[type=3D"radio"] { margin-top: 3px; }
+
+.navbar-form .input-append, .navbar-form .input-prepend { margin-top: 6px; =
+white-space: nowrap; }
+
+.navbar-form .input-append input, .navbar-form .input-prepend input { margi=
+n-top: 0px; }
+
+.navbar-search { position: relative; float: left; margin-top: 6px; margin-b=
+ottom: 0px; }
+
+.navbar-search .search-query { padding: 4px 9px; font-family: "Helvetica Ne=
+ue", Helvetica, Arial, sans-serif; font-size: 13px; font-weight: normal; li=
+ne-height: 1; color: rgba(255, 255, 255, 0.74902); background: rgba(255, 25=
+5, 255, 0.298039); border: 1px solid rgb(17, 17, 17); box-shadow: rgba(0, 0=
+, 0, 0.0980392) 0px 1px 2px inset, rgba(255, 255, 255, 0.14902) 0px 1px 0px=
+; transition: none; }
+
+.navbar-search .search-query::-webkit-input-placeholder { color: rgb(238, 2=
+38, 238); }
+
+.navbar-search .search-query:hover { color: rgb(255, 255, 255); background-=
+color: rgba(255, 255, 255, 0.498039); }
+
+.navbar-search .search-query:focus, .navbar-search .search-query.focused { =
+padding: 5px 10px; color: rgb(51, 51, 51); text-shadow: rgb(255, 255, 255) =
+0px 1px 0px; background-color: rgb(255, 255, 255); border: 0px; box-shadow:=
+ rgba(0, 0, 0, 0.14902) 0px 0px 3px; outline: 0px; }
+
+.navbar-fixed-top { position: fixed; top: 0px; right: 0px; left: 0px; z-ind=
+ex: 1030; }
+
+.navbar-fixed-top .navbar-inner { padding-left: 0px; padding-right: 0px; bo=
+rder-radius: 0px; }
+
+.navbar .nav { position: relative; left: 0px; display: block; float: left; =
+margin: 0px 10px 0px 0px; }
+
+.navbar .nav.pull-right { float: right; }
+
+.navbar .nav > li { display: block; float: left; }
+
+.navbar .nav > li > a { float: none; padding: 10px 10px 11px; line-height: =
+19px; color: rgb(153, 153, 153); text-decoration: none; text-shadow: rgba(0=
+, 0, 0, 0.247059) 0px -1px 0px; }
+
+.navbar .nav > li > a:hover { background-color: transparent; color: rgb(255=
+, 255, 255); text-decoration: none; }
+
+.navbar .nav .active > a, .navbar .nav .active > a:hover { color: rgb(255, =
+255, 255); text-decoration: none; background-color: rgb(34, 34, 34); }
+
+.navbar .divider-vertical { height: 40px; width: 1px; margin: 0px 9px; over=
+flow: hidden; background-color: rgb(34, 34, 34); border-right: 1px solid rg=
+b(51, 51, 51); }
+
+.navbar .nav.pull-right { margin-left: 10px; margin-right: 0px; }
+
+.navbar .dropdown-menu { margin-top: 1px; border-radius: 4px; }
+
+.navbar .dropdown-menu::before { content: ""; display: inline-block; border=
+-left: 7px solid transparent; border-right: 7px solid transparent; border-b=
+ottom: 7px solid rgba(0, 0, 0, 0.2); position: absolute; top: -7px; left: 9=
+px; }
+
+.navbar .dropdown-menu::after { content: ""; display: inline-block; border-=
+left: 6px solid transparent; border-right: 6px solid transparent; border-bo=
+ttom: 6px solid rgb(255, 255, 255); position: absolute; top: -6px; left: 10=
+px; }
+
+.navbar .nav .dropdown-toggle .caret, .navbar .nav .open.dropdown .caret { =
+border-top-color: rgb(255, 255, 255); }
+
+.navbar .nav .active .caret { opacity: 1; }
+
+.navbar .nav .open > .dropdown-toggle, .navbar .nav .active > .dropdown-tog=
+gle, .navbar .nav .open.active > .dropdown-toggle { background-color: trans=
+parent; }
+
+.navbar .nav .active > .dropdown-toggle:hover { color: rgb(255, 255, 255); =
+}
+
+.navbar .nav.pull-right .dropdown-menu { left: auto; right: 0px; }
+
+.navbar .nav.pull-right .dropdown-menu::before { left: auto; right: 12px; }
+
+.navbar .nav.pull-right .dropdown-menu::after { left: auto; right: 13px; }
+
+.breadcrumb { padding: 7px 14px; margin: 0px 0px 18px; background-color: rg=
+b(251, 251, 251); background-image: -webkit-linear-gradient(top, rgb(255, 2=
+55, 255), rgb(245, 245, 245)); background-repeat: repeat-x; border: 1px sol=
+id rgb(221, 221, 221); border-radius: 3px; box-shadow: rgb(255, 255, 255) 0=
+px 1px 0px inset; }
+
+.breadcrumb li { display: inline-block; text-shadow: rgb(255, 255, 255) 0px=
+ 1px 0px; }
+
+.breadcrumb .divider { padding: 0px 5px; color: rgb(153, 153, 153); }
+
+.breadcrumb .active a { color: rgb(51, 51, 51); }
+
+.pagination { height: 36px; margin: 18px 0px; }
+
+.pagination ul { display: inline-block; margin-left: 0px; margin-bottom: 0p=
+x; border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.0470588) 0px 1px 2px; }
+
+.pagination li { display: inline; }
+
+.pagination a { float: left; padding: 0px 14px; line-height: 34px; text-dec=
+oration: none; border-width: 1px 1px 1px 0px; border-style: solid; border-c=
+olor: rgb(221, 221, 221); border-image: initial; }
+
+.pagination a:hover, .pagination .active a { background-color: rgb(245, 245=
+, 245); }
+
+.pagination .active a { color: rgb(153, 153, 153); cursor: default; }
+
+.pagination .disabled a, .pagination .disabled a:hover { color: rgb(153, 15=
+3, 153); background-color: transparent; cursor: default; }
+
+.pagination li:first-child a { border-left-width: 1px; border-radius: 3px 0=
+px 0px 3px; }
+
+.pagination li:last-child a { border-radius: 0px 3px 3px 0px; }
+
+.pagination-centered { text-align: center; }
+
+.pagination-right { text-align: right; }
+
+.pager { margin-left: 0px; margin-bottom: 18px; list-style: none; text-alig=
+n: center; }
+
+.pager::before, .pager::after { display: table; content: ""; }
+
+.pager::after { clear: both; }
+
+.pager li { display: inline; }
+
+.pager a { display: inline-block; padding: 5px 14px; background-color: rgb(=
+255, 255, 255); border: 1px solid rgb(221, 221, 221); border-radius: 15px; =
+}
+
+.pager a:hover { text-decoration: none; background-color: rgb(245, 245, 245=
+); }
+
+.pager .next a { float: right; }
+
+.pager .previous a { float: left; }
+
+.modal-open .dropdown-menu { z-index: 2050; }
+
+.modal-open .dropdown.open { }
+
+.modal-open .popover { z-index: 2060; }
+
+.modal-open .tooltip { z-index: 2070; }
+
+.modal-backdrop { position: fixed; top: 0px; right: 0px; bottom: 0px; left:=
+ 0px; z-index: 1040; background-color: rgb(0, 0, 0); }
+
+.modal-backdrop.fade { opacity: 0; }
+
+.modal-backdrop, .modal-backdrop.fade.in { opacity: 0.8; }
+
+.modal { position: fixed; top: 50%; left: 50%; z-index: 1050; max-height: 5=
+00px; overflow: auto; width: 560px; margin: -250px 0px 0px -280px; backgrou=
+nd-color: rgb(255, 255, 255); border: 1px solid rgba(0, 0, 0, 0.298039); bo=
+rder-radius: 6px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 3px 7px; -webkit-=
+background-clip: padding-box; background-clip: padding-box; }
+
+.modal.fade { transition: opacity 0.3s linear, top 0.3s ease-out; top: -25%=
+; }
+
+.modal.fade.in { top: 50%; }
+
+.modal-header { padding: 9px 15px; border-bottom: 1px solid rgb(238, 238, 2=
+38); }
+
+.modal-header .close { margin-top: 2px; }
+
+.modal-body { padding: 15px; }
+
+.modal-body .modal-form { margin-bottom: 0px; }
+
+.modal-footer { padding: 14px 15px 15px; margin-bottom: 0px; background-col=
+or: rgb(245, 245, 245); border-top: 1px solid rgb(221, 221, 221); border-ra=
+dius: 0px 0px 6px 6px; box-shadow: rgb(255, 255, 255) 0px 1px 0px inset; }
+
+.modal-footer::before, .modal-footer::after { display: table; content: ""; =
+}
+
+.modal-footer::after { clear: both; }
+
+.modal-footer .btn { float: right; margin-left: 5px; margin-bottom: 0px; }
+
+.tooltip { position: absolute; z-index: 1020; display: block; visibility: v=
+isible; padding: 5px; font-size: 11px; opacity: 0; }
+
+.tooltip.in { opacity: 0.8; }
+
+.tooltip.top { margin-top: -2px; }
+
+.tooltip.right { margin-left: 2px; }
+
+.tooltip.bottom { margin-top: 2px; }
+
+.tooltip.left { margin-left: -2px; }
+
+.tooltip.top .tooltip-arrow { bottom: 0px; left: 50%; margin-left: -5px; bo=
+rder-left: 5px solid transparent; border-right: 5px solid transparent; bord=
+er-top: 5px solid rgb(0, 0, 0); }
+
+.tooltip.left .tooltip-arrow { top: 50%; right: 0px; margin-top: -5px; bord=
+er-top: 5px solid transparent; border-bottom: 5px solid transparent; border=
+-left: 5px solid rgb(0, 0, 0); }
+
+.tooltip.bottom .tooltip-arrow { top: 0px; left: 50%; margin-left: -5px; bo=
+rder-left: 5px solid transparent; border-right: 5px solid transparent; bord=
+er-bottom: 5px solid rgb(0, 0, 0); }
+
+.tooltip.right .tooltip-arrow { top: 50%; left: 0px; margin-top: -5px; bord=
+er-top: 5px solid transparent; border-bottom: 5px solid transparent; border=
+-right: 5px solid rgb(0, 0, 0); }
+
+.tooltip-inner { max-width: 200px; padding: 3px 8px; color: rgb(255, 255, 2=
+55); text-align: center; text-decoration: none; background-color: rgb(0, 0,=
+ 0); border-radius: 4px; }
+
+.tooltip-arrow { position: absolute; width: 0px; height: 0px; }
+
+.popover { position: absolute; top: 0px; left: 0px; z-index: 1010; display:=
+ none; padding: 5px; }
+
+.popover.top { margin-top: -5px; }
+
+.popover.right { margin-left: 5px; }
+
+.popover.bottom { margin-top: 5px; }
+
+.popover.left { margin-left: -5px; }
+
+.popover.top .arrow { bottom: 0px; left: 50%; margin-left: -5px; border-lef=
+t: 5px solid transparent; border-right: 5px solid transparent; border-top: =
+5px solid rgb(0, 0, 0); }
+
+.popover.right .arrow { top: 50%; left: 0px; margin-top: -5px; border-top: =
+5px solid transparent; border-bottom: 5px solid transparent; border-right: =
+5px solid rgb(0, 0, 0); }
+
+.popover.bottom .arrow { top: 0px; left: 50%; margin-left: -5px; border-lef=
+t: 5px solid transparent; border-right: 5px solid transparent; border-botto=
+m: 5px solid rgb(0, 0, 0); }
+
+.popover.left .arrow { top: 50%; right: 0px; margin-top: -5px; border-top: =
+5px solid transparent; border-bottom: 5px solid transparent; border-left: 5=
+px solid rgb(0, 0, 0); }
+
+.popover .arrow { position: absolute; width: 0px; height: 0px; }
+
+.popover-inner { padding: 3px; width: 280px; overflow: hidden; background: =
+rgba(0, 0, 0, 0.8); border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.298039)=
+ 0px 3px 7px; }
+
+.popover-title { padding: 9px 15px; line-height: 1; background-color: rgb(2=
+45, 245, 245); border-bottom: 1px solid rgb(238, 238, 238); border-radius: =
+3px 3px 0px 0px; }
+
+.popover-content { padding: 14px; background-color: rgb(255, 255, 255); bor=
+der-radius: 0px 0px 3px 3px; -webkit-background-clip: padding-box; backgrou=
+nd-clip: padding-box; }
+
+.popover-content p, .popover-content ul, .popover-content ol { margin-botto=
+m: 0px; }
+
+.thumbnails { margin-left: -20px; list-style: none; }
+
+.thumbnails::before, .thumbnails::after { display: table; content: ""; }
+
+.thumbnails::after { clear: both; }
+
+.thumbnails > li { float: left; margin: 0px 0px 18px 20px; }
+
+.thumbnail { display: block; padding: 4px; line-height: 1; border: 1px soli=
+d rgb(221, 221, 221); border-radius: 4px; box-shadow: rgba(0, 0, 0, 0.07450=
+98) 0px 1px 1px; }
+
+a.thumbnail:hover { border-color: rgb(0, 136, 204); box-shadow: rgba(0, 105=
+, 214, 0.247059) 0px 1px 4px; }
+
+.thumbnail > img { display: block; max-width: 100%; margin-left: auto; marg=
+in-right: auto; }
+
+.thumbnail .caption { padding: 9px; }
+
+.label { padding: 2px 4px 3px; font-size: 11.05px; font-weight: bold; color=
+: rgb(255, 255, 255); text-shadow: rgba(0, 0, 0, 0.247059) 0px -1px 0px; ba=
+ckground-color: rgb(153, 153, 153); border-radius: 3px; }
+
+.label:hover { color: rgb(255, 255, 255); text-decoration: none; }
+
+.label-important { background-color: rgb(185, 74, 72); }
+
+.label-important:hover { background-color: rgb(149, 59, 57); }
+
+.label-warning { background-color: rgb(248, 148, 6); }
+
+.label-warning:hover { background-color: rgb(198, 118, 5); }
+
+.label-success { background-color: rgb(70, 136, 71); }
+
+.label-success:hover { background-color: rgb(53, 102, 53); }
+
+.label-info { background-color: rgb(58, 135, 173); }
+
+.label-info:hover { background-color: rgb(45, 105, 135); }
+
+@-webkit-keyframes progress-bar-stripes {=20
+  0% { background-position: 0px 0px; }
+  100% { background-position: 40px 0px; }
+}
+
+@keyframes progress-bar-stripes {=20
+  0% { background-position: 0px 0px; }
+  100% { background-position: 40px 0px; }
+}
+
+.progress { overflow: hidden; height: 18px; margin-bottom: 18px; background=
+-color: rgb(247, 247, 247); background-image: -webkit-linear-gradient(top, =
+rgb(245, 245, 245), rgb(249, 249, 249)); background-repeat: repeat-x; box-s=
+hadow: rgba(0, 0, 0, 0.0980392) 0px 1px 2px inset; border-radius: 4px; }
+
+.progress .bar { width: 0%; height: 18px; color: rgb(255, 255, 255); font-s=
+ize: 12px; text-align: center; text-shadow: rgba(0, 0, 0, 0.247059) 0px -1p=
+x 0px; background-color: rgb(14, 144, 210); background-image: -webkit-linea=
+r-gradient(top, rgb(20, 155, 223), rgb(4, 128, 190)); background-repeat: re=
+peat-x; box-shadow: rgba(0, 0, 0, 0.14902) 0px -1px 0px inset; box-sizing: =
+border-box; transition: width 0.6s ease; }
+
+.progress-striped .bar { background-color: rgb(98, 196, 98); background-ima=
+ge: linear-gradient(-45deg, rgba(255, 255, 255, 0.14902) 25%, transparent 2=
+5%, transparent 50%, rgba(255, 255, 255, 0.14902) 50%, rgba(255, 255, 255, =
+0.14902) 75%, transparent 75%, transparent); background-size: 40px 40px; }
+
+.progress.active .bar { animation: progress-bar-stripes 2s linear infinite;=
+ }
+
+.progress-danger .bar { background-color: rgb(221, 81, 76); background-imag=
+e: -webkit-linear-gradient(top, rgb(238, 95, 91), rgb(196, 60, 53)); backgr=
+ound-repeat: repeat-x; }
+
+.progress-danger.progress-striped .bar { background-color: rgb(238, 95, 91)=
+; background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.14902) 25=
+%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.14902) 50%, rgba=
+(255, 255, 255, 0.14902) 75%, transparent 75%, transparent); }
+
+.progress-success .bar { background-color: rgb(94, 185, 94); background-ima=
+ge: -webkit-linear-gradient(top, rgb(98, 196, 98), rgb(87, 169, 87)); backg=
+round-repeat: repeat-x; }
+
+.progress-success.progress-striped .bar { background-color: rgb(98, 196, 98=
+); background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.14902) 2=
+5%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.14902) 50%, rgb=
+a(255, 255, 255, 0.14902) 75%, transparent 75%, transparent); }
+
+.progress-info .bar { background-color: rgb(75, 177, 207); background-image=
+: -webkit-linear-gradient(top, rgb(91, 192, 222), rgb(51, 155, 185)); backg=
+round-repeat: repeat-x; }
+
+.progress-info.progress-striped .bar { background-color: rgb(91, 192, 222);=
+ background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.14902) 25%=
+, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.14902) 50%, rgba(=
+255, 255, 255, 0.14902) 75%, transparent 75%, transparent); }
+
+.accordion { margin-bottom: 18px; }
+
+.accordion-group { margin-bottom: 2px; border: 1px solid rgb(229, 229, 229)=
+; border-radius: 4px; }
+
+.accordion-heading { border-bottom: 0px; }
+
+.accordion-heading .accordion-toggle { display: block; padding: 8px 15px; }
+
+.accordion-inner { padding: 9px 15px; border-top: 1px solid rgb(229, 229, 2=
+29); }
+
+.carousel { position: relative; margin-bottom: 18px; line-height: 1; }
+
+.carousel-inner { overflow: hidden; width: 100%; position: relative; }
+
+.carousel .item { display: none; position: relative; transition: left 0.6s =
+ease-in-out; }
+
+.carousel .item > img { display: block; line-height: 1; }
+
+.carousel .active, .carousel .next, .carousel .prev { display: block; }
+
+.carousel .active { left: 0px; }
+
+.carousel .next, .carousel .prev { position: absolute; top: 0px; width: 100=
+%; }
+
+.carousel .next { left: 100%; }
+
+.carousel .prev { left: -100%; }
+
+.carousel .next.left, .carousel .prev.right { left: 0px; }
+
+.carousel .active.left { left: -100%; }
+
+.carousel .active.right { left: 100%; }
+
+.carousel-control { position: absolute; top: 40%; left: 15px; width: 40px; =
+height: 40px; margin-top: -20px; font-size: 60px; font-weight: 100; line-he=
+ight: 30px; color: rgb(255, 255, 255); text-align: center; background: rgb(=
+34, 34, 34); border: 3px solid rgb(255, 255, 255); border-radius: 23px; opa=
+city: 0.5; }
+
+.carousel-control.right { left: auto; right: 15px; }
+
+.carousel-control:hover { color: rgb(255, 255, 255); text-decoration: none;=
+ opacity: 0.9; }
+
+.carousel-caption { position: absolute; left: 0px; right: 0px; bottom: 0px;=
+ padding: 10px 15px 5px; background: rgba(0, 0, 0, 0.74902); }
+
+.carousel-caption h4, .carousel-caption p { color: rgb(255, 255, 255); }
+
+.hero-unit { padding: 20px; margin-top: 10px; margin-bottom: 30px; backgrou=
+nd-color: rgb(245, 245, 245); border-radius: 6px; }
+
+.hero-unit h1 { margin-bottom: 0px; font-size: 50px; line-height: 1; letter=
+-spacing: -1px; }
+
+.hero-unit p { font-size: 18px; font-weight: 200; line-height: 27px; }
+
+.pull-right { float: right; }
+
+.pull-left { float: left; }
+
+.hide { display: none; }
+
+.show { display: block; }
+
+.invisible { visibility: hidden; }
+------MultipartBoundary--IEKVAqurQXdCcvGCAwqzmjMKCMIHo6sa7eHiZtfkdP----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://aosabook.org/en/500L/theme/css/bootstrap-responsive.css
+
+@charset "utf-8";
+
+.clearfix { }
+
+.clearfix::before, .clearfix::after { display: table; content: ""; }
+
+.clearfix::after { clear: both; }
+
+.hidden { display: none; visibility: hidden; }
+
+@media (max-width: 480px) {=20
+  .nav-collapse { transform: translate3d(0px, 0px, 0px); }
+  .page-header h1 small { display: block; line-height: 18px; }
+  input[class*=3D"span"], select[class*=3D"span"], textarea[class*=3D"span"=
+], .uneditable-input { display: block; width: 100%; min-height: 28px; box-s=
+izing: border-box; }
+  .input-prepend input[class*=3D"span"], .input-append input[class*=3D"span=
+"] { width: auto; }
+  input[type=3D"checkbox"], input[type=3D"radio"] { border: 1px solid rgb(2=
+04, 204, 204); }
+  .form-horizontal .control-group > label { float: none; width: auto; paddi=
+ng-top: 0px; text-align: left; }
+  .form-horizontal .controls { margin-left: 0px; }
+  .form-horizontal .control-list { padding-top: 0px; }
+  .form-horizontal .form-actions { padding-left: 10px; padding-right: 10px;=
+ }
+  .modal { position: absolute; top: 10px; left: 10px; right: 10px; width: a=
+uto; margin: 0px; }
+  .modal.fade.in { top: auto; }
+  .modal-header .close { padding: 10px; margin: -10px; }
+  .carousel-caption { position: static; }
+}
+
+@media (max-width: 767px) {=20
+  .container { width: auto; padding: 0px 20px; }
+  .row-fluid { width: 100%; }
+  .row { margin-left: 0px; }
+  .row > [class*=3D"span"], .row-fluid > [class*=3D"span"] { float: none; d=
+isplay: block; width: auto; margin: 0px; }
+}
+
+@media (max-width: 979px) and (min-width: 768px) {=20
+  .row { margin-left: -20px; }
+  .row::before, .row::after { display: table; content: ""; }
+  .row::after { clear: both; }
+  [class*=3D"span"] { float: left; margin-left: 20px; }
+  .span1 { width: 42px; }
+  .span2 { width: 104px; }
+  .span3 { width: 166px; }
+  .span4 { width: 228px; }
+  .span5 { width: 290px; }
+  .span6 { width: 352px; }
+  .span7 { width: 414px; }
+  .span8 { width: 476px; }
+  .span9 { width: 538px; }
+  .span10 { width: 600px; }
+  .span11 { width: 662px; }
+  .span12, .container { width: 724px; }
+  .offset1 { margin-left: 82px; }
+  .offset2 { margin-left: 144px; }
+  .offset3 { margin-left: 206px; }
+  .offset4 { margin-left: 268px; }
+  .offset5 { margin-left: 330px; }
+  .offset6 { margin-left: 392px; }
+  .offset7 { margin-left: 454px; }
+  .offset8 { margin-left: 516px; }
+  .offset9 { margin-left: 578px; }
+  .offset10 { margin-left: 640px; }
+  .offset11 { margin-left: 702px; }
+  .row-fluid { width: 100%; }
+  .row-fluid::before, .row-fluid::after { display: table; content: ""; }
+  .row-fluid::after { clear: both; }
+  .row-fluid > [class*=3D"span"] { float: left; margin-left: 2.76243%; }
+  .row-fluid > [class*=3D"span"]:first-child { margin-left: 0px; }
+  .row-fluid > .span1 { width: 5.8011%; }
+  .row-fluid > .span2 { width: 14.3646%; }
+  .row-fluid > .span3 { width: 22.9282%; }
+  .row-fluid > .span4 { width: 31.4917%; }
+  .row-fluid > .span5 { width: 40.0552%; }
+  .row-fluid > .span6 { width: 48.6188%; }
+  .row-fluid > .span7 { width: 57.1823%; }
+  .row-fluid > .span8 { width: 65.7459%; }
+  .row-fluid > .span9 { width: 74.3094%; }
+  .row-fluid > .span10 { width: 82.8729%; }
+  .row-fluid > .span11 { width: 91.4365%; }
+  .row-fluid > .span12 { width: 100%; }
+  input.span1, textarea.span1, .uneditable-input.span1 { width: 32px; }
+  input.span2, textarea.span2, .uneditable-input.span2 { width: 94px; }
+  input.span3, textarea.span3, .uneditable-input.span3 { width: 156px; }
+  input.span4, textarea.span4, .uneditable-input.span4 { width: 218px; }
+  input.span5, textarea.span5, .uneditable-input.span5 { width: 280px; }
+  input.span6, textarea.span6, .uneditable-input.span6 { width: 342px; }
+  input.span7, textarea.span7, .uneditable-input.span7 { width: 404px; }
+  input.span8, textarea.span8, .uneditable-input.span8 { width: 466px; }
+  input.span9, textarea.span9, .uneditable-input.span9 { width: 528px; }
+  input.span10, textarea.span10, .uneditable-input.span10 { width: 590px; }
+  input.span11, textarea.span11, .uneditable-input.span11 { width: 652px; }
+  input.span12, textarea.span12, .uneditable-input.span12 { width: 714px; }
+}
+
+@media (max-width: 979px) {=20
+  body { padding-top: 0px; }
+  .navbar-fixed-top { position: static; margin-bottom: 18px; }
+  .navbar-fixed-top .navbar-inner { padding: 5px; }
+  .navbar .container { width: auto; padding: 0px; }
+  .navbar .brand { padding-left: 10px; padding-right: 10px; margin: 0px 0px=
+ 0px -5px; }
+  .navbar .nav-collapse { clear: left; }
+  .navbar .nav { float: none; margin: 0px 0px 9px; }
+  .navbar .nav > li { float: none; }
+  .navbar .nav > li > a { margin-bottom: 2px; }
+  .navbar .nav > .divider-vertical { display: none; }
+  .navbar .nav .nav-header { color: rgb(153, 153, 153); text-shadow: none; =
+}
+  .navbar .nav > li > a, .navbar .dropdown-menu a { padding: 6px 15px; font=
+-weight: bold; color: rgb(153, 153, 153); border-radius: 3px; }
+  .navbar .dropdown-menu li + li a { margin-bottom: 2px; }
+  .navbar .nav > li > a:hover, .navbar .dropdown-menu a:hover { background-=
+color: rgb(34, 34, 34); }
+  .navbar .dropdown-menu { position: static; top: auto; left: auto; float: =
+none; display: block; max-width: none; margin: 0px 15px; padding: 0px; back=
+ground-color: transparent; border: none; border-radius: 0px; box-shadow: no=
+ne; }
+  .navbar .dropdown-menu::before, .navbar .dropdown-menu::after { display: =
+none; }
+  .navbar .dropdown-menu .divider { display: none; }
+  .navbar-form, .navbar-search { float: none; padding: 9px 15px; margin: 9p=
+x 0px; border-top: 1px solid rgb(34, 34, 34); border-bottom: 1px solid rgb(=
+34, 34, 34); box-shadow: rgba(255, 255, 255, 0.0980392) 0px 1px 0px inset, =
+rgba(255, 255, 255, 0.0980392) 0px 1px 0px; }
+  .navbar .nav.pull-right { float: none; margin-left: 0px; }
+  .navbar-static .navbar-inner { padding-left: 10px; padding-right: 10px; }
+  .btn-navbar { display: block; }
+  .nav-collapse { overflow: hidden; height: 0px; }
+}
+
+@media (min-width: 980px) {=20
+  .nav-collapse.collapse { height: auto !important; }
+}
+
+@media (min-width: 1200px) {=20
+  .row { margin-left: -30px; }
+  .row::before, .row::after { display: table; content: ""; }
+  .row::after { clear: both; }
+  [class*=3D"span"] { float: left; margin-left: 30px; }
+  .span1 { width: 70px; }
+  .span2 { width: 170px; }
+  .span3 { width: 270px; }
+  .span4 { width: 370px; }
+  .span5 { width: 470px; }
+  .span6 { width: 570px; }
+  .span7 { width: 670px; }
+  .span8 { width: 770px; }
+  .span9 { width: 870px; }
+  .span10 { width: 970px; }
+  .span11 { width: 1070px; }
+  .span12, .container { width: 1170px; }
+  .offset1 { margin-left: 130px; }
+  .offset2 { margin-left: 230px; }
+  .offset3 { margin-left: 330px; }
+  .offset4 { margin-left: 430px; }
+  .offset5 { margin-left: 530px; }
+  .offset6 { margin-left: 630px; }
+  .offset7 { margin-left: 730px; }
+  .offset8 { margin-left: 830px; }
+  .offset9 { margin-left: 930px; }
+  .offset10 { margin-left: 1030px; }
+  .offset11 { margin-left: 1130px; }
+  .row-fluid { width: 100%; }
+  .row-fluid::before, .row-fluid::after { display: table; content: ""; }
+  .row-fluid::after { clear: both; }
+  .row-fluid > [class*=3D"span"] { float: left; margin-left: 2.5641%; }
+  .row-fluid > [class*=3D"span"]:first-child { margin-left: 0px; }
+  .row-fluid > .span1 { width: 5.98291%; }
+  .row-fluid > .span2 { width: 14.5299%; }
+  .row-fluid > .span3 { width: 23.0769%; }
+  .row-fluid > .span4 { width: 31.6239%; }
+  .row-fluid > .span5 { width: 40.1709%; }
+  .row-fluid > .span6 { width: 48.7179%; }
+  .row-fluid > .span7 { width: 57.265%; }
+  .row-fluid > .span8 { width: 65.812%; }
+  .row-fluid > .span9 { width: 74.359%; }
+  .row-fluid > .span10 { width: 82.906%; }
+  .row-fluid > .span11 { width: 91.453%; }
+  .row-fluid > .span12 { width: 100%; }
+  input.span1, textarea.span1, .uneditable-input.span1 { width: 60px; }
+  input.span2, textarea.span2, .uneditable-input.span2 { width: 160px; }
+  input.span3, textarea.span3, .uneditable-input.span3 { width: 260px; }
+  input.span4, textarea.span4, .uneditable-input.span4 { width: 360px; }
+  input.span5, textarea.span5, .uneditable-input.span5 { width: 460px; }
+  input.span6, textarea.span6, .uneditable-input.span6 { width: 560px; }
+  input.span7, textarea.span7, .uneditable-input.span7 { width: 660px; }
+  input.span8, textarea.span8, .uneditable-input.span8 { width: 760px; }
+  input.span9, textarea.span9, .uneditable-input.span9 { width: 860px; }
+  input.span10, textarea.span10, .uneditable-input.span10 { width: 960px; }
+  input.span11, textarea.span11, .uneditable-input.span11 { width: 1060px; =
+}
+  input.span12, textarea.span12, .uneditable-input.span12 { width: 1160px; =
+}
+  .thumbnails { margin-left: -30px; }
+  .thumbnails > li { margin-left: 30px; }
+}
+------MultipartBoundary--IEKVAqurQXdCcvGCAwqzmjMKCMIHo6sa7eHiZtfkdP----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://aosabook.org/en/500L/theme/css/code.css
+
+@charset "utf-8";
+
+.sourceCode span.kw { color: rgb(0, 112, 32); font-weight: bold; }
+
+.sourceCode span.dt { color: rgb(144, 32, 0); }
+
+.sourceCode span.dv { color: rgb(64, 160, 112); }
+
+.sourceCode span.bn { color: rgb(64, 160, 112); }
+
+.sourceCode span.fl { color: rgb(64, 160, 112); }
+
+.sourceCode span.ch { color: rgb(64, 112, 160); }
+
+.sourceCode span.st { color: rgb(64, 112, 160); }
+
+.sourceCode span.co { color: rgb(96, 160, 176); font-style: italic; }
+
+.sourceCode span.al { color: red; font-weight: bold; }
+
+.sourceCode span.fu { color: rgb(6, 40, 126); }
+
+.sourceCode span.re { }
+
+.sourceCode span.er { color: red; font-weight: bold; }
+------MultipartBoundary--IEKVAqurQXdCcvGCAwqzmjMKCMIHo6sa7eHiZtfkdP----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://aosabook.org/en/500L/theme/css/500L.css
+
+@charset "utf-8";
+
+img.cover { display: block; margin-left: auto; margin-right: auto; padding-=
+bottom: 2em; }
+
+body.help { margin-left: auto; margin-right: auto; }
+
+div.box { display: block; margin-left: auto; margin-right: auto; outline: g=
+ray solid 1px; padding: 1px 10px; }
+
+div.figure { display: block; margin-left: auto; margin-right: auto; padding=
+: 1px 10px; text-align: center; }
+
+div.footnotes { border-top: 1px solid gray; }
+
+div.footnotes h2 { font-style: italic; }
+
+div.sect h2 { font-style: italic; }
+
+div.subsect h3 { font-style: italic; }
+
+div.table { display: block; margin-left: auto; margin-right: auto; padding:=
+ 1px 10px; text-align: center; }
+
+div.table table { font-size: small; margin-left: auto; margin-right: auto; =
+outline: gray solid 1px; }
+
+dl.faq dt { font-style: italic; }
+
+dl.faq dd { margin-bottom: 10px; }
+
+h1.chaptertitle { font-style: italic; font-size: xx-large; }
+
+h1.chapterauthor { font-style: italic; font-size: x-large; }
+
+p.boxtitle { text-align: center; font-style: italic; font-weight: bold; }
+
+p.pullquote { font-style: italic; }
+
+table.bibtable td { text-align: center; }
+
+table.tasks th { vertical-align: top; }
+
+td { vertical-align: top; }
+
+td.center { vertical-align: top; text-align: center; }
+
+th { text-align: left; }
+
+th.center { text-align: center; }
+
+.table-striped tbody tr:nth-child(2n+1) td, table.table-striped tbody tr:nt=
+h-child(2n+1) th { background-color: rgb(211, 229, 240); }
+
+.hero-unit { background-color: rgb(200, 217, 227); }
+
+.center { text-align: center; }
+
+* + table { border-style: solid; border-width: 1px; border-color: rgb(231, =
+227, 231); }
+
+* + table th, * + table td { border-style: dashed; border-width: 1px; borde=
+r-color: rgb(231, 227, 231); padding-left: 3px; padding-right: 3px; }
+
+* + table th { border-style: solid; font-weight: bold; background: url("/im=
+ages/noise.png?1330434582") left top repeat scroll rgb(247, 243, 247); }
+
+* + table th[align=3D"left"], * + table td[align=3D"left"] { text-align: le=
+ft; }
+
+* + table th[align=3D"right"], * + table td[align=3D"right"] { text-align: =
+right; }
+
+* + table th[align=3D"center"], * + table td[align=3D"center"] { text-align=
+: center; }
+------MultipartBoundary--IEKVAqurQXdCcvGCAwqzmjMKCMIHo6sa7eHiZtfkdP----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: http://aosabook.org/en/500L/objmodel-images/inheritance.png
+
+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
+IiIA/Be2FlsgvAfTsQAAAABJRU5ErkJggg==
+------MultipartBoundary--IEKVAqurQXdCcvGCAwqzmjMKCMIHo6sa7eHiZtfkdP----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: http://aosabook.org/en/500L/objmodel-images/maptransition.png
+
+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
+------MultipartBoundary--IEKVAqurQXdCcvGCAwqzmjMKCMIHo6sa7eHiZtfkdP----
+Content-Type: text/html
+Content-ID: <frame-106-1b5f7d02-1097-4b2b-83fd-6155e2e742e8@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
+=3DUTF-8"></head><body></body></html>
+------MultipartBoundary--IEKVAqurQXdCcvGCAwqzmjMKCMIHo6sa7eHiZtfkdP------

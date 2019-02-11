@@ -1,0 +1,3852 @@
+From: <Saved by Blink>
+Subject: 500 Lines or Less | Static Analysis
+Date: Tue, 11 Feb 2019 01:57:08 -0000
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--TJ96w9fUA7yjllh1YuJK8WyLDucvOglwcwQdigSjPm----"
+
+------MultipartBoundary--TJ96w9fUA7yjllh1YuJK8WyLDucvOglwcwQdigSjPm----
+Content-Type: text/html
+Content-ID: <frame-60-006710fb-6122-4418-bdd4-da42682abec9@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://aosabook.org/en/500L/static-analysis.html
+
+<!DOCTYPE html><html lang=3D"en"><head><meta http-equiv=3D"Content-Type" co=
+ntent=3D"text/html; charset=3DUTF-8">
+   =20
+    <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=
+=3D1.0">
+    <meta name=3D"provenance" content=3D"$Id: index.html 1472 2012-09-21 22=
+:17:41Z audrey $">
+    <link rel=3D"stylesheet" href=3D"http://aosabook.org/en/500L/theme/css/=
+bootstrap.css" type=3D"text/css">
+    <link rel=3D"stylesheet" href=3D"http://aosabook.org/en/500L/theme/css/=
+bootstrap-responsive.css" type=3D"text/css">
+    <link rel=3D"stylesheet" href=3D"http://aosabook.org/en/500L/theme/css/=
+code.css" type=3D"text/css">
+    <link rel=3D"stylesheet" href=3D"http://aosabook.org/en/500L/theme/css/=
+500L.css" type=3D"text/css">
+    <title>500 Lines or Less | Static Analysis</title>
+   =20
+   =20
+<style type=3D"text/css">.MathJax_Hover_Frame {border-radius: .25em; -webki=
+t-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .2=
+5em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; =
+-moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; b=
+order: 1px solid #A6D ! important; display: inline-block; position: absolut=
+e}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: poin=
+ter; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -we=
+bkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px=
+; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-=
+color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding=
+: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!=
+important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type=3D"text/css">#MathJax_About {position: fixed; left: 50%=
+; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; ba=
+ckground-color: #DDDDDD; color: black; cursor: default; font-family: messag=
+e-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform:=
+ none; line-height: normal; letter-spacing: normal; word-spacing: normal; w=
+ord-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-ra=
+dius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-b=
+order-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: =
+0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-s=
+hadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dro=
+pshadow(OffX=3D2, OffY=3D2, Color=3D'gray', Positive=3D'true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; w=
+idth: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: def=
+ault; font: menu; text-align: left; text-indent: 0; text-transform: none; l=
+ine-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap=
+: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 1=
+0px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shado=
+w: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter:=
+ progid:DXImageTransform.Microsoft.dropshadow(OffX=3D2, OffY=3D2, Color=3D'=
+gray', Positive=3D'true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; co=
+lor: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E=
+8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-bl=
+ock; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18=
+px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Cou=
+rier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.=
+5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-ra=
+dius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!im=
+portant}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type=3D"text/css">.MathJax_Preview .MJXf-math {color: inheri=
+t!important}
+</style><style type=3D"text/css">.MJX_Assistive_MathML {position: absolute!=
+important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 =
+0 0!important; border: 0!important; height: 1px!important; width: 1px!impor=
+tant; overflow: hidden!important; display: block!important; -webkit-touch-c=
+allout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-use=
+r-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type=3D"text/css">#MathJax_Zoom {position: absolute; backgro=
+und-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: =
+.5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: =
+normal; text-align: left; text-indent: 0; text-transform: none; line-height=
+: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; =
+white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box=
+-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AA=
+AAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15=
+px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImage=
+Transform.Microsoft.dropshadow(OffX=3D2, OffY=3D2, Color=3D'gray', Positive=
+=3D'true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; di=
+splay: inline-block; width: 100%; height: 100%; border: 0; padding: 0; marg=
+in: 0; background-color: white; opacity: 0; filter: alpha(opacity=3D0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; w=
+idth: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; =
+display: inline-block; border: 0; padding: 0; margin: 0; background-color: =
+white; opacity: 0; filter: alpha(opacity=3D0)}
+</style><style type=3D"text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-col=
+or: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-in=
+dex: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-ind=
+ex: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type=3D"text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right;=
+ -ms-transform-origin: right; -o-transform-origin: right; transform-origin:=
+ right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,=
+serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGenera=
+l,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGenera=
+l,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGen=
+eral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGen=
+eral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-f=
+amily: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; bord=
+er-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: to=
+p}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em=
+ 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid =
+#CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -m=
+s-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -m=
+s-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -m=
+s-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -m=
+s-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -m=
+s-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -m=
+s-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -m=
+s-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -m=
+s-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -m=
+s-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -m=
+s-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left=
+; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+  <body><div id=3D"MathJax_Message" style=3D"display: none;"></div>
+    <div class=3D"container">
+      <div class=3D"row">
+        <div class=3D"hero-unit">
+	  <a class=3D"pull-right" href=3D"http://aosabook.org/en/index.html"></a>
+          <h1>Static Analysis</h1>
+          <h2 class=3D"author">Leah Hanson</h2>
+          <blockquote class=3D"pull-right">
+            </blockquote>
+
+        </div>
+      </div>
+      <div class=3D"row">
+        <div class=3D"span10 offset1" id=3D"content">
+          <p><em>Leah Hanson is a proud alumni of Hacker School and loves h=
+elping people learn about Julia. She blogs at <a href=3D"http://blog.leahha=
+nson.us/">http://blog.leahhanson.us/</a> and tweets at <a href=3D"https://t=
+witter.com/astrieanna">@astrieanna</a>.</em></p>
+
+<h2 id=3D"introduction">Introduction</h2>
+
+<p>You may be familiar with a fancy IDE that draws red underlines under par=
+ts of your code that don't compile. You may have run a linter on your code =
+to check for formatting or style problems. You might run your compiler in s=
+uper-picky mode with all the warnings turned on. All of these tools are app=
+lications of static analysis.</p>
+
+<p>Static analysis is a way to check for problems in your code without runn=
+ing it. "Static" means at compile time rather than at run time, and "analys=
+is" means we're analyzing the code. When you've used the tools I mentioned =
+above, it may have felt like magic. But those tools are just programs=E2=80=
+=94they are made of source code that was written by a person, a programmer =
+like you. In this chapter, we're going to talk about how to implement a cou=
+ple of static analysis checks. In order to do this, we need to know what we=
+ want the check to do and how we want to do it.</p>
+
+<p>We can get more specific about what you need to know by describing the p=
+rocess as three stages:</p>
+
+<h4 id=3D"deciding-what-you-want-to-check-for.">1. Deciding what you want t=
+o check for.</h4>
+
+<p>You should be able to explain the general problem you'd like to solve, i=
+n terms that a user of the programming language would recognize. Examples i=
+nclude:</p>
+
+<ul>
+<li>Finding misspelled variable names</li>
+<li>Finding race conditions in parallel code</li>
+<li>Finding calls to unimplemented functions</li>
+</ul>
+
+<h4 id=3D"deciding-how-exactly-to-check-for-it.">2. Deciding how exactly to=
+ check for it.</h4>
+
+<p>While we could ask a friend to do one of the tasks listed above, they ar=
+en't specific enough to explain to a computer. To tackle "misspelled variab=
+le names", for example, we'd need to decide what misspelled means here. One=
+ option would be to claim variable names should be composed of English word=
+s from the dictionary; another option is to look for variables that are onl=
+y used once (the one time you mistyped it).</p>
+
+<p>If we know we're looking for variables that are only used once, we can t=
+alk about kinds of variable usages (having their value assigned versus read=
+) and what code would or would not trigger a warning.</p>
+
+<h4 id=3D"implementation-details.">3. Implementation details.</h4>
+
+<p>This covers the actual act of writing the code, the time spent reading t=
+he documentation for libraries you use, and figuring out how to get at the =
+information you need to write the analysis. This could involve reading in a=
+ file of code, parsing it to understand the structure, and then making your=
+ specific check on that structure.</p>
+
+<p>We're going to work through these steps for each of the individual check=
+s implemented in this chapter. Step 1 requires enough understanding of the =
+language we're analyzing to empathize with the problems its users face. All=
+ the code in this chapter is Julia code, written to analyze Julia code.</p>
+
+<h2 id=3D"a-very-brief-introduction-to-julia">A Very Brief Introduction to =
+Julia</h2>
+
+<p>Julia is a young language aimed at technical computing. It was released =
+at version 0.1 in the spring of 2012; as of the start of 2015, it has reach=
+ed version 0.3. In general, Julia looks a lot like Python, but with some op=
+tional type annotations and without any object-oriented stuff. The feature =
+that most programmers will find novel in Julia is multiple dispatch, which =
+has a pervasive impact on both API design and on other design choices in th=
+e language.</p>
+
+<p>Here is a snippet of Julia code:</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia"><span clas=
+s=3D"co"># A comment about increment</span>
+<span class=3D"kw">function</span> increment(x::<span class=3D"dt">Int64</s=
+pan>)
+  <span class=3D"kw">return</span> x + <span class=3D"fl">1</span>
+<span class=3D"kw">end</span>
+
+increment(<span class=3D"fl">5</span>)</code></pre>
+
+<p>This code defines a method of the function <code>increment</code> that t=
+akes one argument, named <code>x</code>, of type <code>Int64</code>. The me=
+thod returns the value of <code>x + 1</code>. Then, this freshly defined me=
+thod is called with the value <code>5</code>; the function call, as you may=
+ have guessed, will evaluate to <code>6</code>.</p>
+
+<p><code>Int64</code> is a type whose values are signed integers represente=
+d in memory by 64 bits; they are the integers that your hardware understand=
+s if your computer has a 64-bit processor. Types in Julia define the repres=
+entation of data in memory, in addition to influencing method dispatch.</p>
+
+<p>The name <code>increment</code> refers to a generic function, which may =
+have many methods. We have just defined one method of it. In many languages=
+, the terms "function" and "method" are used interchangeably; in Julia, the=
+y have distinct meanings. This chapter will make more sense if you are care=
+ful to understand "function" as a named collection of methods, where a "met=
+hod" is a specific implementation for a specific type signature.</p>
+
+<p>Let's define another method of the <code>increment</code> function:</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia"><span clas=
+s=3D"co"># Increment x by y</span>
+<span class=3D"kw">function</span> increment(x::<span class=3D"dt">Int64</s=
+pan>, y::<span class=3D"dt">Number</span>)
+  <span class=3D"kw">return</span> x + y
+<span class=3D"kw">end</span>
+
+increment(<span class=3D"fl">5</span>) <span class=3D"co"># =3D&gt; 6</span=
+>
+increment(<span class=3D"fl">5</span>,<span class=3D"fl">4</span>) <span cl=
+ass=3D"co"># =3D&gt; 9</span></code></pre>
+
+<p>Now the function <code>increment</code> has two methods. Julia decides w=
+hich method to run for a given call based on the number and types of the ar=
+guments; this is called <em>dynamic multiple dispatch</em>:</p>
+
+<ul>
+<li><strong>Dynamic</strong> because it's based on the types of the values =
+used at runtime.</li>
+<li><strong>Multiple</strong> because it looks at the types and order of al=
+l the arguments.</li>
+<li><strong>Dispatch</strong> because this is a way of matching function ca=
+lls to method definitions.</li>
+</ul>
+
+<p>To put this in the context of languages you may already know, object-ori=
+ented languages use single dispatch because they only consider the first ar=
+gument. (In <code>x.foo(y)</code>, the first argument is <code>x</code>.)</=
+p>
+
+<p>Both single and multiple dispatch are based on the types of the argument=
+s. The <code>x::Int64</code> above is a type annotation purely for dispatch=
+. In Julia's dynamic type system, you could assign a value of any type to <=
+code>x</code> during the function without an error.</p>
+
+<p>We haven't really seen the "multiple" part yet, but if you're curious ab=
+out Julia, you'll have to look that up on your own. We need to move on to o=
+ur first check.</p>
+
+<h2 id=3D"checking-the-types-of-variables-in-loops">Checking the Types of V=
+ariables in Loops</h2>
+
+<p>As in most programming languages, writing very fast code in Julia involv=
+es an understanding of how the computer works and how Julia works. An impor=
+tant part of helping the compiler create fast code for you is writing type-=
+stable code; this is important in Julia and JavaScript, and is also helpful=
+ in other JIT=E2=80=99d languages. When the compiler can see that a variabl=
+e in a section of code will always contain the same specific type, the comp=
+iler can do more optimizations than if it believes (correctly or not) that =
+there are multiple possible types for that variable. You can read more abou=
+t why type stability (also called =E2=80=9Cmonomorphism=E2=80=9D) is import=
+ant for JavaScript <a href=3D"http://mrale.ph/blog/2015/01/11/whats-up-with=
+-monomorphism.html">online</a>.</p>
+
+<h3 id=3D"why-this-is-important">Why This Is Important</h3>
+
+<p>Let's write a function that takes an <code>Int64</code> and increases it=
+ by some amount. If the number is small (less than 10), let's increase it b=
+y a big number (50), but if it's big, let's only increase it by 0.5.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia"><span clas=
+s=3D"kw">function</span> increment(x::<span class=3D"dt">Int64</span>)
+  <span class=3D"kw">if</span> x &lt; <span class=3D"fl">10</span>
+    x =3D x + <span class=3D"fl">50</span>
+  <span class=3D"kw">else</span>
+    x =3D x + <span class=3D"fl">0.5</span>
+  <span class=3D"kw">end</span>
+  <span class=3D"kw">return</span> x
+<span class=3D"kw">end</span></code></pre>
+
+<p>This function looks pretty straightforward, but the type of <code>x</cod=
+e> is unstable. I selected two numbers: 50, an <code>Int64</code>, and 0.5,=
+ a <code>Float64</code>. Depending on the value of <code>x</code>, it might=
+ be added to either one of them. If you add an <code>Int64</code> like 22, =
+to a <code>Float64</code> like 0.5, you'll get a <code>Float64</code> (22.5=
+). Because the type of variable in the function (<code>x</code>) could chan=
+ge depending on the value of the arguments to the function (<code>x</code>)=
+, this method of <code>increment</code> and specifically the variable <code=
+>x</code> are type-unstable.</p>
+
+<p><code>Float64</code> is a type that represents floating-point values sto=
+red in 64 bits; in C, it is called a <code>double</code>. This is one of th=
+e floating-point types that 64-bit processors understand.</p>
+
+<p>As with most efficiency problems, this issue is more pronounced when it =
+happens during loops. Code inside for loops and while loops is run many, ma=
+ny times, so making it fast is more important than speeding up code that is=
+ only run once or twice. Therefore, our first check is to look for variable=
+s that have unstable types inside loops.</p>
+
+<p>First, let's look at an example of what we want to catch. We'll be looki=
+ng at two functions. Each of them sums the numbers 1 to 100, but instead of=
+ summing the whole numbers, they divide each one by 2 before summing it. Bo=
+th functions will get the same answer (2525.0); both will return the same t=
+ype (<code>Float64</code>). However, the first function, <code>unstable</co=
+de>, suffers from type-instability, while the second one, <code>stable</cod=
+e>, does not.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia"><span clas=
+s=3D"kw">function</span> unstable()
+  sum =3D <span class=3D"fl">0</span>
+  <span class=3D"kw">for</span> i=3D<span class=3D"fl">1</span>:<span class=
+=3D"fl">100</span>
+    sum +=3D i/<span class=3D"fl">2</span>
+  <span class=3D"kw">end</span>
+  <span class=3D"kw">return</span> sum
+<span class=3D"kw">end</span></code></pre>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia"><span clas=
+s=3D"kw">function</span> stable()
+  sum =3D <span class=3D"fl">0.0</span>
+  <span class=3D"kw">for</span> i=3D<span class=3D"fl">1</span>:<span class=
+=3D"fl">100</span>
+    sum +=3D i/<span class=3D"fl">2</span>
+  <span class=3D"kw">end</span>
+  <span class=3D"kw">return</span> sum
+<span class=3D"kw">end</span></code></pre>
+
+<p>The only textual difference between the two functions is in the initiali=
+zation of <code>sum</code>: <code>sum =3D 0</code> versus <code>sum =3D 0.0=
+</code>. In Julia, <code>0</code> is an <code>Int64</code> literal and <cod=
+e>0.0</code> is a <code>Float64</code> literal. How big of a difference cou=
+ld this tiny change make?</p>
+
+<p>Because Julia is Just-In-Time (JIT) compiled, the first run of a functio=
+n will take longer than subsequent runs. (The first run includes the time i=
+t takes to compile the function for these argument types.) When we benchmar=
+k functions, we have to be sure to run them once (or precompile them) befor=
+e timing them.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">julia&gt; =
+unstable()
+<span class=3D"fl">2525.0</span>
+
+julia&gt; stable()
+<span class=3D"fl">2525.0</span>
+
+julia&gt; @time unstable()
+elapsed time: <span class=3D"fl">9.517e-6</span> seconds (<span class=3D"fl=
+">3248</span> bytes allocated)
+<span class=3D"fl">2525.0</span>
+
+julia&gt; @time stable()
+elapsed time: <span class=3D"fl">2.285e-6</span> seconds (<span class=3D"fl=
+">64</span> bytes allocated)
+<span class=3D"fl">2525.0</span></code></pre>
+
+<p>The <code>@time</code> macro prints out how long the function took to ru=
+n and how many bytes were allocated while it was running. The number of byt=
+es allocated increases every time new memory is needed; it does not decreas=
+e when the garbage collector vacuums up memory that's no longer being used.=
+ This means that the bytes allocated is related to the amount of time we sp=
+end allocating and managing memory, but does not imply that we had all of t=
+hat memory in use at the same time.</p>
+
+<p>If we wanted to get solid numbers for <code>stable</code> versus <code>u=
+nstable</code> we would need to make the loop much longer or run the functi=
+ons many times. However, it looks like <code>unstable</code> is probably sl=
+ower. More interestingly, we can see a large gap in the number of bytes all=
+ocated; <code>unstable</code> has allocated around 3 KB of memory, where <c=
+ode>stable</code> is using 64 bytes.</p>
+
+<p>Since we can see how simple <code>unstable</code> is, we might guess tha=
+t this allocation is happening in the loop. To test this, we can make the l=
+oop longer and see if the allocations increase accordingly. Let's make the =
+loop go from 1 to 10000, which is 100 times more iterations; we'll look for=
+ the number of bytes allocated to also increase about 100 times, to around =
+300 KB.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia"><span clas=
+s=3D"kw">function</span> unstable()
+  sum =3D <span class=3D"fl">0</span>
+  <span class=3D"kw">for</span> i=3D<span class=3D"fl">1</span>:<span class=
+=3D"fl">10000</span>
+    sum +=3D i/<span class=3D"fl">2</span>
+  <span class=3D"kw">end</span>
+  <span class=3D"kw">return</span> sum
+<span class=3D"kw">end</span></code></pre>
+
+<p>Since we redefined the function, we'll need to run it so it gets compile=
+d before we measure it. We expect to get a different, larger answer from th=
+e new function definition, since it's summing more numbers now.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">julia&gt; =
+unstable()
+<span class=3D"fl">2.50025e7</span>
+
+julia&gt;@time unstable()
+elapsed time: <span class=3D"fl">0.000667613</span> seconds (<span class=3D=
+"fl">320048</span> bytes allocated)
+<span class=3D"fl">2.50025e7</span></code></pre>
+
+<p>The new <code>unstable</code> allocated about 320 KB, which is what we w=
+ould expect if the allocations are happening in the loop. To explain what's=
+ going on here, we're going to look at how Julia works under the hood.</p>
+
+<p>This difference between <code>unstable</code> and <code>stable</code> oc=
+curs because <code>sum</code> in <code>unstable</code> must be boxed while =
+<code>sum</code> in <code>stable</code> can be unboxed. Boxed values consis=
+t of a type tag and the actual bits that represent the value; unboxed value=
+s only have their actual bits. But the type tag is small, so that's not why=
+ boxing values allocates a lot more memory.</p>
+
+<p>The difference comes from what optimizations the compiler can make. When=
+ a variable has a concrete, immutable type, the compiler can unbox it insid=
+e the function. If that's not the case, then the variable must be allocated=
+ on the heap, and participate in the garbage collector. Immutable types are=
+ a concept specific to Julia. A value of an immutable type can't be changed=
+.</p>
+
+<p>Immutable types are usually types that represent values, rather than col=
+lections of values. For example, most numeric types, including <code>Int64<=
+/code> and <code>Float64</code>, are immutable. (Numeric types in Julia are=
+ normal types, not special primitive types; you could define a new <code>My=
+Int64</code> that's the same as the provided one.) Because immutable types =
+cannot be modified, you must make a new copy every time you want change one=
+. For example <code>4 + 6</code> must make a new <code>Int64</code> to hold=
+ the result. In contrast, the members of a mutable type can be updated in-p=
+lace; this means you don't have to make a copy of the whole thing to make a=
+ change.</p>
+
+<p>The idea of <code>x =3D x + 2</code> allocating memory probably sounds p=
+retty weird; why would you make such a basic operation slow by making <code=
+>Int64</code> values immutable? This is where those compiler optimizations =
+come in: using immutable types doesn't (usually) slow this down. If <code>x=
+</code> has a stable, concrete type (such as <code>Int64</code>), then the =
+compiler is free to allocate <code>x</code> on the stack and mutate <code>x=
+</code> in place. The problem is only when <code>x</code> has an unstable t=
+ype (so the compiler doesn't know how big or what type it will be); once <c=
+ode>x</code> is boxed and on the heap, the compiler isn't completely sure t=
+hat some other piece of code isn't using the value, and thus can't edit it.=
+</p>
+
+<p>Because <code>sum</code> in <code>stable</code> has a concrete type (<co=
+de>Float64</code>), the compiler knows that it can store it unboxed locally=
+ in the function and mutate its value; <code>sum</code> will not be allocat=
+ed on the heap and new copies don't have to be made every time we add <code=
+>i/2</code>.</p>
+
+<p>Because <code>sum</code> in <code>unstable</code> does not have a concre=
+te type, the compiler allocates it on the heap. Every time we modify sum, w=
+e allocated a new value on the heap. All this time spent allocating values =
+on the heap (and retrieving them every time we want to read the value of <c=
+ode>sum</code>) is expensive.</p>
+
+<p>Using <code>0</code> versus <code>0.0</code> is an easy mistake to make,=
+ especially when you're new to Julia. Automatically checking that variables=
+ used in loops are type-stable helps programmers get more insight into what=
+ the types of their variables are in performance-critical sections of their=
+ code.</p>
+
+<h3 id=3D"implementation-details">Implementation Details</h3>
+
+<p>We'll need to find out which variables are used inside loops and we'll n=
+eed to find the types of those variables. We'll then need to decide how to =
+print them in a human-readable format.</p>
+
+<ul>
+<li>How do we find loops?</li>
+<li>How do we find variables in loops?</li>
+<li>How do we find the types of a variable?</li>
+<li>How do we print the results?</li>
+<li>How do we tell if the type is unstable?</li>
+</ul>
+
+<p>I'm going to tackle the last question first, since this whole endeavour =
+hinges on it. We've looked at an unstable function and seen, as programmers=
+, how to identify an unstable variable, but we need our program to find the=
+m. This sounds like it would require simulating the function to look for va=
+riables whose values might change=E2=80=94which sounds like it would take s=
+ome work. Luckily for us, Julia's type inference already traces through the=
+ function's execution to determine the types.</p>
+
+<p>The type of <code>sum</code> in <code>unstable</code> is <code>Union(Flo=
+at64,Int64)</code>. This is a <code>UnionType</code>, a special kind of typ=
+e that indicates that the variable may hold any of a set of types of values=
+. A variable of type <code>Union(Float64,Int64)</code> can hold values of t=
+ype <code>Int64</code> or <code>Float64</code>; a value can only have one o=
+f those types. A <code>UnionType</code> joins any number of types (e.g., <c=
+ode>UnionType(Float64, Int64, Int32)</code> joins three types). We're going=
+ to look for is <code>UnionType</code>d variables inside loops.</p>
+
+<p>Parsing code into a representative structure is a complicated business, =
+and gets more complicated as the language grows. In this chapter, we'll be =
+depending on internal data structures used by the compiler. This means that=
+ we don't have to worry about reading files or parsing them, but it does me=
+an we have to work with data structures that are not in our control and tha=
+t sometimes feel clumsy or ugly.</p>
+
+<p>Besides all the work we'll save by not having to parse the code by ourse=
+lves, working with the same data structures that the compiler uses means th=
+at our checks will be based on an accurate assessment of the compilers unde=
+rstanding=E2=80=94which means our check will be consistent with how the cod=
+e actually runs.</p>
+
+<p>This process of examining Julia code from Julia code is called introspec=
+tion. When you or I introspect, we're thinking about how and why we think a=
+nd feel. When code introspects, it examines the representation or execution=
+ properties of code in the same language (possibly its own code). When code=
+'s introspection extends to modifying the examined code, it's called metapr=
+ogramming (programs that write or modify programs).</p>
+
+<h4 id=3D"introspection-in-julia">Introspection in Julia</h4>
+
+<p>Julia makes it easy to introspect. There are four functions built in to =
+let us see what the compiler is thinking: <code>code_lowered</code>, <code>=
+code_typed</code>, <code>code_llvm</code>, and <code>code_native</code>. Th=
+ose are listed in order of what step in the compilation process their outpu=
+t is from; the first one is closest to the code we'd type in and the last o=
+ne is the closest to what the CPU runs. For this chapter, we'll focus on <c=
+ode>code_typed</code>, which gives us the optimized, type-inferred abstract=
+ syntax tree (AST). <!-- FIXME @michaeldibernardo?: point to other 500 line=
+s chapters that use ASTs--></p>
+
+<p><code>code_typed</code> takes two arguments: the function of interest, a=
+nd a tuple of argument types. For example, if we wanted to see the AST for =
+a function <code>foo</code> when called with two <code>Int64</code>s, then =
+we would call <code>code_typed(foo, (Int64,Int64))</code>.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia"><span clas=
+s=3D"kw">function</span> foo(x,y)
+  z =3D x + y
+  <span class=3D"kw">return</span> <span class=3D"fl">2</span> * z
+<span class=3D"kw">end</span>
+
+code_typed(foo,(<span class=3D"dt">Int64</span>,<span class=3D"dt">Int64</s=
+pan>))</code></pre>
+
+<p>This is the structure that <code>code_typed</code> would return:</p>
+
+<pre><code>1-element Array{Any,1}:
+:($(Expr(:lambda, {:x,:y}, {{:z},{{:x,Int64,0},{:y,Int64,0},{:z,Int64,18}},=
+{}},
+ :(begin  # none, line 2:
+        z =3D (top(box))(Int64,(top(add_int))(x::Int64,y::Int64))::Int64 # =
+line 3:
+        return (top(box))(Int64,(top(mul_int))(2,z::Int64))::Int64
+    end::Int64))))</code></pre>
+
+<p>This is an <code>Array</code>; this allows <code>code_typed</code> to re=
+turn multiple matching methods. Some combinations of functions and argument=
+ types may not completely determine which method should be called. For exam=
+ple, you could pass in a type like <code>Any</code> (instead of <code>Int64=
+</code>). <code>Any</code> is the type at the top of the type hierarchy; al=
+l types are subtypes of <code>Any</code> (including <code>Any</code>). If w=
+e included <code>Any</code> in our tuple of argument types, and had multipl=
+e matching methods, then the <code>Array</code> from <code>code_typed</code=
+> would have more than one element in it; it would have one element per mat=
+ching method.</p>
+
+<p>Let's pull our example <code>Expr</code> out to make it easier to talk a=
+bout.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">julia&gt; =
+e =3D code_typed(foo,(<span class=3D"dt">Int64</span>,<span class=3D"dt">In=
+t64</span>))[<span class=3D"fl">1</span>]
+:($(<span class=3D"dt">Expr</span>(:lambda, {:x,:y}, {{:z},{{:x,<span class=
+=3D"dt">Int64</span>,<span class=3D"fl">0</span>},{:y,<span class=3D"dt">In=
+t64</span>,<span class=3D"fl">0</span>},{:z,<span class=3D"dt">Int64</span>=
+,<span class=3D"fl">18</span>}},{}},
+ :(<span class=3D"kw">begin</span>  <span class=3D"co"># none, line 2:</spa=
+n>
+        z =3D (top(box))(<span class=3D"dt">Int64</span>,(top(add_int))(x::=
+<span class=3D"dt">Int64</span>,y::<span class=3D"dt">Int64</span>))::<span=
+ class=3D"dt">Int64</span> <span class=3D"co"># line 3:</span>
+        <span class=3D"kw">return</span> (top(box))(<span class=3D"dt">Int6=
+4</span>,(top(mul_int))(<span class=3D"fl">2</span>,z::<span class=3D"dt">I=
+nt64</span>))::<span class=3D"dt">Int64</span>
+    <span class=3D"kw">end</span>::<span class=3D"dt">Int64</span>))))</cod=
+e></pre>
+
+<p>The structure we're interested in is inside the <code>Array</code>: it i=
+s an <code>Expr</code>. Julia uses <code>Expr</code> (short for expression)=
+ to represent its AST. (An abstract syntax tree is how the compiler thinks =
+about the meaning of your code; it's kind of like when you had to diagram s=
+entences in grade school.) The <code>Expr</code> we get back represents one=
+ method. It has some metadata (about the variables that appear in the metho=
+d) and the expressions that make up the body of the method.</p>
+
+<p>Now we can ask some questions about <code>e</code>.</p>
+
+<p>We can ask what properties an <code>Expr</code> has by using the <code>n=
+ames</code> function, which works on any Julia value or type. It returns an=
+ <code>Array</code> of names defined by that type (or the type of the value=
+).</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">julia&gt; =
+names(e)
+<span class=3D"fl">3</span>-element <span class=3D"dt">Array</span>{<span c=
+lass=3D"dt">Symbol</span>,<span class=3D"fl">1</span>}:
+ :head
+ :args
+ :typ </code></pre>
+
+<p>We just asked <code>e</code> what names it has, and now we can ask what =
+value each name corresponds to. An <code>Expr</code> has three properties: =
+<code>head</code>, <code>typ</code> and <code>args</code>.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">julia&gt; =
+e.head
+:lambda
+
+julia&gt; e.typ
+<span class=3D"dt">Any</span>
+
+julia&gt; e.args
+<span class=3D"fl">3</span>-element <span class=3D"dt">Array</span>{<span c=
+lass=3D"dt">Any</span>,<span class=3D"fl">1</span>}:
+ {:x,:y}                                                                   =
+                                                                           =
+                                      =20
+ {{:z},{{:x,<span class=3D"dt">Int64</span>,<span class=3D"fl">0</span>},{:=
+y,<span class=3D"dt">Int64</span>,<span class=3D"fl">0</span>},{:z,<span cl=
+ass=3D"dt">Int64</span>,<span class=3D"fl">18</span>}},{}}                 =
+                                                                           =
+                                            =20
+ :(<span class=3D"kw">begin</span>  <span class=3D"co"># none, line 2:</spa=
+n>
+        z =3D (top(box))(<span class=3D"dt">Int64</span>,(top(add_int))(x::=
+<span class=3D"dt">Int64</span>,y::<span class=3D"dt">Int64</span>))::<span=
+ class=3D"dt">Int64</span> <span class=3D"co"># line 3:</span>
+        <span class=3D"kw">return</span> (top(box))(<span class=3D"dt">Int6=
+4</span>,(top(mul_int))(<span class=3D"fl">2</span>,z::<span class=3D"dt">I=
+nt64</span>))::<span class=3D"dt">Int64</span>
+    <span class=3D"kw">end</span>::<span class=3D"dt">Int64</span>)</code><=
+/pre>
+
+<p>We just saw some values printed out, but that doesn't tell us much about=
+ what they mean or how they're used.</p>
+
+<ul>
+<li><code>head</code> tells us what kind of expression this is; normally, y=
+ou'd use separate types for this in Julia, but <code>Expr</code> is a type =
+that models the structure used in the parser. The parser is written in a di=
+alect of Scheme, which structures everything as nested lists. <code>head</c=
+ode> tells us how the rest of the <code>Expr</code> is organized and what k=
+ind of expression it represents.</li>
+<li><code>typ</code> is the inferred return type of the expression; when yo=
+u evaluate any expression, it results in some value. <code>typ</code> is th=
+e type of the value that the expression will evaluate to. For nearly all <c=
+ode>Expr</code>s, this value will be <code>Any</code> (which is always corr=
+ect, since every possible type is a subtype of <code>Any</code>). Only the =
+<code>body</code> of type-inferred methods and most expressions inside them=
+ will have their <code>typ</code> set to something more specific. (Because =
+<code>type</code> is a keyword, this field can't use that word as its name.=
+)</li>
+<li><code>args</code> is the most complicated part of <code>Expr</code>; it=
+s structure varies based on the value of <code>head</code>. It's always an =
+<code>Array{Any}</code> (an untyped array), but beyond that the structure c=
+hanges.</li>
+</ul>
+
+<p>In an <code>Expr</code> representing a method, there will be three eleme=
+nts in <code>e.args</code>:</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">julia&gt; =
+e.args[<span class=3D"fl">1</span>] <span class=3D"co"># names of arguments=
+ as symbols</span>
+<span class=3D"fl">2</span>-element <span class=3D"dt">Array</span>{<span c=
+lass=3D"dt">Any</span>,<span class=3D"fl">1</span>}:
+ :x
+ :y</code></pre>
+
+<p>Symbols are a special type for representing the names of variables, cons=
+tants, functions, and modules. They are a different type from strings becau=
+se they specifically represent the name of a program construct.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">julia&gt; =
+e.args[<span class=3D"fl">2</span>] <span class=3D"co"># three lists of var=
+iable metadata</span>
+<span class=3D"fl">3</span>-element <span class=3D"dt">Array</span>{<span c=
+lass=3D"dt">Any</span>,<span class=3D"fl">1</span>}:
+ {:z}                                    =20
+ {{:x,<span class=3D"dt">Int64</span>,<span class=3D"fl">0</span>},{:y,<spa=
+n class=3D"dt">Int64</span>,<span class=3D"fl">0</span>},{:z,<span class=3D=
+"dt">Int64</span>,<span class=3D"fl">18</span>}}
+ {}                                       </code></pre>
+
+<p>The first list above contains the names of all local variables; we only =
+have one (<code>z</code>) here. The second list contains a tuple for each v=
+ariable in and argument to the method; each tuple has the variable name, th=
+e variable's inferred type, and a number. The number conveys information ab=
+out how the variable is used, in a machine- (rather than human-) friendly w=
+ay. The last list is of captured variable names; it's empty in this example=
+.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">julia&gt; =
+e.args[<span class=3D"fl">3</span>] <span class=3D"co"># the body of the me=
+thod</span>
+:(<span class=3D"kw">begin</span>  <span class=3D"co"># none, line 2:</span=
+>
+        z =3D (top(box))(<span class=3D"dt">Int64</span>,(top(add_int))(x::=
+<span class=3D"dt">Int64</span>,y::<span class=3D"dt">Int64</span>))::<span=
+ class=3D"dt">Int64</span> <span class=3D"co"># line 3:</span>
+        <span class=3D"kw">return</span> (top(box))(<span class=3D"dt">Int6=
+4</span>,(top(mul_int))(<span class=3D"fl">2</span>,z::<span class=3D"dt">I=
+nt64</span>))::<span class=3D"dt">Int64</span>
+    <span class=3D"kw">end</span>::<span class=3D"dt">Int64</span>)</code><=
+/pre>
+
+<p>The first two <code>args</code> elements are metadata about the third. W=
+hile the metadata is very interesting, it isn't necessary right now. The im=
+portant part is the body of the method, which is the third element. This is=
+ another <code>Expr</code>.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">julia&gt; =
+body =3D e.args[<span class=3D"fl">3</span>]
+:(<span class=3D"kw">begin</span>  <span class=3D"co"># none, line 2:</span=
+>
+        z =3D (top(box))(<span class=3D"dt">Int64</span>,(top(add_int))(x::=
+<span class=3D"dt">Int64</span>,y::<span class=3D"dt">Int64</span>))::<span=
+ class=3D"dt">Int64</span> <span class=3D"co"># line 3:</span>
+        <span class=3D"kw">return</span> (top(box))(<span class=3D"dt">Int6=
+4</span>,(top(mul_int))(<span class=3D"fl">2</span>,z::<span class=3D"dt">I=
+nt64</span>))::<span class=3D"dt">Int64</span>
+    <span class=3D"kw">end</span>::<span class=3D"dt">Int64</span>)
+
+julia&gt; body.head
+:body</code></pre>
+
+<p>This <code>Expr</code> has head <code>:body</code> because it's the body=
+ of the method.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">julia&gt; =
+body.typ
+<span class=3D"dt">Int64</span></code></pre>
+
+<p>The <code>typ</code> is the inferred return type of the method.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">julia&gt; =
+body.args
+<span class=3D"fl">4</span>-element <span class=3D"dt">Array</span>{<span c=
+lass=3D"dt">Any</span>,<span class=3D"fl">1</span>}:
+ :( <span class=3D"co"># none, line 2:)                                    =
+          </span>
+ :(z =3D (top(box))(<span class=3D"dt">Int64</span>,(top(add_int))(x::<span=
+ class=3D"dt">Int64</span>,y::<span class=3D"dt">Int64</span>))::<span clas=
+s=3D"dt">Int64</span>)
+ :( <span class=3D"co"># line 3:)                                          =
+          </span>
+ :(<span class=3D"kw">return</span> (top(box))(<span class=3D"dt">Int64</sp=
+an>,(top(mul_int))(<span class=3D"fl">2</span>,z::<span class=3D"dt">Int64<=
+/span>))::<span class=3D"dt">Int64</span>)    </code></pre>
+
+<p><code>args</code> holds a list of expressions: the list of expressions i=
+n the method's body. There are a couple of annotations of line numbers (i.e=
+., <code>:( # line 3:)</code>), but most of the body is setting the value o=
+f <code>z</code> (<code>z =3D x + y</code>) and returning <code>2 * z</code=
+>. Notice that these operations have been replaced by <code>Int64</code>-sp=
+ecific intrinsic functions. The <code>top(function-name)</code> indicates a=
+n intrinsic function; something that is implemented in Julia's code generat=
+ion, rather than in Julia.</p>
+
+<p>We haven't seen what a loop looks like yet, so let's try that.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">julia&gt; =
+<span class=3D"kw">function</span> lloop(x)
+         <span class=3D"kw">for</span> x =3D <span class=3D"fl">1</span>:<s=
+pan class=3D"fl">100</span>
+           x *=3D <span class=3D"fl">2</span>
+         <span class=3D"kw">end</span>
+       <span class=3D"kw">end</span>
+lloop (generic <span class=3D"kw">function</span> with <span class=3D"fl">1=
+</span> method)
+
+julia&gt; code_typed(lloop, (<span class=3D"dt">Int</span>,))[<span class=
+=3D"fl">1</span>].args[<span class=3D"fl">3</span>]
+:(<span class=3D"kw">begin</span>  <span class=3D"co"># none, line 2:</span=
+>
+        <span class=3D"co">#s120 =3D $(Expr(:new, UnitRange{Int64}, 1, :(((=
+top(getfield))(Intrinsics,</span>
+         :select_value))((top(sle_int))(<span class=3D"fl">1</span>,<span c=
+lass=3D"fl">100</span>)::<span class=3D"dt">Bool</span>,<span class=3D"fl">=
+100</span>,(top(box))(<span class=3D"dt">Int64</span>,(top(
+         sub_int))(<span class=3D"fl">1</span>,<span class=3D"fl">1</span>)=
+)::<span class=3D"dt">Int64</span>)::<span class=3D"dt">Int64</span>)))::Un=
+itRange{<span class=3D"dt">Int64</span>}
+        <span class=3D"co">#s119 =3D (top(getfield))(#s120::UnitRange{Int64=
+},:start)::Int64        unless </span>
+         (top(box))(<span class=3D"dt">Bool</span>,(top(not_int))(<span cla=
+ss=3D"co">#s119::Int64 =3D=3D=3D (top(box))(Int64,(top(</span>
+         add_int))((top(getfield))
+         (<span class=3D"co">#s120::UnitRange{Int64},:stop)::Int64,1))::Int=
+64::Bool))::Bool goto 1</span>
+        <span class=3D"fl">2</span>:=20
+        _var0 =3D <span class=3D"co">#s119::Int64</span>
+        _var1 =3D (top(box))(<span class=3D"dt">Int64</span>,(top(add_int))=
+(<span class=3D"co">#s119::Int64,1))::Int64</span>
+        x =3D _var0::<span class=3D"dt">Int64</span>
+        <span class=3D"co">#s119 =3D _var1::Int64 # line 3:</span>
+        x =3D (top(box))(<span class=3D"dt">Int64</span>,(top(mul_int))(x::=
+<span class=3D"dt">Int64</span>,<span class=3D"fl">2</span>))::<span class=
+=3D"dt">Int64</span>
+        <span class=3D"fl">3</span>:=20
+        unless (top(box))(<span class=3D"dt">Bool</span>,(top(not_int))((to=
+p(box))(<span class=3D"dt">Bool</span>,(top(not_int))
+         (<span class=3D"co">#s119::Int64 =3D=3D=3D (top(box))(Int64,(top(a=
+dd_int))((top(getfield))(</span>
+         <span class=3D"co">#s120::UnitRange{Int64},:stop)::Int64,1))::Int6=
+4::Bool))::Bool))::Bool</span>
+         goto <span class=3D"fl">2</span>
+        <span class=3D"fl">1</span>:         <span class=3D"fl">0</span>:=
+=20
+        <span class=3D"kw">return</span>
+    <span class=3D"kw">end</span>::<span class=3D"dt">Nothing</span>)</code=
+></pre>
+
+<p>You'll notice there's no for or while loop in the body. As the compiler =
+transforms the code from what we wrote to the binary instructions the CPU u=
+nderstands, features that are useful to humans but that are not understood =
+by the CPU (like loops) are removed. The loop has been rewritten as <code>l=
+abel</code> and <code>goto</code> expressions. The <code>goto</code> has a =
+number in it; each <code>label</code> also has a number. The <code>goto</co=
+de> jumps to the the <code>label</code> with the same number.</p>
+
+<h4 id=3D"detecting-and-extracting-loops">Detecting and Extracting Loops</h=
+4>
+
+<p>We're going to find loops by looking for <code>goto</code> expressions t=
+hat jump backwards.</p>
+
+<p>We'll need to find the labels and gotos, and figure out which ones match=
+. I'm going to give you the full implementation first. After the wall of co=
+de, we'll take it apart and examine the pieces.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia"><span clas=
+s=3D"co"># This is a function for trying to detect loops in the body of a M=
+ethod</span>
+<span class=3D"co"># Returns lines that are inside one or more loops</span>
+<span class=3D"kw">function</span> loopcontents(e::<span class=3D"dt">Expr<=
+/span>)
+  b =3D body(e)
+  loops =3D <span class=3D"dt">Int</span>[]
+  nesting =3D <span class=3D"fl">0</span>
+  lines =3D {}
+  <span class=3D"kw">for</span> i <span class=3D"kw">in</span> <span class=
+=3D"fl">1</span>:length(b)
+    <span class=3D"kw">if</span> typeof(b[i]) =3D=3D LabelNode
+      l =3D b[i].label
+      jumpback =3D findnext(x-&gt; (typeof(x) =3D=3D GotoNode &amp;&amp; x.=
+label =3D=3D l)=20
+                              || (Base.is_expr(x,:gotoifnot) &amp;&amp; x.a=
+rgs[<span class=3D"kw">end</span>] =3D=3D l),
+                          b, i)
+      <span class=3D"kw">if</span> jumpback !=3D <span class=3D"fl">0</span=
+>
+        push!(loops,jumpback)
+        nesting +=3D <span class=3D"fl">1</span>
+      <span class=3D"kw">end</span>
+    <span class=3D"kw">end</span>
+    <span class=3D"kw">if</span> nesting &gt; <span class=3D"fl">0</span>
+      push!(lines,(i,b[i]))
+    <span class=3D"kw">end</span>
+
+    <span class=3D"kw">if</span> typeof(b[i]) =3D=3D GotoNode &amp;&amp; <s=
+pan class=3D"kw">in</span>(i,loops)
+      splice!(loops,findfirst(loops,i))
+      nesting -=3D <span class=3D"fl">1</span>
+    <span class=3D"kw">end</span>
+  <span class=3D"kw">end</span>
+  lines
+<span class=3D"kw">end</span></code></pre>
+
+<p>And now to explain in pieces:</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">b =3D body=
+(e)</code></pre>
+
+<p>We start by getting all the expressions in the body of method, as an <co=
+de>Array</code>. <code>body</code> is a function that I've already implemen=
+ted:</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">  <span cl=
+ass=3D"co"># Return the body of a Method.</span>
+  <span class=3D"co"># Takes an Expr representing a Method,</span>
+  <span class=3D"co"># returns Vector{Expr}.</span>
+  <span class=3D"kw">function</span> body(e::<span class=3D"dt">Expr</span>=
+)
+    <span class=3D"kw">return</span> e.args[<span class=3D"fl">3</span>].ar=
+gs
+  <span class=3D"kw">end</span></code></pre>
+
+<p>And then:</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">  loops =
+=3D <span class=3D"dt">Int</span>[]
+  nesting =3D <span class=3D"fl">0</span>
+  lines =3D {}</code></pre>
+
+<p><code>loops</code> is an <code>Array</code> of label line numbers where =
+gotos that are loops occur. <code>nesting</code> indicates the number of lo=
+ops we are currently inside. <code>lines</code> is an <code>Array</code> of=
+ (index, <code>Expr</code>) tuples.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">  <span cl=
+ass=3D"kw">for</span> i <span class=3D"kw">in</span> <span class=3D"fl">1</=
+span>:length(b)
+    <span class=3D"kw">if</span> typeof(b[i]) =3D=3D LabelNode
+      l =3D b[i].label
+      jumpback =3D findnext(
+        x-&gt; (typeof(x) =3D=3D GotoNode &amp;&amp; x.label =3D=3D l)=20
+            || (Base.is_expr(x,:gotoifnot) &amp;&amp; x.args[<span class=3D=
+"kw">end</span>] =3D=3D l),
+        b, i)
+      <span class=3D"kw">if</span> jumpback !=3D <span class=3D"fl">0</span=
+>
+        push!(loops,jumpback)
+        nesting +=3D <span class=3D"fl">1</span>
+      <span class=3D"kw">end</span>
+    <span class=3D"kw">end</span></code></pre>
+
+<p>We look at each expression in the body of <code>e</code>. If it is a lab=
+el, we check to see if there is a goto that jumps to this label (and occurs=
+ after the current index). If the result of <code>findnext</code> is greate=
+r than zero, then such a goto node exists, so we'll add that to <code>loops=
+</code> (the <code>Array</code> of loops we are currently in) and increment=
+ our <code>nesting</code> level.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">    <span =
+class=3D"kw">if</span> nesting &gt; <span class=3D"fl">0</span>
+      push!(lines,(i,b[i]))
+    <span class=3D"kw">end</span></code></pre>
+
+<p>If we're currently inside a loop, we push the current line to our array =
+of lines to return.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">    <span =
+class=3D"kw">if</span> typeof(b[i]) =3D=3D GotoNode &amp;&amp; <span class=
+=3D"kw">in</span>(i,loops)
+      splice!(loops,findfirst(loops,i))
+      nesting -=3D <span class=3D"fl">1</span>
+    <span class=3D"kw">end</span>
+  <span class=3D"kw">end</span>
+  lines
+<span class=3D"kw">end</span></code></pre>
+
+<p>If we're at a <code>GotoNode</code>, then we check to see if it's the en=
+d of a loop. If so, we remove the entry from <code>loops</code> and reduce =
+our nesting level.</p>
+
+<p>The result of this function is the <code>lines</code> array, an array of=
+ (index, value) tuples. This means that each value in the array has an inde=
+x into the method-body-<code>Expr</code>'s body and the value at that index=
+. Each element of <code>lines</code> is an expression that occurred inside =
+a loop.</p>
+
+<h4 id=3D"finding-and-typing-variables">Finding and Typing Variables</h4>
+
+<p>We just finished the function <code>loopcontents</code> which returns th=
+e <code>Expr</code>s that are inside loops. Our next function will be <code=
+>loosetypes</code>, which takes a list of <code>Expr</code>s and returns a =
+list of variables that are loosely typed. Later, we'll pass the output of <=
+code>loopcontents</code> into <code>loosetypes</code>.</p>
+
+<p>In each expression that occurred inside a loop, <code>loosetypes</code> =
+searches for occurrences of symbols and their associated types. Variable us=
+ages show up as <code>SymbolNode</code>s in the AST; <code>SymbolNode</code=
+>s hold the name and inferred type of the variable.</p>
+
+<p>We can't just check each expression that <code>loopcontents</code> colle=
+cted to see if it's a <code>SymbolNode</code>. The problem is that each <co=
+de>Expr</code> may contain one or more <code>Expr</code>; each <code>Expr</=
+code> may contain one or more <code>SymbolNode</code>s. This means we need =
+to pull out any nested <code>Expr</code>s, so that we can look in each of t=
+hem for <code>SymbolNode</code>s.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia"><span clas=
+s=3D"co"># given `lr`, a Vector of expressions (Expr + literals, etc)</span=
+>
+<span class=3D"co"># try to find all occurrences of a variables in `lr`</sp=
+an>
+<span class=3D"co"># and determine their types</span>
+<span class=3D"kw">function</span> loosetypes(lr::<span class=3D"dt">Vector=
+</span>)
+  symbols =3D SymbolNode[]
+  <span class=3D"kw">for</span> (i,e) <span class=3D"kw">in</span> lr
+    <span class=3D"kw">if</span> typeof(e) =3D=3D <span class=3D"dt">Expr</=
+span>
+      es =3D copy(e.args)
+      <span class=3D"kw">while</span> !isempty(es)
+        e1 =3D pop!(es)
+        <span class=3D"kw">if</span> typeof(e1) =3D=3D <span class=3D"dt">E=
+xpr</span>
+          append!(es,e1.args)
+        <span class=3D"kw">elseif</span> typeof(e1) =3D=3D SymbolNode
+          push!(symbols,e1)
+        <span class=3D"kw">end</span>
+      <span class=3D"kw">end</span>
+    <span class=3D"kw">end</span>
+  <span class=3D"kw">end</span>
+  loose_types =3D SymbolNode[]
+  <span class=3D"kw">for</span> symnode <span class=3D"kw">in</span> symbol=
+s
+    <span class=3D"kw">if</span> !isleaftype(symnode.typ) &amp;&amp; typeof=
+(symnode.typ) =3D=3D UnionType
+      push!(loose_types, symnode)
+    <span class=3D"kw">end</span>
+  <span class=3D"kw">end</span>
+  <span class=3D"kw">return</span> loose_types
+<span class=3D"kw">end</span></code></pre>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">  symbols =
+=3D SymbolNode[]
+  <span class=3D"kw">for</span> (i,e) <span class=3D"kw">in</span> lr
+    <span class=3D"kw">if</span> typeof(e) =3D=3D <span class=3D"dt">Expr</=
+span>
+      es =3D copy(e.args)
+      <span class=3D"kw">while</span> !isempty(es)
+        e1 =3D pop!(es)
+        <span class=3D"kw">if</span> typeof(e1) =3D=3D <span class=3D"dt">E=
+xpr</span>
+          append!(es,e1.args)
+        <span class=3D"kw">elseif</span> typeof(e1) =3D=3D SymbolNode
+          push!(symbols,e1)
+        <span class=3D"kw">end</span>
+      <span class=3D"kw">end</span>
+    <span class=3D"kw">end</span>
+  <span class=3D"kw">end</span></code></pre>
+
+<p>The while loop goes through the guts of all the <code>Expr</code>s, recu=
+rsively. Every time the loop finds a <code>SymbolNode</code>, it adds it to=
+ the vector <code>symbols</code>.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">  loose_ty=
+pes =3D SymbolNode[]
+  <span class=3D"kw">for</span> symnode <span class=3D"kw">in</span> symbol=
+s
+    <span class=3D"kw">if</span> !isleaftype(symnode.typ) &amp;&amp; typeof=
+(symnode.typ) =3D=3D UnionType
+      push!(loose_types, symnode)
+    <span class=3D"kw">end</span>
+  <span class=3D"kw">end</span>
+  <span class=3D"kw">return</span> loose_types
+<span class=3D"kw">end</span></code></pre>
+
+<p>Now we have a list of variables and their types, so it's easy to check i=
+f a type is loose. <code>loosetypes</code> does that by looking for a speci=
+fic kind of non-concrete type, a <code>UnionType</code>. We get a lot more =
+"failing" results when we consider all non-concrete types to be "failing". =
+This is because we're evaluating each method with its annotated argument ty=
+pes, which are likely to be abstract.</p>
+
+<h3 id=3D"making-this-usable">Making This Usable</h3>
+
+<p>Now that we can do the check on an expression, we should make it easier =
+to call on a user's code. We'll create two ways to call <code>checklooptype=
+s</code>:</p>
+
+<ol style=3D"list-style-type: decimal">
+<li><p>On a whole function; this will check each method of the given functi=
+on.</p></li>
+<li><p>On an expression; this will work if the user extracts the results of=
+ <code>code_typed</code> themselves.</p></li>
+</ol>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia"><span clas=
+s=3D"co">## for a given Function, run checklooptypes on each Method</span>
+<span class=3D"kw">function</span> checklooptypes(f::Callable;kwargs...)
+  lrs =3D LoopResult[]
+  <span class=3D"kw">for</span> e <span class=3D"kw">in</span> code_typed(f=
+)
+    lr =3D checklooptypes(e)
+    <span class=3D"kw">if</span> length(lr.lines) &gt; <span class=3D"fl">0=
+</span> push!(lrs,lr) <span class=3D"kw">end</span>
+  <span class=3D"kw">end</span>
+  LoopResults(f.env.name,lrs)
+<span class=3D"kw">end</span>
+
+<span class=3D"co"># for an Expr representing a Method,</span>
+<span class=3D"co"># check that the type of each variable used in a loop</s=
+pan>
+<span class=3D"co"># has a concrete type</span>
+checklooptypes(e::<span class=3D"dt">Expr</span>;kwargs...) =3D=20
+ LoopResult(MethodSignature(e),loosetypes(loopcontents(e)))</code></pre>
+
+<p>We can see both options work about the same for a function with one meth=
+od:</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">julia&gt; =
+using TypeCheck
+
+julia&gt; <span class=3D"kw">function</span> foo(x::<span class=3D"dt">Int<=
+/span>)
+         s =3D <span class=3D"fl">0</span>
+         <span class=3D"kw">for</span> i =3D <span class=3D"fl">1</span>:x
+           s +=3D i/<span class=3D"fl">2</span>
+         <span class=3D"kw">end</span>
+         <span class=3D"kw">return</span> s
+       <span class=3D"kw">end</span>
+foo (generic <span class=3D"kw">function</span> with <span class=3D"fl">1</=
+span> method)
+
+julia&gt; checklooptypes(foo)
+foo(<span class=3D"dt">Int64</span>)::<span class=3D"dt">Union</span>(<span=
+ class=3D"dt">Int64</span>,<span class=3D"dt">Float64</span>)
+    s::<span class=3D"dt">Union</span>(<span class=3D"dt">Int64</span>,<spa=
+n class=3D"dt">Float64</span>)
+    s::<span class=3D"dt">Union</span>(<span class=3D"dt">Int64</span>,<spa=
+n class=3D"dt">Float64</span>)
+
+
+julia&gt; checklooptypes(code_typed(foo,(<span class=3D"dt">Int</span>,))[<=
+span class=3D"fl">1</span>])
+(<span class=3D"dt">Int64</span>)::<span class=3D"dt">Union</span>(<span cl=
+ass=3D"dt">Int64</span>,<span class=3D"dt">Float64</span>)
+    s::<span class=3D"dt">Union</span>(<span class=3D"dt">Int64</span>,<spa=
+n class=3D"dt">Float64</span>)
+    s::<span class=3D"dt">Union</span>(<span class=3D"dt">Int64</span>,<spa=
+n class=3D"dt">Float64</span>)</code></pre>
+
+<h4 id=3D"pretty-printing">Pretty Printing</h4>
+
+<p>I've skipped an implementation detail here: how did we get the results t=
+o print out to the REPL?</p>
+
+<p>First, I made some new types. <code>LoopResults</code> is the result of =
+checking a whole function; it has the function name and the results for eac=
+h method. <code>LoopResult</code> is the result of checking one method; it =
+has the argument types and the loosely typed variables.</p>
+
+<p>The <code>checklooptypes</code> function returns a <code>LoopResults</co=
+de>. This type has a function called <code>show</code> defined for it. The =
+REPL calls <code>display</code> on values it wants to display; <code>displa=
+y</code> will then call our <code>show</code> implementation.</p>
+
+<p>This code is important for making this static analysis usable, but it is=
+ not doing static analysis. You should use the preferred method for pretty-=
+printing types and output in your implementation language; this is just how=
+ it's done in Julia.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia"><span clas=
+s=3D"kw">type</span> LoopResult
+  msig::MethodSignature
+  lines::<span class=3D"dt">Vector</span>{SymbolNode}
+  LoopResult(ms::MethodSignature,ls::<span class=3D"dt">Vector</span>{Symbo=
+lNode}) =3D new(ms,unique(ls))
+<span class=3D"kw">end</span>
+
+<span class=3D"kw">function</span> Base.show(io::<span class=3D"dt">IO</spa=
+n>, x::LoopResult)
+  display(x.msig)
+  <span class=3D"kw">for</span> snode <span class=3D"kw">in</span> x.lines
+    println(io,<span class=3D"st">"</span>\t<span class=3D"st">"</span>,str=
+ing(snode.name),<span class=3D"st">"::"</span>,string(snode.typ))
+  <span class=3D"kw">end</span>
+<span class=3D"kw">end</span>
+
+<span class=3D"kw">type</span> LoopResults
+  name::<span class=3D"dt">Symbol</span>
+  methods::<span class=3D"dt">Vector</span>{LoopResult}
+<span class=3D"kw">end</span>
+
+<span class=3D"kw">function</span> Base.show(io::<span class=3D"dt">IO</spa=
+n>, x::LoopResults)
+  <span class=3D"kw">for</span> lr <span class=3D"kw">in</span> x.methods
+    print(io,string(x.name))
+    display(lr)
+  <span class=3D"kw">end</span>
+<span class=3D"kw">end</span></code></pre>
+
+<h2 id=3D"looking-for-unused-variables">Looking For Unused Variables</h2>
+
+<p>Sometimes, as you're typing in your program, you mistype a variable name=
+. The program can't tell that you meant for this to be the same variable th=
+at you spelled correctly before; it sees a variable used only one time, whe=
+re you might see a variable name misspelled. Languages that require variabl=
+e declarations naturally catch these misspellings, but many dynamic languag=
+es don=E2=80=99t require declarations and thus need an extra layer of analy=
+sis to catch them.</p>
+
+<p>We can find misspelled variable names (and other unused variables) by lo=
+oking for variables that are only used once=E2=80=94or only used one way.</=
+p>
+
+<p>Here is an example of a little bit of code with one misspelled name.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia"><span clas=
+s=3D"kw">function</span> foo(variable_name::<span class=3D"dt">Int</span>)
+  sum =3D <span class=3D"fl">0</span>
+  <span class=3D"kw">for</span> i=3D<span class=3D"fl">1</span>:variable_na=
+me
+    sum +=3D variable_name
+  <span class=3D"kw">end</span>
+  variable_nme =3D sum
+  <span class=3D"kw">return</span> variable_name
+<span class=3D"kw">end</span></code></pre>
+
+<p>This kind of mistake can cause problems in your code that are only disco=
+vered when it's run. Let's assume you misspell each variable name only once=
+. We can separate variable usages into writes and reads. If the misspelling=
+ is a write (i.e., <code>worng =3D 5</code>), then no error will be thrown;=
+ you'll just be silently putting the value in the wrong variable=E2=80=94an=
+d it could be frustrating to find the bug. If the misspelling is a read (i.=
+e., <code>right =3D worng + 2</code>), then you'll get a runtime error when=
+ the code is run; we'd like to have a static warning for this, so that you =
+can find this error sooner, but you will still have to wait until you run t=
+he code to see the problem.</p>
+
+<p>As code becomes longer and more complicated, it becomes harder to spot t=
+he mistake=E2=80=94unless you have the help of static analysis.</p>
+
+<h3 id=3D"left-hand-side-and-right-hand-side">Left-Hand Side and Right-Hand=
+ Side</h3>
+
+<p>Another way to talk about "read" and "write" usages is to call them "rig=
+ht-hand side" (RHS) and "left-hand side" (LHS) usages. This refers to where=
+ the variable is relative to the <code>=3D</code> sign.</p>
+
+<p>Here are some usages of <code>x</code>:</p>
+
+<ul>
+<li>Left-hand side:
+<ul>
+<li><code>x =3D 2</code></li>
+<li><code>x =3D y + 22</code></li>
+<li><code>x =3D x + y + 2</code></li>
+<li><code>x +=3D 2</code> (which de-sugars to <code>x =3D x + 2</code>)</li=
+>
+</ul></li>
+<li>Right-hand side:
+<ul>
+<li><code>y =3D x + 22</code></li>
+<li><code>x =3D x + y + 2</code></li>
+<li><code>x +=3D 2</code> (which de-sugars to <code>x =3D x + 2</code>)</li=
+>
+<li><code>2 * x</code></li>
+<li><code>x</code></li>
+</ul></li>
+</ul>
+
+<p>Notice that expressions like <code>x =3D x + y + 2</code> and <code>x +=
+=3D 2</code> appear in both sections, since <code>x</code> appears on both =
+sides of the <code>=3D</code> sign.</p>
+
+<h3 id=3D"looking-for-single-use-variables">Looking for Single-Use Variable=
+s</h3>
+
+<p>There are two cases we need to look for:</p>
+
+<ol style=3D"list-style-type: decimal">
+<li>Variables used once.</li>
+<li>Variables used only on the LHS or only on the RHS.</li>
+</ol>
+
+<p>We'll look for all variable usages, but we'll look for LHS and RHS usage=
+s separately, to cover both cases.</p>
+
+<h4 id=3D"finding-lhs-usages">Finding LHS Usages</h4>
+
+<p>To be on the LHS, a variable needs to have an <code>=3D</code> sign to b=
+e to the left of. This means we can look for <code>=3D</code> signs in the =
+AST, and then look to the left of them to find the relevant variable.</p>
+
+<p>In the AST, an <code>=3D</code> is an <code>Expr</code> with the head <c=
+ode>:(=3D)</code>. (The parentheses are there to make it clear that this is=
+ the symbol for <code>=3D</code> and not another operator, <code>:=3D</code=
+>.) The first value in <code>args</code> will be the variable name on its L=
+HS. Because we're looking at an AST that the compiler has already cleaned u=
+p, there will (nearly) always be just a single symbol to the left of our <c=
+ode>=3D</code> sign.</p>
+
+<p>Let's see what that means in code:</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">julia&gt; =
+:(x =3D <span class=3D"fl">5</span>)
+:(x =3D <span class=3D"fl">5</span>)
+
+julia&gt; :(x =3D <span class=3D"fl">5</span>).head
+:(=3D)
+
+julia&gt; :(x =3D <span class=3D"fl">5</span>).args
+<span class=3D"fl">2</span>-element <span class=3D"dt">Array</span>{<span c=
+lass=3D"dt">Any</span>,<span class=3D"fl">1</span>}:
+  :x
+ <span class=3D"fl">5</span> =20
+
+julia&gt; :(x =3D <span class=3D"fl">5</span>).args[<span class=3D"fl">1</s=
+pan>]
+:x</code></pre>
+
+<p>Below is the full implementation, followed by an explanation.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia"><span clas=
+s=3D"co"># Return a list of all variables used on the left-hand-side of ass=
+ignment (=3D)</span>
+<span class=3D"co">#</span>
+<span class=3D"co"># Arguments:</span>
+<span class=3D"co">#   e: an Expr representing a Method, as from code_typed=
+</span>
+<span class=3D"co">#</span>
+<span class=3D"co"># Returns:</span>
+<span class=3D"co">#   a Set{Symbol}, where each element appears on the LHS=
+ of an assignment in e.</span>
+<span class=3D"co">#</span>
+<span class=3D"kw">function</span> find_lhs_variables(e::<span class=3D"dt"=
+>Expr</span>)
+  output =3D <span class=3D"dt">Set</span>{<span class=3D"dt">Symbol</span>=
+}()
+  <span class=3D"kw">for</span> ex <span class=3D"kw">in</span> body(e)
+    <span class=3D"kw">if</span> Base.is_expr(ex,:(=3D))
+      push!(output,ex.args[<span class=3D"fl">1</span>])
+    <span class=3D"kw">end</span>
+  <span class=3D"kw">end</span>
+  <span class=3D"kw">return</span> output
+<span class=3D"kw">end</span></code></pre>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">  output =
+=3D <span class=3D"dt">Set</span>{<span class=3D"dt">Symbol</span>}()</code=
+></pre>
+
+<p>We have a set of Symbols; those are variables names we've found on the L=
+HS.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">  <span cl=
+ass=3D"kw">for</span> ex <span class=3D"kw">in</span> body(e)
+    <span class=3D"kw">if</span> Base.is_expr(ex,:(=3D))
+      push!(output,ex.args[<span class=3D"fl">1</span>])
+    <span class=3D"kw">end</span>
+  <span class=3D"kw">end</span></code></pre>
+
+<p>We aren't digging deeper into the expressions, because the <code>code_ty=
+ped</code> AST is pretty flat; loops and ifs have been converted to flat st=
+atements with gotos for control flow. There won't be any assignments hiding=
+ inside function calls' arguments. This code will fail if anything more tha=
+n a symbol is on the left of the equal sign. This misses two specific edge =
+cases: array accesses (like <code>a[5]</code>, which will be represented as=
+ a <code>:ref</code> expression) and properties (like <code>a.head</code>, =
+which will be represented as a <code>:.</code> expression). These will stil=
+l always have the relevant symbol as the first value in their <code>args</c=
+ode>, it might just be buried a bit (as in <code>a.property.name.head.other=
+_property</code>). This code doesn=E2=80=99t handle those cases, but a coup=
+le lines of code inside the <code>if</code> statement could fix that.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">      push=
+!(output,ex.args[<span class=3D"fl">1</span>])</code></pre>
+
+<p>When we find a LHS variable usage, we <code>push!</code> the variable na=
+me into the <code>Set</code>. The <code>Set</code> will make sure that we o=
+nly have one copy of each name.</p>
+
+<h4 id=3D"finding-rhs-usages">Finding RHS usages</h4>
+
+<p>To find all the other variable usages, we also need to look at each <cod=
+e>Expr</code>. This is a bit more involved, because we care about basically=
+ all the <code>Expr</code>s, not just the <code>:(=3D)</code> ones and beca=
+use we have to dig into nested <code>Expr</code>s (to handle nested functio=
+n calls).</p>
+
+<p>Here is the full implementation, with explanation following.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia"><span clas=
+s=3D"co"># Given an Expression, finds variables used in it (on right-hand-s=
+ide)</span>
+<span class=3D"co">#</span>
+<span class=3D"co"># Arguments: e: an Expr</span>
+<span class=3D"co">#</span>
+<span class=3D"co"># Returns: a Set{Symbol}, where each e is used in a rhs =
+expression in e</span>
+<span class=3D"co">#</span>
+<span class=3D"kw">function</span> find_rhs_variables(e::<span class=3D"dt"=
+>Expr</span>)
+  output =3D <span class=3D"dt">Set</span>{<span class=3D"dt">Symbol</span>=
+}()
+
+  <span class=3D"kw">if</span> e.head =3D=3D :lambda
+    <span class=3D"kw">for</span> ex <span class=3D"kw">in</span> body(e)
+      union!(output,find_rhs_variables(ex))
+    <span class=3D"kw">end</span>
+  <span class=3D"kw">elseif</span> e.head =3D=3D :(=3D)
+    <span class=3D"kw">for</span> ex <span class=3D"kw">in</span> e.args[<s=
+pan class=3D"fl">2</span>:<span class=3D"kw">end</span>]  <span class=3D"co=
+"># skip lhs</span>
+      union!(output,find_rhs_variables(ex))
+    <span class=3D"kw">end</span>
+  <span class=3D"kw">elseif</span> e.head =3D=3D :<span class=3D"kw">return=
+</span>
+    output =3D find_rhs_variables(e.args[<span class=3D"fl">1</span>])
+  <span class=3D"kw">elseif</span> e.head =3D=3D :call
+    start =3D <span class=3D"fl">2</span>  <span class=3D"co"># skip functi=
+on name</span>
+    e.args[<span class=3D"fl">1</span>] =3D=3D TopNode(:box) &amp;&amp; (st=
+art =3D <span class=3D"fl">3</span>)  <span class=3D"co"># skip type name</=
+span>
+    <span class=3D"kw">for</span> ex <span class=3D"kw">in</span> e.args[st=
+art:<span class=3D"kw">end</span>]
+      union!(output,find_rhs_variables(ex))
+    <span class=3D"kw">end</span>
+  <span class=3D"kw">elseif</span> e.head =3D=3D :<span class=3D"kw">if</sp=
+an>
+   <span class=3D"kw">for</span> ex <span class=3D"kw">in</span> e.args <sp=
+an class=3D"co"># want to check condition, too</span>
+     union!(output,find_rhs_variables(ex))
+   <span class=3D"kw">end</span>
+  <span class=3D"kw">elseif</span> e.head =3D=3D :(::)
+    output =3D find_rhs_variables(e.args[<span class=3D"fl">1</span>])
+  <span class=3D"kw">end</span>
+
+  <span class=3D"kw">return</span> output
+<span class=3D"kw">end</span></code></pre>
+
+<p>The main structure of this function is a large if-else statement, where =
+each case handles a different head-symbol.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">  output =
+=3D <span class=3D"dt">Set</span>{<span class=3D"dt">Symbol</span>}()</code=
+></pre>
+
+<p><code>output</code> is the set of variable names, which we will return a=
+t the end of the function. Since we only care about the fact that each of t=
+hese variables has be read at least once, using a <code>Set</code> frees us=
+ from worrying about the uniqueness of each name.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">  <span cl=
+ass=3D"kw">if</span> e.head =3D=3D :lambda
+    <span class=3D"kw">for</span> ex <span class=3D"kw">in</span> body(e)
+      union!(output,find_rhs_variables(ex))
+    <span class=3D"kw">end</span></code></pre>
+
+<p>This is the first condition in the if-else statement. A <code>:lambda</c=
+ode> represents the body of a function. We recurse on the body of the defin=
+ition, which should get all the RHS variable usages in the definition.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">  <span cl=
+ass=3D"kw">elseif</span> e.head =3D=3D :(=3D)
+    <span class=3D"kw">for</span> ex <span class=3D"kw">in</span> e.args[<s=
+pan class=3D"fl">2</span>:<span class=3D"kw">end</span>]  <span class=3D"co=
+"># skip lhs</span>
+      union!(output,find_rhs_variables(ex))
+    <span class=3D"kw">end</span></code></pre>
+
+<p>If the head is <code>:(=3D)</code>, then the expression is an assignment=
+. We skip the first element of <code>args</code> because that's the variabl=
+e being assigned to. For each of the remaining expressions, we recursively =
+find the RHS variables and add them to our set.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">  <span cl=
+ass=3D"kw">elseif</span> e.head =3D=3D :<span class=3D"kw">return</span>
+    output =3D find_rhs_variables(e.args[<span class=3D"fl">1</span>])</cod=
+e></pre>
+
+<p>If this is a return statement, then the first element of <code>args</cod=
+e> is the expression whose value is returned; we'll add any variables in th=
+ere into our set.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">  <span cl=
+ass=3D"kw">elseif</span> e.head =3D=3D :call
+    <span class=3D"co"># skip function name</span>
+    <span class=3D"kw">for</span> ex <span class=3D"kw">in</span> e.args[<s=
+pan class=3D"fl">2</span>:<span class=3D"kw">end</span>]
+      union!(output,find_rhs_variables(ex))
+    <span class=3D"kw">end</span></code></pre>
+
+<p>For function calls, we want to get all variables used in all the argumen=
+ts to the call. We skip the function name, which is the first element of <c=
+ode>args</code>.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">  <span cl=
+ass=3D"kw">elseif</span> e.head =3D=3D :<span class=3D"kw">if</span>
+   <span class=3D"kw">for</span> ex <span class=3D"kw">in</span> e.args <sp=
+an class=3D"co"># want to check condition, too</span>
+     union!(output,find_rhs_variables(ex))
+   <span class=3D"kw">end</span></code></pre>
+
+<p>An <code>Expr</code> representing an if statement has the <code>head</co=
+de> value <code>:if</code>. We want to get variable usages from all the exp=
+ressions in the body of the if statement, so we recurse on each element of =
+<code>args</code>.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">  <span cl=
+ass=3D"kw">elseif</span> e.head =3D=3D :(::)
+    output =3D find_rhs_variables(e.args[<span class=3D"fl">1</span>])
+  <span class=3D"kw">end</span></code></pre>
+
+<p>The <code>:(::)</code> operator is used to add type annotations. The fir=
+st argument is the expression or variable being annotated; we check for var=
+iable usages in the annotated expression.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">  <span cl=
+ass=3D"kw">return</span> output</code></pre>
+
+<p>At the end of the function, we return the set of RHS variable usages.</p=
+>
+
+<p>There's a little more code that simplifies the method above. Because the=
+ version above only handles <code>Expr</code>s, but some of the values that=
+ get passed recursively may not be <code>Expr</code>s, we need a few more m=
+ethods to handle the other possible types appropriately.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia"><span clas=
+s=3D"co"># Recursive Base Cases, to simplify control flow in the Expr versi=
+on</span>
+find_rhs_variables(a) =3D <span class=3D"dt">Set</span>{<span class=3D"dt">=
+Symbol</span>}()  <span class=3D"co"># unhandled, should be immediate val e=
+.g. Int</span>
+find_rhs_variables(s::<span class=3D"dt">Symbol</span>) =3D <span class=3D"=
+dt">Set</span>{<span class=3D"dt">Symbol</span>}([s])
+find_rhs_variables(s::SymbolNode) =3D <span class=3D"dt">Set</span>{<span c=
+lass=3D"dt">Symbol</span>}([s.name])</code></pre>
+
+<h4 id=3D"putting-it-together">Putting It Together</h4>
+
+<p>Now that we have the two functions defined above, we can use them togeth=
+er to find variables that are either only read from or only written to. The=
+ function that finds them will be called <code>unused_locals</code>.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia"><span clas=
+s=3D"kw">function</span> unused_locals(e::<span class=3D"dt">Expr</span>)
+  lhs =3D find_lhs_variables(e)
+  rhs =3D find_rhs_variables(e)
+  setdiff(lhs,rhs)
+<span class=3D"kw">end</span></code></pre>
+
+<p><code>unused_locals</code> will return a set of variable names. It's eas=
+y to write a function that determines whether the output of <code>unused_lo=
+cals</code> counts as a "pass" or not. If the set is empty, the method pass=
+es. If all the methods of a function pass, then the function passes. The fu=
+nction <code>check_locals</code> below implements this logic.</p>
+
+<pre class=3D"sourceCode julia"><code class=3D"sourceCode julia">check_loca=
+ls(f::Callable) =3D all([check_locals(e) <span class=3D"kw">for</span> e <s=
+pan class=3D"kw">in</span> code_typed(f)])
+check_locals(e::<span class=3D"dt">Expr</span>) =3D isempty(unused_locals(e=
+))</code></pre>
+
+<h2 id=3D"conclusion">Conclusion</h2>
+
+<p>We=E2=80=99ve done two static analyses of Julia code=E2=80=94one based o=
+n types and one based on variable usages.</p>
+
+<p>Statically-typed languages already do the kind of work our type-based an=
+alysis did; additional type-based static analysis is mostly useful in dynam=
+ically typed languages. There have been (mostly research) projects to build=
+ static type inference systems for languages including Python, Ruby, and Li=
+sp. These systems are usually built around optional type annotations; you c=
+an have static types when you want them, and fall back to dynamic typing wh=
+en you don=E2=80=99t. This is especially helpful for integrating some stati=
+c typing into existing code bases.</p>
+
+<p>Non-typed-based checks, like our variable-usage one, are applicable to b=
+oth dynamically and statically typed languages. However, many statically ty=
+ped languages, like C++ and Java, require you to declare variables, and alr=
+eady give basic warnings like the ones we created. There are still custom c=
+hecks that can be written; for example, checks that are specific to your pr=
+oject=E2=80=99s style guide or extra safety precautions based on security p=
+olicies.</p>
+
+<p>While Julia does have great tools for enabling static analysis, it=E2=80=
+=99s not alone. Lisp, of course, is famous for having the code be a data st=
+ructure of nested lists, so it tends to be easy to get at the AST. Java als=
+o exposes its AST, although the AST is much more complicated than Lisp=E2=
+=80=99s. Some languages or language tool-chains are not designed to allow m=
+ere users to poke around at internal representations. For open-source tool =
+chains (especially well-commented ones), one option is to add hooks to the =
+enviroment that let you access the AST.</p>
+
+<p>In cases where that won=E2=80=99t work, the final fallback is writing a =
+parser yourself; this is to be avoided when possible. It=E2=80=99s a lot of=
+ work to cover the full grammar of most programming languages, and you=E2=
+=80=99ll have to update it yourself as new features are added to the langua=
+ge (rather than getting the updates automatically from upstream). Depending=
+ on the checks you want to do, you may be able to get away with parsing onl=
+y some lines or a subset of language features, which would greatly decrease=
+ the cost of writing your own parser.</p>
+
+<p>Hopefully, your new understanding of how static analysis tools are writt=
+en will help you understand the tools you use on your code, and maybe inspi=
+re you to write one of your own.</p>
+        </div>
+      </div>
+    </div>
+ =20
+<div id=3D"cntvlive2-is-installed"></div><div id=3D"qb-sougou-search" style=
+=3D"display: none; opacity: 0;"><p>=E6=90=9C=E7=B4=A2</p><p class=3D"last-b=
+tn">=E5=A4=8D=E5=88=B6</p><iframe src=3D"cid:frame-118-c9957e7e-9b2b-4b59-9=
+dbb-daed47adc904@mhtml.blink"></iframe></div></body></html>
+------MultipartBoundary--TJ96w9fUA7yjllh1YuJK8WyLDucvOglwcwQdigSjPm----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://aosabook.org/en/500L/theme/css/bootstrap.css
+
+@charset "utf-8";
+
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, s=
+ection { display: block; }
+
+audio, canvas, video { display: inline-block; }
+
+audio:not([controls]) { display: none; }
+
+html { font-size: 100%; text-size-adjust: 100%; }
+
+a:focus { outline: -webkit-focus-ring-color auto 5px; outline-offset: -2px;=
+ }
+
+a:hover, a:active { outline: 0px; }
+
+sub, sup { position: relative; font-size: 75%; line-height: 0; vertical-ali=
+gn: baseline; }
+
+sup { top: -0.5em; }
+
+sub { bottom: -0.25em; }
+
+img { max-width: 100%; height: auto; border: 0px; }
+
+button, input, select, textarea { margin: 0px; font-size: 100%; vertical-al=
+ign: middle; }
+
+button, input { line-height: normal; }
+
+button, input[type=3D"button"], input[type=3D"reset"], input[type=3D"submit=
+"] { cursor: pointer; -webkit-appearance: button; }
+
+input[type=3D"search"] { -webkit-appearance: textfield; box-sizing: content=
+-box; }
+
+input[type=3D"search"]::-webkit-search-decoration, input[type=3D"search"]::=
+-webkit-search-cancel-button { -webkit-appearance: none; }
+
+textarea { overflow: auto; vertical-align: top; }
+
+.clearfix { }
+
+.clearfix::before, .clearfix::after { display: table; content: ""; }
+
+.clearfix::after { clear: both; }
+
+body { margin: 0px; font-family: "Helvetica Neue", Helvetica, Arial, sans-s=
+erif; font-size: 13px; line-height: 18px; color: rgb(51, 51, 51); backgroun=
+d-color: rgb(255, 255, 255); }
+
+a { color: rgb(0, 136, 204); text-decoration: none; }
+
+a:hover { color: rgb(0, 85, 128); text-decoration: underline; }
+
+.row { margin-left: -20px; }
+
+.row::before, .row::after { display: table; content: ""; }
+
+.row::after { clear: both; }
+
+[class*=3D"span"] { float: left; margin-left: 20px; }
+
+.span1 { width: 60px; }
+
+.span2 { width: 140px; }
+
+.span3 { width: 220px; }
+
+.span4 { width: 300px; }
+
+.span5 { width: 380px; }
+
+.span6 { width: 460px; }
+
+.span7 { width: 540px; }
+
+.span8 { width: 620px; }
+
+.span9 { width: 700px; }
+
+.span10 { width: 780px; }
+
+.span11 { width: 860px; }
+
+.span12, .container { width: 940px; }
+
+.offset1 { margin-left: 100px; }
+
+.offset2 { margin-left: 180px; }
+
+.offset3 { margin-left: 260px; }
+
+.offset4 { margin-left: 340px; }
+
+.offset5 { margin-left: 420px; }
+
+.offset6 { margin-left: 500px; }
+
+.offset7 { margin-left: 580px; }
+
+.offset8 { margin-left: 660px; }
+
+.offset9 { margin-left: 740px; }
+
+.offset10 { margin-left: 820px; }
+
+.offset11 { margin-left: 900px; }
+
+.row-fluid { width: 100%; }
+
+.row-fluid::before, .row-fluid::after { display: table; content: ""; }
+
+.row-fluid::after { clear: both; }
+
+.row-fluid > [class*=3D"span"] { float: left; margin-left: 2.12766%; }
+
+.row-fluid > [class*=3D"span"]:first-child { margin-left: 0px; }
+
+.row-fluid > .span1 { width: 6.38298%; }
+
+.row-fluid > .span2 { width: 14.8936%; }
+
+.row-fluid > .span3 { width: 23.4043%; }
+
+.row-fluid > .span4 { width: 31.9149%; }
+
+.row-fluid > .span5 { width: 40.4255%; }
+
+.row-fluid > .span6 { width: 48.9362%; }
+
+.row-fluid > .span7 { width: 57.4468%; }
+
+.row-fluid > .span8 { width: 65.9574%; }
+
+.row-fluid > .span9 { width: 74.4681%; }
+
+.row-fluid > .span10 { width: 82.9787%; }
+
+.row-fluid > .span11 { width: 91.4894%; }
+
+.row-fluid > .span12 { width: 100%; }
+
+.container { width: 940px; margin-left: auto; margin-right: auto; }
+
+.container::before, .container::after { display: table; content: ""; }
+
+.container::after { clear: both; }
+
+.container-fluid { padding-left: 20px; padding-right: 20px; }
+
+.container-fluid::before, .container-fluid::after { display: table; content=
+: ""; }
+
+.container-fluid::after { clear: both; }
+
+p { margin: 0px 0px 9px; font-family: "Helvetica Neue", Helvetica, Arial, s=
+ans-serif; font-size: 13px; line-height: 18px; }
+
+p small { font-size: 11px; color: rgb(153, 153, 153); }
+
+.lead { margin-bottom: 18px; font-size: 20px; font-weight: 200; line-height=
+: 27px; }
+
+h1, h2, h3, h4, h5, h6 { margin: 0px; font-weight: bold; color: rgb(51, 51,=
+ 51); text-rendering: optimizeLegibility; }
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small { font-weight: n=
+ormal; color: rgb(153, 153, 153); }
+
+h1 { font-size: 30px; line-height: 36px; }
+
+h1 small { font-size: 18px; }
+
+h2 { font-size: 24px; line-height: 36px; }
+
+h2 small { font-size: 18px; }
+
+h3 { line-height: 27px; font-size: 18px; }
+
+h3 small { font-size: 14px; }
+
+h4, h5, h6 { line-height: 18px; }
+
+h4 { font-size: 14px; }
+
+h4 small { font-size: 12px; }
+
+h5 { font-size: 12px; }
+
+h6 { font-size: 11px; color: rgb(153, 153, 153); text-transform: uppercase;=
+ }
+
+.page-header { padding-bottom: 17px; margin: 18px 0px; border-bottom: 1px s=
+olid rgb(238, 238, 238); }
+
+.page-header h1 { line-height: 1; }
+
+ul, ol { padding: 0px; margin: 0px 0px 9px 25px; }
+
+ul ul, ul ol, ol ol, ol ul { margin-bottom: 0px; }
+
+ul { list-style: disc; }
+
+ol { list-style: decimal; }
+
+li { line-height: 18px; }
+
+ul.unstyled, ol.unstyled { margin-left: 0px; list-style: none; }
+
+dl { margin-bottom: 18px; }
+
+dt, dd { line-height: 18px; }
+
+dt { font-weight: bold; }
+
+dd { margin-left: 9px; }
+
+hr { margin: 18px 0px; border-width: 1px 0px; border-right-style: initial; =
+border-left-style: initial; border-right-color: initial; border-left-color:=
+ initial; border-image: initial; border-top-style: solid; border-top-color:=
+ rgb(238, 238, 238); border-bottom-style: solid; border-bottom-color: rgb(2=
+55, 255, 255); }
+
+strong { font-weight: bold; }
+
+em { font-style: italic; }
+
+.muted { color: rgb(153, 153, 153); }
+
+abbr { font-size: 90%; text-transform: uppercase; border-bottom: 1px dotted=
+ rgb(221, 221, 221); cursor: help; }
+
+blockquote { padding: 0px 0px 0px 15px; margin: 0px 0px 18px; border-left: =
+5px solid rgb(238, 238, 238); }
+
+blockquote p { margin-bottom: 0px; font-size: 16px; font-weight: 300; line-=
+height: 22.5px; }
+
+blockquote small { display: block; line-height: 18px; color: rgb(153, 153, =
+153); }
+
+blockquote small::before { content: "=E2=80=94=C2=A0"; }
+
+blockquote.pull-right { float: right; padding-left: 0px; padding-right: 15p=
+x; border-left: 0px; border-right: 5px solid rgb(238, 238, 238); }
+
+blockquote.pull-right p, blockquote.pull-right small { text-align: right; }
+
+q::before, q::after, blockquote::before, blockquote::after { content: ""; }
+
+address { display: block; margin-bottom: 18px; line-height: 18px; font-styl=
+e: normal; }
+
+small { font-size: 100%; }
+
+cite { font-style: normal; }
+
+code, pre { padding: 0px 3px 2px; font-family: Menlo, Monaco, "Courier New"=
+, monospace; font-size: 12px; color: rgb(51, 51, 51); border-radius: 3px; }
+
+code { padding: 3px 4px; background-color: rgb(247, 247, 249); border: 1px =
+solid rgb(225, 225, 232); }
+
+pre { display: block; padding: 8.5px; margin: 0px 0px 9px; font-size: 12px;=
+ line-height: 18px; background-color: rgb(245, 245, 245); border: 1px solid=
+ rgba(0, 0, 0, 0.14902); border-radius: 4px; overflow-x: auto; overflow-y: =
+hidden; width: auto; }
+
+pre.prettyprint { margin-bottom: 18px; }
+
+pre code { padding: 0px; color: inherit; background-color: transparent; bor=
+der: 0px; }
+
+.pre-scrollable { max-height: 340px; overflow-y: scroll; }
+
+form { margin: 0px 0px 18px; }
+
+fieldset { padding: 0px; margin: 0px; border: 0px; }
+
+legend { display: block; width: 100%; padding: 0px; margin-bottom: 27px; fo=
+nt-size: 19.5px; line-height: 36px; color: rgb(51, 51, 51); border-width: 0=
+px 0px 1px; border-top-style: initial; border-right-style: initial; border-=
+left-style: initial; border-top-color: initial; border-right-color: initial=
+; border-left-color: initial; border-image: initial; border-bottom-style: s=
+olid; border-bottom-color: rgb(238, 238, 238); }
+
+legend small { font-size: 13.5px; color: rgb(153, 153, 153); }
+
+label, input, button, select, textarea { font-size: 13px; font-weight: norm=
+al; line-height: 18px; }
+
+input, button, select, textarea { font-family: "Helvetica Neue", Helvetica,=
+ Arial, sans-serif; }
+
+label { display: block; margin-bottom: 5px; color: rgb(51, 51, 51); }
+
+input, textarea, select, .uneditable-input { display: inline-block; width: =
+210px; height: 18px; padding: 4px; margin-bottom: 9px; font-size: 13px; lin=
+e-height: 18px; color: rgb(85, 85, 85); border: 1px solid rgb(204, 204, 204=
+); border-radius: 3px; }
+
+.uneditable-textarea { width: auto; height: auto; }
+
+label input, label textarea, label select { display: block; }
+
+input[type=3D"image"], input[type=3D"checkbox"], input[type=3D"radio"] { wi=
+dth: auto; height: auto; padding: 0px; margin: 3px 0px; line-height: normal=
+; cursor: pointer; border-radius: 0px; }
+
+input[type=3D"image"] { border: 0px; }
+
+input[type=3D"file"] { width: auto; padding: initial; line-height: initial;=
+ border: initial; background-color: initial; box-shadow: none; }
+
+input[type=3D"button"], input[type=3D"reset"], input[type=3D"submit"] { wid=
+th: auto; height: auto; }
+
+select, input[type=3D"file"] { height: 28px; line-height: 28px; }
+
+input[type=3D"file"] { }
+
+select { width: 220px; background-color: rgb(255, 255, 255); }
+
+select[multiple], select[size] { height: auto; }
+
+input[type=3D"image"] { box-shadow: none; }
+
+textarea { height: auto; }
+
+input[type=3D"hidden"] { display: none; }
+
+.radio, .checkbox { padding-left: 18px; }
+
+.radio input[type=3D"radio"], .checkbox input[type=3D"checkbox"] { float: l=
+eft; margin-left: -18px; }
+
+.controls > .radio:first-child, .controls > .checkbox:first-child { padding=
+-top: 5px; }
+
+.radio.inline, .checkbox.inline { display: inline-block; padding-top: 5px; =
+margin-bottom: 0px; vertical-align: middle; }
+
+.radio.inline + .radio.inline, .checkbox.inline + .checkbox.inline { margin=
+-left: 10px; }
+
+input, textarea { box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px inset; t=
+ransition: border 0.2s linear, box-shadow 0.2s linear; }
+
+input:focus, textarea:focus { border-color: rgba(82, 168, 236, 0.8); box-sh=
+adow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px inset, rgba(82, 168, 236, 0.6) 0=
+px 0px 8px; outline: 0px; }
+
+input[type=3D"file"]:focus, input[type=3D"radio"]:focus, input[type=3D"chec=
+kbox"]:focus, select:focus { box-shadow: none; outline: -webkit-focus-ring-=
+color auto 5px; outline-offset: -2px; }
+
+.input-mini { width: 60px; }
+
+.input-small { width: 90px; }
+
+.input-medium { width: 150px; }
+
+.input-large { width: 210px; }
+
+.input-xlarge { width: 270px; }
+
+.input-xxlarge { width: 530px; }
+
+input[class*=3D"span"], select[class*=3D"span"], textarea[class*=3D"span"],=
+ .uneditable-input { float: none; margin-left: 0px; }
+
+input.span1, textarea.span1, .uneditable-input.span1 { width: 50px; }
+
+input.span2, textarea.span2, .uneditable-input.span2 { width: 130px; }
+
+input.span3, textarea.span3, .uneditable-input.span3 { width: 210px; }
+
+input.span4, textarea.span4, .uneditable-input.span4 { width: 290px; }
+
+input.span5, textarea.span5, .uneditable-input.span5 { width: 370px; }
+
+input.span6, textarea.span6, .uneditable-input.span6 { width: 450px; }
+
+input.span7, textarea.span7, .uneditable-input.span7 { width: 530px; }
+
+input.span8, textarea.span8, .uneditable-input.span8 { width: 610px; }
+
+input.span9, textarea.span9, .uneditable-input.span9 { width: 690px; }
+
+input.span10, textarea.span10, .uneditable-input.span10 { width: 770px; }
+
+input.span11, textarea.span11, .uneditable-input.span11 { width: 850px; }
+
+input.span12, textarea.span12, .uneditable-input.span12 { width: 930px; }
+
+input[disabled], select[disabled], textarea[disabled], input[readonly], sel=
+ect[readonly], textarea[readonly] { background-color: rgb(245, 245, 245); b=
+order-color: rgb(221, 221, 221); cursor: not-allowed; }
+
+.control-group.warning > label, .control-group.warning .help-block, .contro=
+l-group.warning .help-inline { color: rgb(192, 152, 83); }
+
+.control-group.warning input, .control-group.warning select, .control-group=
+.warning textarea { color: rgb(192, 152, 83); border-color: rgb(192, 152, 8=
+3); }
+
+.control-group.warning input:focus, .control-group.warning select:focus, .c=
+ontrol-group.warning textarea:focus { border-color: rgb(164, 126, 60); box-=
+shadow: rgb(219, 197, 158) 0px 0px 6px; }
+
+.control-group.warning .input-prepend .add-on, .control-group.warning .inpu=
+t-append .add-on { color: rgb(192, 152, 83); background-color: rgb(252, 248=
+, 227); border-color: rgb(192, 152, 83); }
+
+.control-group.error > label, .control-group.error .help-block, .control-gr=
+oup.error .help-inline { color: rgb(185, 74, 72); }
+
+.control-group.error input, .control-group.error select, .control-group.err=
+or textarea { color: rgb(185, 74, 72); border-color: rgb(185, 74, 72); }
+
+.control-group.error input:focus, .control-group.error select:focus, .contr=
+ol-group.error textarea:focus { border-color: rgb(149, 59, 57); box-shadow:=
+ rgb(213, 147, 146) 0px 0px 6px; }
+
+.control-group.error .input-prepend .add-on, .control-group.error .input-ap=
+pend .add-on { color: rgb(185, 74, 72); background-color: rgb(242, 222, 222=
+); border-color: rgb(185, 74, 72); }
+
+.control-group.success > label, .control-group.success .help-block, .contro=
+l-group.success .help-inline { color: rgb(70, 136, 71); }
+
+.control-group.success input, .control-group.success select, .control-group=
+.success textarea { color: rgb(70, 136, 71); border-color: rgb(70, 136, 71)=
+; }
+
+.control-group.success input:focus, .control-group.success select:focus, .c=
+ontrol-group.success textarea:focus { border-color: rgb(53, 102, 53); box-s=
+hadow: rgb(122, 186, 123) 0px 0px 6px; }
+
+.control-group.success .input-prepend .add-on, .control-group.success .inpu=
+t-append .add-on { color: rgb(70, 136, 71); background-color: rgb(223, 240,=
+ 216); border-color: rgb(70, 136, 71); }
+
+input:focus:required:invalid, textarea:focus:required:invalid, select:focus=
+:required:invalid { color: rgb(185, 74, 72); border-color: rgb(238, 95, 91)=
+; }
+
+input:focus:required:invalid:focus, textarea:focus:required:invalid:focus, =
+select:focus:required:invalid:focus { border-color: rgb(233, 50, 45); box-s=
+hadow: rgb(248, 185, 183) 0px 0px 6px; }
+
+.form-actions { padding: 17px 20px 18px; margin-top: 18px; margin-bottom: 1=
+8px; background-color: rgb(245, 245, 245); border-top: 1px solid rgb(221, 2=
+21, 221); }
+
+.uneditable-input { display: block; background-color: rgb(255, 255, 255); b=
+order-color: rgb(238, 238, 238); box-shadow: rgba(0, 0, 0, 0.0235294) 0px 1=
+px 2px inset; cursor: not-allowed; }
+
+::-webkit-input-placeholder { color: rgb(153, 153, 153); }
+
+.help-block { display: block; margin-top: 5px; margin-bottom: 0px; color: r=
+gb(153, 153, 153); }
+
+.help-inline { display: inline-block; margin-bottom: 9px; vertical-align: m=
+iddle; padding-left: 5px; }
+
+.input-prepend, .input-append { margin-bottom: 5px; }
+
+.input-prepend::before, .input-append::before, .input-prepend::after, .inpu=
+t-append::after { display: table; content: ""; }
+
+.input-prepend::after, .input-append::after { clear: both; }
+
+.input-prepend input, .input-append input, .input-prepend .uneditable-input=
+, .input-append .uneditable-input { border-radius: 0px 3px 3px 0px; }
+
+.input-prepend input:focus, .input-append input:focus, .input-prepend .uned=
+itable-input:focus, .input-append .uneditable-input:focus { position: relat=
+ive; z-index: 2; }
+
+.input-prepend .uneditable-input, .input-append .uneditable-input { border-=
+left-color: rgb(204, 204, 204); }
+
+.input-prepend .add-on, .input-append .add-on { float: left; display: block=
+; width: auto; min-width: 16px; height: 18px; margin-right: -1px; padding: =
+4px 5px; font-weight: normal; line-height: 18px; color: rgb(153, 153, 153);=
+ text-align: center; text-shadow: rgb(255, 255, 255) 0px 1px 0px; backgroun=
+d-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204); border-r=
+adius: 3px 0px 0px 3px; }
+
+.input-prepend .active, .input-append .active { background-color: rgb(169, =
+219, 169); border-color: rgb(70, 165, 70); }
+
+.input-prepend .add-on { }
+
+.input-append input, .input-append .uneditable-input { float: left; border-=
+radius: 3px 0px 0px 3px; }
+
+.input-append .uneditable-input { border-left-color: rgb(238, 238, 238); bo=
+rder-right-color: rgb(204, 204, 204); }
+
+.input-append .add-on { margin-right: 0px; margin-left: -1px; border-radius=
+: 0px 3px 3px 0px; }
+
+.input-append input:first-child { }
+
+.input-append input:first-child + .add-on { }
+
+.search-query { padding-left: 14px; padding-right: 14px; margin-bottom: 0px=
+; border-radius: 14px; }
+
+.form-search input, .form-inline input, .form-horizontal input, .form-searc=
+h textarea, .form-inline textarea, .form-horizontal textarea, .form-search =
+select, .form-inline select, .form-horizontal select, .form-search .help-in=
+line, .form-inline .help-inline, .form-horizontal .help-inline, .form-searc=
+h .uneditable-input, .form-inline .uneditable-input, .form-horizontal .uned=
+itable-input { display: inline-block; margin-bottom: 0px; }
+
+.form-search .hide, .form-inline .hide, .form-horizontal .hide { display: n=
+one; }
+
+.form-search label, .form-inline label, .form-search .input-append, .form-i=
+nline .input-append, .form-search .input-prepend, .form-inline .input-prepe=
+nd { display: inline-block; }
+
+.form-search .input-append .add-on, .form-inline .input-prepend .add-on, .f=
+orm-search .input-append .add-on, .form-inline .input-prepend .add-on { ver=
+tical-align: middle; }
+
+.form-search .radio, .form-inline .radio, .form-search .checkbox, .form-inl=
+ine .checkbox { margin-bottom: 0px; vertical-align: middle; }
+
+.control-group { margin-bottom: 9px; }
+
+legend + .control-group { margin-top: 18px; -webkit-margin-top-collapse: se=
+parate; }
+
+.form-horizontal .control-group { margin-bottom: 18px; }
+
+.form-horizontal .control-group::before, .form-horizontal .control-group::a=
+fter { display: table; content: ""; }
+
+.form-horizontal .control-group::after { clear: both; }
+
+.form-horizontal .control-label { float: left; width: 140px; padding-top: 5=
+px; text-align: right; }
+
+.form-horizontal .controls { margin-left: 160px; }
+
+.form-horizontal .form-actions { padding-left: 160px; }
+
+table { max-width: 100%; border-collapse: collapse; border-spacing: 0px; }
+
+.table { width: 100%; margin-bottom: 18px; }
+
+.table th, .table td { padding: 8px; line-height: 18px; text-align: left; v=
+ertical-align: top; border-top: 1px solid rgb(221, 221, 221); }
+
+.table th { font-weight: bold; }
+
+.table thead th { vertical-align: bottom; }
+
+.table thead:first-child tr th, .table thead:first-child tr td { border-top=
+: 0px; }
+
+.table tbody + tbody { border-top: 2px solid rgb(221, 221, 221); }
+
+.table-condensed th, .table-condensed td { padding: 4px 5px; }
+
+.table-bordered { border: 1px solid rgb(221, 221, 221); border-collapse: se=
+parate; border-radius: 4px; }
+
+.table-bordered th + th, .table-bordered td + td, .table-bordered th + td, =
+.table-bordered td + th { border-left: 1px solid rgb(221, 221, 221); }
+
+.table-bordered thead:first-child tr:first-child th, .table-bordered tbody:=
+first-child tr:first-child th, .table-bordered tbody:first-child tr:first-c=
+hild td { border-top: 0px; }
+
+.table-bordered thead:first-child tr:first-child th:first-child, .table-bor=
+dered tbody:first-child tr:first-child td:first-child { border-radius: 4px =
+0px 0px; }
+
+.table-bordered thead:first-child tr:first-child th:last-child, .table-bord=
+ered tbody:first-child tr:first-child td:last-child { border-radius: 0px 4p=
+x 0px 0px; }
+
+.table-bordered thead:last-child tr:last-child th:first-child, .table-borde=
+red tbody:last-child tr:last-child td:first-child { border-radius: 0px 0px =
+0px 4px; }
+
+.table-bordered thead:last-child tr:last-child th:last-child, .table-border=
+ed tbody:last-child tr:last-child td:last-child { border-radius: 0px 0px 4p=
+x; }
+
+.table-striped tbody tr:nth-child(2n+1) td, .table-striped tbody tr:nth-chi=
+ld(2n+1) th { background-color: rgb(249, 249, 249); }
+
+.table tbody tr:hover td, .table tbody tr:hover th { background-color: rgb(=
+245, 245, 245); }
+
+table .span1 { float: none; width: 44px; margin-left: 0px; }
+
+table .span2 { float: none; width: 124px; margin-left: 0px; }
+
+table .span3 { float: none; width: 204px; margin-left: 0px; }
+
+table .span4 { float: none; width: 284px; margin-left: 0px; }
+
+table .span5 { float: none; width: 364px; margin-left: 0px; }
+
+table .span6 { float: none; width: 444px; margin-left: 0px; }
+
+table .span7 { float: none; width: 524px; margin-left: 0px; }
+
+table .span8 { float: none; width: 604px; margin-left: 0px; }
+
+table .span9 { float: none; width: 684px; margin-left: 0px; }
+
+table .span10 { float: none; width: 764px; margin-left: 0px; }
+
+table .span11 { float: none; width: 844px; margin-left: 0px; }
+
+table .span12 { float: none; width: 924px; margin-left: 0px; }
+
+[class^=3D"icon-"], [class*=3D" icon-"] { display: inline-block; width: 14p=
+x; height: 14px; line-height: 14px; vertical-align: text-top; background-im=
+age: url("../img/glyphicons-halflings.png"); background-position: 14px 14px=
+; background-repeat: no-repeat; }
+
+[class^=3D"icon-"]:last-child, [class*=3D" icon-"]:last-child { }
+
+.icon-white { background-image: url("../img/glyphicons-halflings-white.png"=
+); }
+
+.icon-glass { background-position: 0px 0px; }
+
+.icon-music { background-position: -24px 0px; }
+
+.icon-search { background-position: -48px 0px; }
+
+.icon-envelope { background-position: -72px 0px; }
+
+.icon-heart { background-position: -96px 0px; }
+
+.icon-star { background-position: -120px 0px; }
+
+.icon-star-empty { background-position: -144px 0px; }
+
+.icon-user { background-position: -168px 0px; }
+
+.icon-film { background-position: -192px 0px; }
+
+.icon-th-large { background-position: -216px 0px; }
+
+.icon-th { background-position: -240px 0px; }
+
+.icon-th-list { background-position: -264px 0px; }
+
+.icon-ok { background-position: -288px 0px; }
+
+.icon-remove { background-position: -312px 0px; }
+
+.icon-zoom-in { background-position: -336px 0px; }
+
+.icon-zoom-out { background-position: -360px 0px; }
+
+.icon-off { background-position: -384px 0px; }
+
+.icon-signal { background-position: -408px 0px; }
+
+.icon-cog { background-position: -432px 0px; }
+
+.icon-trash { background-position: -456px 0px; }
+
+.icon-home { background-position: 0px -24px; }
+
+.icon-file { background-position: -24px -24px; }
+
+.icon-time { background-position: -48px -24px; }
+
+.icon-road { background-position: -72px -24px; }
+
+.icon-download-alt { background-position: -96px -24px; }
+
+.icon-download { background-position: -120px -24px; }
+
+.icon-upload { background-position: -144px -24px; }
+
+.icon-inbox { background-position: -168px -24px; }
+
+.icon-play-circle { background-position: -192px -24px; }
+
+.icon-repeat { background-position: -216px -24px; }
+
+.icon-refresh { background-position: -240px -24px; }
+
+.icon-list-alt { background-position: -264px -24px; }
+
+.icon-lock { background-position: -287px -24px; }
+
+.icon-flag { background-position: -312px -24px; }
+
+.icon-headphones { background-position: -336px -24px; }
+
+.icon-volume-off { background-position: -360px -24px; }
+
+.icon-volume-down { background-position: -384px -24px; }
+
+.icon-volume-up { background-position: -408px -24px; }
+
+.icon-qrcode { background-position: -432px -24px; }
+
+.icon-barcode { background-position: -456px -24px; }
+
+.icon-tag { background-position: 0px -48px; }
+
+.icon-tags { background-position: -25px -48px; }
+
+.icon-book { background-position: -48px -48px; }
+
+.icon-bookmark { background-position: -72px -48px; }
+
+.icon-print { background-position: -96px -48px; }
+
+.icon-camera { background-position: -120px -48px; }
+
+.icon-font { background-position: -144px -48px; }
+
+.icon-bold { background-position: -167px -48px; }
+
+.icon-italic { background-position: -192px -48px; }
+
+.icon-text-height { background-position: -216px -48px; }
+
+.icon-text-width { background-position: -240px -48px; }
+
+.icon-align-left { background-position: -264px -48px; }
+
+.icon-align-center { background-position: -288px -48px; }
+
+.icon-align-right { background-position: -312px -48px; }
+
+.icon-align-justify { background-position: -336px -48px; }
+
+.icon-list { background-position: -360px -48px; }
+
+.icon-indent-left { background-position: -384px -48px; }
+
+.icon-indent-right { background-position: -408px -48px; }
+
+.icon-facetime-video { background-position: -432px -48px; }
+
+.icon-picture { background-position: -456px -48px; }
+
+.icon-pencil { background-position: 0px -72px; }
+
+.icon-map-marker { background-position: -24px -72px; }
+
+.icon-adjust { background-position: -48px -72px; }
+
+.icon-tint { background-position: -72px -72px; }
+
+.icon-edit { background-position: -96px -72px; }
+
+.icon-share { background-position: -120px -72px; }
+
+.icon-check { background-position: -144px -72px; }
+
+.icon-move { background-position: -168px -72px; }
+
+.icon-step-backward { background-position: -192px -72px; }
+
+.icon-fast-backward { background-position: -216px -72px; }
+
+.icon-backward { background-position: -240px -72px; }
+
+.icon-play { background-position: -264px -72px; }
+
+.icon-pause { background-position: -288px -72px; }
+
+.icon-stop { background-position: -312px -72px; }
+
+.icon-forward { background-position: -336px -72px; }
+
+.icon-fast-forward { background-position: -360px -72px; }
+
+.icon-step-forward { background-position: -384px -72px; }
+
+.icon-eject { background-position: -408px -72px; }
+
+.icon-chevron-left { background-position: -432px -72px; }
+
+.icon-chevron-right { background-position: -456px -72px; }
+
+.icon-plus-sign { background-position: 0px -96px; }
+
+.icon-minus-sign { background-position: -24px -96px; }
+
+.icon-remove-sign { background-position: -48px -96px; }
+
+.icon-ok-sign { background-position: -72px -96px; }
+
+.icon-question-sign { background-position: -96px -96px; }
+
+.icon-info-sign { background-position: -120px -96px; }
+
+.icon-screenshot { background-position: -144px -96px; }
+
+.icon-remove-circle { background-position: -168px -96px; }
+
+.icon-ok-circle { background-position: -192px -96px; }
+
+.icon-ban-circle { background-position: -216px -96px; }
+
+.icon-arrow-left { background-position: -240px -96px; }
+
+.icon-arrow-right { background-position: -264px -96px; }
+
+.icon-arrow-up { background-position: -289px -96px; }
+
+.icon-arrow-down { background-position: -312px -96px; }
+
+.icon-share-alt { background-position: -336px -96px; }
+
+.icon-resize-full { background-position: -360px -96px; }
+
+.icon-resize-small { background-position: -384px -96px; }
+
+.icon-plus { background-position: -408px -96px; }
+
+.icon-minus { background-position: -433px -96px; }
+
+.icon-asterisk { background-position: -456px -96px; }
+
+.icon-exclamation-sign { background-position: 0px -120px; }
+
+.icon-gift { background-position: -24px -120px; }
+
+.icon-leaf { background-position: -48px -120px; }
+
+.icon-fire { background-position: -72px -120px; }
+
+.icon-eye-open { background-position: -96px -120px; }
+
+.icon-eye-close { background-position: -120px -120px; }
+
+.icon-warning-sign { background-position: -144px -120px; }
+
+.icon-plane { background-position: -168px -120px; }
+
+.icon-calendar { background-position: -192px -120px; }
+
+.icon-random { background-position: -216px -120px; }
+
+.icon-comment { background-position: -240px -120px; }
+
+.icon-magnet { background-position: -264px -120px; }
+
+.icon-chevron-up { background-position: -288px -120px; }
+
+.icon-chevron-down { background-position: -313px -119px; }
+
+.icon-retweet { background-position: -336px -120px; }
+
+.icon-shopping-cart { background-position: -360px -120px; }
+
+.icon-folder-close { background-position: -384px -120px; }
+
+.icon-folder-open { background-position: -408px -120px; }
+
+.icon-resize-vertical { background-position: -432px -119px; }
+
+.icon-resize-horizontal { background-position: -456px -118px; }
+
+.dropdown { position: relative; }
+
+.dropdown-toggle { }
+
+.dropdown-toggle:active, .open .dropdown-toggle { outline: 0px; }
+
+.caret { display: inline-block; width: 0px; height: 0px; text-indent: -9999=
+9px; vertical-align: top; border-left: 4px solid transparent; border-right:=
+ 4px solid transparent; border-top: 4px solid rgb(0, 0, 0); opacity: 0.3; c=
+ontent: "=E2=86=93"; }
+
+.dropdown .caret { margin-top: 8px; margin-left: 2px; }
+
+.dropdown:hover .caret, .open.dropdown .caret { opacity: 1; }
+
+.dropdown-menu { position: absolute; top: 100%; left: 0px; z-index: 1000; f=
+loat: left; display: none; min-width: 160px; padding: 4px 0px; margin: 0px;=
+ list-style: none; background-color: rgb(255, 255, 255); border-color: rgba=
+(0, 0, 0, 0.2); border-style: solid; border-width: 1px; border-radius: 0px =
+0px 5px 5px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px; -webkit-backgroun=
+d-clip: padding-box; background-clip: padding-box; }
+
+.dropdown-menu.bottom-up { top: auto; bottom: 100%; margin-bottom: 2px; }
+
+.dropdown-menu .divider { height: 1px; margin: 5px 1px; overflow: hidden; b=
+ackground-color: rgb(229, 229, 229); border-bottom: 1px solid rgb(255, 255,=
+ 255); }
+
+.dropdown-menu a { display: block; padding: 3px 15px; clear: both; font-wei=
+ght: normal; line-height: 18px; color: rgb(85, 85, 85); white-space: nowrap=
+; }
+
+.dropdown-menu li > a:hover, .dropdown-menu .active > a, .dropdown-menu .ac=
+tive > a:hover { color: rgb(255, 255, 255); text-decoration: none; backgrou=
+nd-color: rgb(0, 136, 204); }
+
+.dropdown.open { }
+
+.dropdown.open .dropdown-toggle { color: rgb(255, 255, 255); background: rg=
+ba(0, 0, 0, 0.298039); }
+
+.dropdown.open .dropdown-menu { display: block; }
+
+.typeahead { margin-top: 2px; border-radius: 4px; }
+
+.well { min-height: 20px; padding: 19px; margin-bottom: 20px; background-co=
+lor: rgb(245, 245, 245); border: 1px solid rgba(0, 0, 0, 0.0470588); border=
+-radius: 4px; box-shadow: rgba(0, 0, 0, 0.0470588) 0px 1px 1px inset; }
+
+.well blockquote { border-color: rgba(0, 0, 0, 0.14902); }
+
+.fade { transition: opacity 0.15s linear; opacity: 0; }
+
+.fade.in { opacity: 1; }
+
+.collapse { transition: height 0.35s ease; position: relative; overflow: hi=
+dden; height: 0px; }
+
+.collapse.in { height: auto; }
+
+.close { float: right; font-size: 20px; font-weight: bold; line-height: 18p=
+x; color: rgb(0, 0, 0); text-shadow: rgb(255, 255, 255) 0px 1px 0px; opacit=
+y: 0.2; }
+
+.close:hover { color: rgb(0, 0, 0); text-decoration: none; opacity: 0.4; cu=
+rsor: pointer; }
+
+.btn { display: inline-block; padding: 4px 10px; margin-bottom: 0px; font-s=
+ize: 13px; line-height: 18px; color: rgb(51, 51, 51); text-align: center; t=
+ext-shadow: rgba(255, 255, 255, 0.74902) 0px 1px 1px; vertical-align: middl=
+e; background-color: rgb(245, 245, 245); background-image: -webkit-linear-g=
+radient(top, rgb(255, 255, 255), rgb(230, 230, 230)); background-repeat: re=
+peat-x; border-width: 1px; border-style: solid; border-color: rgb(204, 204,=
+ 204) rgb(204, 204, 204) rgb(187, 187, 187); border-image: initial; border-=
+radius: 4px; box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px inset, rgba(0=
+, 0, 0, 0.0470588) 0px 1px 2px; cursor: pointer; }
+
+.btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled] { backg=
+round-color: rgb(230, 230, 230); }
+
+.btn:active, .btn.active { }
+
+.btn:first-child { }
+
+.btn:hover { color: rgb(51, 51, 51); text-decoration: none; background-colo=
+r: rgb(230, 230, 230); background-position: 0px -15px; transition: backgrou=
+nd-position 0.1s linear; }
+
+.btn:focus { outline: -webkit-focus-ring-color auto 5px; outline-offset: -2=
+px; }
+
+.btn.active, .btn:active { background-image: none; box-shadow: rgba(0, 0, 0=
+, 0.14902) 0px 2px 4px inset, rgba(0, 0, 0, 0.0470588) 0px 1px 2px; backgro=
+und-color: rgb(230, 230, 230); outline: 0px; }
+
+.btn.disabled, .btn[disabled] { cursor: default; background-image: none; ba=
+ckground-color: rgb(230, 230, 230); opacity: 0.65; box-shadow: none; }
+
+.btn-large { padding: 9px 14px; font-size: 15px; line-height: normal; borde=
+r-radius: 5px; }
+
+.btn-large [class^=3D"icon-"] { margin-top: 1px; }
+
+.btn-small { padding: 5px 9px; font-size: 11px; line-height: 16px; }
+
+.btn-small [class^=3D"icon-"] { margin-top: -1px; }
+
+.btn-mini { padding: 2px 6px; font-size: 11px; line-height: 14px; }
+
+.btn-primary, .btn-primary:hover, .btn-warning, .btn-warning:hover, .btn-da=
+nger, .btn-danger:hover, .btn-success, .btn-success:hover, .btn-info, .btn-=
+info:hover, .btn-inverse, .btn-inverse:hover { text-shadow: rgba(0, 0, 0, 0=
+.247059) 0px -1px 0px; color: rgb(255, 255, 255); }
+
+.btn-primary.active, .btn-warning.active, .btn-danger.active, .btn-success.=
+active, .btn-info.active, .btn-dark.active { color: rgba(255, 255, 255, 0.7=
+4902); }
+
+.btn-primary { background-color: rgb(0, 109, 204); background-image: -webki=
+t-linear-gradient(top, rgb(0, 136, 204), rgb(0, 68, 204)); background-repea=
+t: repeat-x; border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.0980392=
+) rgba(0, 0, 0, 0.247059); }
+
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.=
+disabled, .btn-primary[disabled] { background-color: rgb(0, 68, 204); }
+
+.btn-primary:active, .btn-primary.active { }
+
+.btn-warning { background-color: rgb(250, 167, 50); background-image: -webk=
+it-linear-gradient(top, rgb(251, 180, 80), rgb(248, 148, 6)); background-re=
+peat: repeat-x; border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.0980=
+392) rgba(0, 0, 0, 0.247059); }
+
+.btn-warning:hover, .btn-warning:active, .btn-warning.active, .btn-warning.=
+disabled, .btn-warning[disabled] { background-color: rgb(248, 148, 6); }
+
+.btn-warning:active, .btn-warning.active { }
+
+.btn-danger { background-color: rgb(218, 79, 73); background-image: -webkit=
+-linear-gradient(top, rgb(238, 95, 91), rgb(189, 54, 47)); background-repea=
+t: repeat-x; border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.0980392=
+) rgba(0, 0, 0, 0.247059); }
+
+.btn-danger:hover, .btn-danger:active, .btn-danger.active, .btn-danger.disa=
+bled, .btn-danger[disabled] { background-color: rgb(189, 54, 47); }
+
+.btn-danger:active, .btn-danger.active { }
+
+.btn-success { background-color: rgb(91, 183, 91); background-image: -webki=
+t-linear-gradient(top, rgb(98, 196, 98), rgb(81, 163, 81)); background-repe=
+at: repeat-x; border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.098039=
+2) rgba(0, 0, 0, 0.247059); }
+
+.btn-success:hover, .btn-success:active, .btn-success.active, .btn-success.=
+disabled, .btn-success[disabled] { background-color: rgb(81, 163, 81); }
+
+.btn-success:active, .btn-success.active { }
+
+.btn-info { background-color: rgb(73, 175, 205); background-image: -webkit-=
+linear-gradient(top, rgb(91, 192, 222), rgb(47, 150, 180)); background-repe=
+at: repeat-x; border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.098039=
+2) rgba(0, 0, 0, 0.247059); }
+
+.btn-info:hover, .btn-info:active, .btn-info.active, .btn-info.disabled, .b=
+tn-info[disabled] { background-color: rgb(47, 150, 180); }
+
+.btn-info:active, .btn-info.active { }
+
+.btn-inverse { background-color: rgb(57, 57, 57); background-image: -webkit=
+-linear-gradient(top, rgb(69, 69, 69), rgb(38, 38, 38)); background-repeat:=
+ repeat-x; border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.0980392) =
+rgba(0, 0, 0, 0.247059); }
+
+.btn-inverse:hover, .btn-inverse:active, .btn-inverse.active, .btn-inverse.=
+disabled, .btn-inverse[disabled] { background-color: rgb(38, 38, 38); }
+
+.btn-inverse:active, .btn-inverse.active { }
+
+button.btn, input[type=3D"submit"].btn { }
+
+button.btn.large, input[type=3D"submit"].btn.large { }
+
+button.btn.small, input[type=3D"submit"].btn.small { }
+
+.btn-group { position: relative; }
+
+.btn-group::before, .btn-group::after { display: table; content: ""; }
+
+.btn-group::after { clear: both; }
+
+.btn-group:first-child { }
+
+.btn-group + .btn-group { margin-left: 5px; }
+
+.btn-toolbar { margin-top: 9px; margin-bottom: 9px; }
+
+.btn-toolbar .btn-group { display: inline-block; }
+
+.btn-group .btn { position: relative; float: left; margin-left: -1px; borde=
+r-radius: 0px; }
+
+.btn-group .btn:first-child { margin-left: 0px; border-top-left-radius: 4px=
+; border-bottom-left-radius: 4px; }
+
+.btn-group .btn:last-child, .btn-group .dropdown-toggle { border-top-right-=
+radius: 4px; border-bottom-right-radius: 4px; }
+
+.btn-group .btn.large:first-child { margin-left: 0px; border-top-left-radiu=
+s: 6px; border-bottom-left-radius: 6px; }
+
+.btn-group .btn.large:last-child, .btn-group .large.dropdown-toggle { borde=
+r-top-right-radius: 6px; border-bottom-right-radius: 6px; }
+
+.btn-group .btn:hover, .btn-group .btn:focus, .btn-group .btn:active, .btn-=
+group .btn.active { z-index: 2; }
+
+.btn-group .dropdown-toggle:active, .btn-group.open .dropdown-toggle { outl=
+ine: 0px; }
+
+.btn-group .dropdown-toggle { padding-left: 8px; padding-right: 8px; box-sh=
+adow: rgba(255, 255, 255, 0.121569) 1px 0px 0px inset, rgba(255, 255, 255, =
+0.2) 0px 1px 0px inset, rgba(0, 0, 0, 0.0470588) 0px 1px 2px; }
+
+.btn-group.open { }
+
+.btn-group.open .dropdown-menu { display: block; margin-top: 1px; border-ra=
+dius: 5px; }
+
+.btn-group.open .dropdown-toggle { background-image: none; box-shadow: rgba=
+(0, 0, 0, 0.14902) 0px 1px 6px inset, rgba(0, 0, 0, 0.0470588) 0px 1px 2px;=
+ }
+
+.btn .caret { margin-top: 7px; margin-left: 0px; }
+
+.btn:hover .caret, .open.btn-group .caret { opacity: 1; }
+
+.btn-primary .caret, .btn-danger .caret, .btn-info .caret, .btn-success .ca=
+ret, .btn-inverse .caret { border-top-color: rgb(255, 255, 255); opacity: 0=
+.75; }
+
+.btn-small .caret { margin-top: 4px; }
+
+.alert { padding: 8px 35px 8px 14px; margin-bottom: 18px; text-shadow: rgba=
+(255, 255, 255, 0.498039) 0px 1px 0px; background-color: rgb(252, 248, 227)=
+; border: 1px solid rgb(251, 238, 213); border-radius: 4px; }
+
+.alert, .alert-heading { color: rgb(192, 152, 83); }
+
+.alert .close { position: relative; top: -2px; right: -21px; line-height: 1=
+8px; }
+
+.alert-success { background-color: rgb(223, 240, 216); border-color: rgb(21=
+4, 233, 198); }
+
+.alert-success, .alert-success .alert-heading { color: rgb(70, 136, 71); }
+
+.alert-danger, .alert-error { background-color: rgb(242, 222, 222); border-=
+color: rgb(238, 211, 215); }
+
+.alert-danger, .alert-error, .alert-danger .alert-heading, .alert-error .al=
+ert-heading { color: rgb(185, 74, 72); }
+
+.alert-info { background-color: rgb(217, 237, 247); border-color: rgb(188, =
+232, 241); }
+
+.alert-info, .alert-info .alert-heading { color: rgb(58, 135, 173); }
+
+.alert-block { padding-top: 14px; padding-bottom: 14px; }
+
+.alert-block > p, .alert-block > ul { margin-bottom: 0px; }
+
+.alert-block p + p { margin-top: 5px; }
+
+.nav { margin-left: 0px; margin-bottom: 18px; list-style: none; }
+
+.nav > li > a { display: block; }
+
+.nav > li > a:hover { text-decoration: none; background-color: rgb(238, 238=
+, 238); }
+
+.nav .nav-header { display: block; padding: 3px 15px; font-size: 11px; font=
+-weight: bold; line-height: 18px; color: rgb(153, 153, 153); text-shadow: r=
+gba(255, 255, 255, 0.498039) 0px 1px 0px; text-transform: uppercase; }
+
+.nav li + .nav-header { margin-top: 9px; }
+
+.nav-list { padding-left: 14px; padding-right: 14px; margin-bottom: 0px; }
+
+.nav-list > li > a, .nav-list .nav-header { margin-left: -15px; margin-righ=
+t: -15px; text-shadow: rgba(255, 255, 255, 0.498039) 0px 1px 0px; }
+
+.nav-list > li > a { padding: 3px 15px; }
+
+.nav-list .active > a, .nav-list .active > a:hover { color: rgb(255, 255, 2=
+55); text-shadow: rgba(0, 0, 0, 0.2) 0px -1px 0px; background-color: rgb(0,=
+ 136, 204); }
+
+.nav-list [class^=3D"icon-"] { margin-right: 2px; }
+
+.nav-tabs, .nav-pills { }
+
+.nav-tabs::before, .nav-pills::before, .nav-tabs::after, .nav-pills::after =
+{ display: table; content: ""; }
+
+.nav-tabs::after, .nav-pills::after { clear: both; }
+
+.nav-tabs > li, .nav-pills > li { float: left; }
+
+.nav-tabs > li > a, .nav-pills > li > a { padding-right: 12px; padding-left=
+: 12px; margin-right: 2px; line-height: 14px; }
+
+.nav-tabs { border-bottom: 1px solid rgb(221, 221, 221); }
+
+.nav-tabs > li { margin-bottom: -1px; }
+
+.nav-tabs > li > a { padding-top: 9px; padding-bottom: 9px; border: 1px sol=
+id transparent; border-radius: 4px 4px 0px 0px; }
+
+.nav-tabs > li > a:hover { border-color: rgb(238, 238, 238) rgb(238, 238, 2=
+38) rgb(221, 221, 221); }
+
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover { color: rgb(85, 85,=
+ 85); background-color: rgb(255, 255, 255); border-width: 1px; border-style=
+: solid; border-color: rgb(221, 221, 221) rgb(221, 221, 221) transparent; b=
+order-image: initial; cursor: default; }
+
+.nav-pills > li > a { padding-top: 8px; padding-bottom: 8px; margin-top: 2p=
+x; margin-bottom: 2px; border-radius: 5px; }
+
+.nav-pills .active > a, .nav-pills .active > a:hover { color: rgb(255, 255,=
+ 255); background-color: rgb(0, 136, 204); }
+
+.nav-stacked > li { float: none; }
+
+.nav-stacked > li > a { margin-right: 0px; }
+
+.nav-tabs.nav-stacked { border-bottom: 0px; }
+
+.nav-tabs.nav-stacked > li > a { border: 1px solid rgb(221, 221, 221); bord=
+er-radius: 0px; }
+
+.nav-tabs.nav-stacked > li:first-child > a { border-radius: 4px 4px 0px 0px=
+; }
+
+.nav-tabs.nav-stacked > li:last-child > a { border-radius: 0px 0px 4px 4px;=
+ }
+
+.nav-tabs.nav-stacked > li > a:hover { border-color: rgb(221, 221, 221); z-=
+index: 2; }
+
+.nav-pills.nav-stacked > li > a { margin-bottom: 3px; }
+
+.nav-pills.nav-stacked > li:last-child > a { margin-bottom: 1px; }
+
+.nav-tabs .dropdown-menu, .nav-pills .dropdown-menu { margin-top: 1px; bord=
+er-width: 1px; }
+
+.nav-pills .dropdown-menu { border-radius: 4px; }
+
+.nav-tabs .dropdown-toggle .caret, .nav-pills .dropdown-toggle .caret { bor=
+der-top-color: rgb(0, 136, 204); margin-top: 6px; }
+
+.nav-tabs .dropdown-toggle:hover .caret, .nav-pills .dropdown-toggle:hover =
+.caret { border-top-color: rgb(0, 85, 128); }
+
+.nav-tabs .active .dropdown-toggle .caret, .nav-pills .active .dropdown-tog=
+gle .caret { border-top-color: rgb(51, 51, 51); }
+
+.nav > .dropdown.active > a:hover { color: rgb(0, 0, 0); cursor: pointer; }
+
+.nav-tabs .open .dropdown-toggle, .nav-pills .open .dropdown-toggle, .nav >=
+ .open.active > a:hover { color: rgb(255, 255, 255); background-color: rgb(=
+153, 153, 153); border-color: rgb(153, 153, 153); }
+
+.nav .open .caret, .nav .open.active .caret, .nav .open a:hover .caret { bo=
+rder-top-color: rgb(255, 255, 255); opacity: 1; }
+
+.tabs-stacked .open > a:hover { border-color: rgb(153, 153, 153); }
+
+.tabbable { }
+
+.tabbable::before, .tabbable::after { display: table; content: ""; }
+
+.tabbable::after { clear: both; }
+
+.tab-content { overflow: hidden; }
+
+.tabs-below .nav-tabs, .tabs-right .nav-tabs, .tabs-left .nav-tabs { border=
+-bottom: 0px; }
+
+.tab-content > .tab-pane, .pill-content > .pill-pane { display: none; }
+
+.tab-content > .active, .pill-content > .active { display: block; }
+
+.tabs-below .nav-tabs { border-top: 1px solid rgb(221, 221, 221); }
+
+.tabs-below .nav-tabs > li { margin-top: -1px; margin-bottom: 0px; }
+
+.tabs-below .nav-tabs > li > a { border-radius: 0px 0px 4px 4px; }
+
+.tabs-below .nav-tabs > li > a:hover { border-bottom-color: transparent; bo=
+rder-top-color: rgb(221, 221, 221); }
+
+.tabs-below .nav-tabs .active > a, .tabs-below .nav-tabs .active > a:hover =
+{ border-color: transparent rgb(221, 221, 221) rgb(221, 221, 221); }
+
+.tabs-left .nav-tabs > li, .tabs-right .nav-tabs > li { float: none; }
+
+.tabs-left .nav-tabs > li > a, .tabs-right .nav-tabs > li > a { min-width: =
+74px; margin-right: 0px; margin-bottom: 3px; }
+
+.tabs-left .nav-tabs { float: left; margin-right: 19px; border-right: 1px s=
+olid rgb(221, 221, 221); }
+
+.tabs-left .nav-tabs > li > a { margin-right: -1px; border-radius: 4px 0px =
+0px 4px; }
+
+.tabs-left .nav-tabs > li > a:hover { border-color: rgb(238, 238, 238) rgb(=
+221, 221, 221) rgb(238, 238, 238) rgb(238, 238, 238); }
+
+.tabs-left .nav-tabs .active > a, .tabs-left .nav-tabs .active > a:hover { =
+border-color: rgb(221, 221, 221) transparent rgb(221, 221, 221) rgb(221, 22=
+1, 221); }
+
+.tabs-right .nav-tabs { float: right; margin-left: 19px; border-left: 1px s=
+olid rgb(221, 221, 221); }
+
+.tabs-right .nav-tabs > li > a { margin-left: -1px; border-radius: 0px 4px =
+4px 0px; }
+
+.tabs-right .nav-tabs > li > a:hover { border-color: rgb(238, 238, 238) rgb=
+(238, 238, 238) rgb(238, 238, 238) rgb(221, 221, 221); }
+
+.tabs-right .nav-tabs .active > a, .tabs-right .nav-tabs .active > a:hover =
+{ border-color: rgb(221, 221, 221) rgb(221, 221, 221) rgb(221, 221, 221) tr=
+ansparent; }
+
+.navbar { overflow: visible; margin-bottom: 18px; }
+
+.navbar-inner { padding-left: 20px; padding-right: 20px; background-color: =
+rgb(44, 44, 44); background-image: -webkit-linear-gradient(top, rgb(51, 51,=
+ 51), rgb(34, 34, 34)); background-repeat: repeat-x; border-radius: 4px; bo=
+x-shadow: rgba(0, 0, 0, 0.247059) 0px 1px 3px, rgba(0, 0, 0, 0.0980392) 0px=
+ -1px 0px inset; }
+
+.btn-navbar { display: none; float: right; padding: 7px 10px; margin-left: =
+5px; margin-right: 5px; background-color: rgb(44, 44, 44); background-image=
+: -webkit-linear-gradient(top, rgb(51, 51, 51), rgb(34, 34, 34)); backgroun=
+d-repeat: repeat-x; border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.=
+0980392) rgba(0, 0, 0, 0.247059); box-shadow: rgba(255, 255, 255, 0.0980392=
+) 0px 1px 0px inset, rgba(255, 255, 255, 0.0745098) 0px 1px 0px; }
+
+.btn-navbar:hover, .btn-navbar:active, .btn-navbar.active, .btn-navbar.disa=
+bled, .btn-navbar[disabled] { background-color: rgb(34, 34, 34); }
+
+.btn-navbar:active, .btn-navbar.active { }
+
+.btn-navbar .icon-bar { display: block; width: 18px; height: 2px; backgroun=
+d-color: rgb(245, 245, 245); border-radius: 1px; box-shadow: rgba(0, 0, 0, =
+0.247059) 0px 1px 0px; }
+
+.btn-navbar .icon-bar + .icon-bar { margin-top: 3px; }
+
+.nav-collapse.collapse { height: auto; }
+
+.navbar .brand:hover { text-decoration: none; }
+
+.navbar .brand { float: left; display: block; padding: 8px 20px 12px; margi=
+n-left: -20px; font-size: 20px; font-weight: 200; line-height: 1; color: rg=
+b(255, 255, 255); }
+
+.navbar .navbar-text { margin-bottom: 0px; line-height: 40px; color: rgb(15=
+3, 153, 153); }
+
+.navbar .navbar-text a:hover { color: rgb(255, 255, 255); background-color:=
+ transparent; }
+
+.navbar .btn, .navbar .btn-group { margin-top: 5px; }
+
+.navbar .btn-group .btn { margin-top: 0px; }
+
+.navbar-form { margin-bottom: 0px; }
+
+.navbar-form::before, .navbar-form::after { display: table; content: ""; }
+
+.navbar-form::after { clear: both; }
+
+.navbar-form input, .navbar-form select { display: inline-block; margin-top=
+: 5px; margin-bottom: 0px; }
+
+.navbar-form .radio, .navbar-form .checkbox { margin-top: 5px; }
+
+.navbar-form input[type=3D"image"], .navbar-form input[type=3D"checkbox"], =
+.navbar-form input[type=3D"radio"] { margin-top: 3px; }
+
+.navbar-form .input-append, .navbar-form .input-prepend { margin-top: 6px; =
+white-space: nowrap; }
+
+.navbar-form .input-append input, .navbar-form .input-prepend input { margi=
+n-top: 0px; }
+
+.navbar-search { position: relative; float: left; margin-top: 6px; margin-b=
+ottom: 0px; }
+
+.navbar-search .search-query { padding: 4px 9px; font-family: "Helvetica Ne=
+ue", Helvetica, Arial, sans-serif; font-size: 13px; font-weight: normal; li=
+ne-height: 1; color: rgba(255, 255, 255, 0.74902); background: rgba(255, 25=
+5, 255, 0.298039); border: 1px solid rgb(17, 17, 17); box-shadow: rgba(0, 0=
+, 0, 0.0980392) 0px 1px 2px inset, rgba(255, 255, 255, 0.14902) 0px 1px 0px=
+; transition: none; }
+
+.navbar-search .search-query::-webkit-input-placeholder { color: rgb(238, 2=
+38, 238); }
+
+.navbar-search .search-query:hover { color: rgb(255, 255, 255); background-=
+color: rgba(255, 255, 255, 0.498039); }
+
+.navbar-search .search-query:focus, .navbar-search .search-query.focused { =
+padding: 5px 10px; color: rgb(51, 51, 51); text-shadow: rgb(255, 255, 255) =
+0px 1px 0px; background-color: rgb(255, 255, 255); border: 0px; box-shadow:=
+ rgba(0, 0, 0, 0.14902) 0px 0px 3px; outline: 0px; }
+
+.navbar-fixed-top { position: fixed; top: 0px; right: 0px; left: 0px; z-ind=
+ex: 1030; }
+
+.navbar-fixed-top .navbar-inner { padding-left: 0px; padding-right: 0px; bo=
+rder-radius: 0px; }
+
+.navbar .nav { position: relative; left: 0px; display: block; float: left; =
+margin: 0px 10px 0px 0px; }
+
+.navbar .nav.pull-right { float: right; }
+
+.navbar .nav > li { display: block; float: left; }
+
+.navbar .nav > li > a { float: none; padding: 10px 10px 11px; line-height: =
+19px; color: rgb(153, 153, 153); text-decoration: none; text-shadow: rgba(0=
+, 0, 0, 0.247059) 0px -1px 0px; }
+
+.navbar .nav > li > a:hover { background-color: transparent; color: rgb(255=
+, 255, 255); text-decoration: none; }
+
+.navbar .nav .active > a, .navbar .nav .active > a:hover { color: rgb(255, =
+255, 255); text-decoration: none; background-color: rgb(34, 34, 34); }
+
+.navbar .divider-vertical { height: 40px; width: 1px; margin: 0px 9px; over=
+flow: hidden; background-color: rgb(34, 34, 34); border-right: 1px solid rg=
+b(51, 51, 51); }
+
+.navbar .nav.pull-right { margin-left: 10px; margin-right: 0px; }
+
+.navbar .dropdown-menu { margin-top: 1px; border-radius: 4px; }
+
+.navbar .dropdown-menu::before { content: ""; display: inline-block; border=
+-left: 7px solid transparent; border-right: 7px solid transparent; border-b=
+ottom: 7px solid rgba(0, 0, 0, 0.2); position: absolute; top: -7px; left: 9=
+px; }
+
+.navbar .dropdown-menu::after { content: ""; display: inline-block; border-=
+left: 6px solid transparent; border-right: 6px solid transparent; border-bo=
+ttom: 6px solid rgb(255, 255, 255); position: absolute; top: -6px; left: 10=
+px; }
+
+.navbar .nav .dropdown-toggle .caret, .navbar .nav .open.dropdown .caret { =
+border-top-color: rgb(255, 255, 255); }
+
+.navbar .nav .active .caret { opacity: 1; }
+
+.navbar .nav .open > .dropdown-toggle, .navbar .nav .active > .dropdown-tog=
+gle, .navbar .nav .open.active > .dropdown-toggle { background-color: trans=
+parent; }
+
+.navbar .nav .active > .dropdown-toggle:hover { color: rgb(255, 255, 255); =
+}
+
+.navbar .nav.pull-right .dropdown-menu { left: auto; right: 0px; }
+
+.navbar .nav.pull-right .dropdown-menu::before { left: auto; right: 12px; }
+
+.navbar .nav.pull-right .dropdown-menu::after { left: auto; right: 13px; }
+
+.breadcrumb { padding: 7px 14px; margin: 0px 0px 18px; background-color: rg=
+b(251, 251, 251); background-image: -webkit-linear-gradient(top, rgb(255, 2=
+55, 255), rgb(245, 245, 245)); background-repeat: repeat-x; border: 1px sol=
+id rgb(221, 221, 221); border-radius: 3px; box-shadow: rgb(255, 255, 255) 0=
+px 1px 0px inset; }
+
+.breadcrumb li { display: inline-block; text-shadow: rgb(255, 255, 255) 0px=
+ 1px 0px; }
+
+.breadcrumb .divider { padding: 0px 5px; color: rgb(153, 153, 153); }
+
+.breadcrumb .active a { color: rgb(51, 51, 51); }
+
+.pagination { height: 36px; margin: 18px 0px; }
+
+.pagination ul { display: inline-block; margin-left: 0px; margin-bottom: 0p=
+x; border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.0470588) 0px 1px 2px; }
+
+.pagination li { display: inline; }
+
+.pagination a { float: left; padding: 0px 14px; line-height: 34px; text-dec=
+oration: none; border-width: 1px 1px 1px 0px; border-style: solid; border-c=
+olor: rgb(221, 221, 221); border-image: initial; }
+
+.pagination a:hover, .pagination .active a { background-color: rgb(245, 245=
+, 245); }
+
+.pagination .active a { color: rgb(153, 153, 153); cursor: default; }
+
+.pagination .disabled a, .pagination .disabled a:hover { color: rgb(153, 15=
+3, 153); background-color: transparent; cursor: default; }
+
+.pagination li:first-child a { border-left-width: 1px; border-radius: 3px 0=
+px 0px 3px; }
+
+.pagination li:last-child a { border-radius: 0px 3px 3px 0px; }
+
+.pagination-centered { text-align: center; }
+
+.pagination-right { text-align: right; }
+
+.pager { margin-left: 0px; margin-bottom: 18px; list-style: none; text-alig=
+n: center; }
+
+.pager::before, .pager::after { display: table; content: ""; }
+
+.pager::after { clear: both; }
+
+.pager li { display: inline; }
+
+.pager a { display: inline-block; padding: 5px 14px; background-color: rgb(=
+255, 255, 255); border: 1px solid rgb(221, 221, 221); border-radius: 15px; =
+}
+
+.pager a:hover { text-decoration: none; background-color: rgb(245, 245, 245=
+); }
+
+.pager .next a { float: right; }
+
+.pager .previous a { float: left; }
+
+.modal-open .dropdown-menu { z-index: 2050; }
+
+.modal-open .dropdown.open { }
+
+.modal-open .popover { z-index: 2060; }
+
+.modal-open .tooltip { z-index: 2070; }
+
+.modal-backdrop { position: fixed; top: 0px; right: 0px; bottom: 0px; left:=
+ 0px; z-index: 1040; background-color: rgb(0, 0, 0); }
+
+.modal-backdrop.fade { opacity: 0; }
+
+.modal-backdrop, .modal-backdrop.fade.in { opacity: 0.8; }
+
+.modal { position: fixed; top: 50%; left: 50%; z-index: 1050; max-height: 5=
+00px; overflow: auto; width: 560px; margin: -250px 0px 0px -280px; backgrou=
+nd-color: rgb(255, 255, 255); border: 1px solid rgba(0, 0, 0, 0.298039); bo=
+rder-radius: 6px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 3px 7px; -webkit-=
+background-clip: padding-box; background-clip: padding-box; }
+
+.modal.fade { transition: opacity 0.3s linear, top 0.3s ease-out; top: -25%=
+; }
+
+.modal.fade.in { top: 50%; }
+
+.modal-header { padding: 9px 15px; border-bottom: 1px solid rgb(238, 238, 2=
+38); }
+
+.modal-header .close { margin-top: 2px; }
+
+.modal-body { padding: 15px; }
+
+.modal-body .modal-form { margin-bottom: 0px; }
+
+.modal-footer { padding: 14px 15px 15px; margin-bottom: 0px; background-col=
+or: rgb(245, 245, 245); border-top: 1px solid rgb(221, 221, 221); border-ra=
+dius: 0px 0px 6px 6px; box-shadow: rgb(255, 255, 255) 0px 1px 0px inset; }
+
+.modal-footer::before, .modal-footer::after { display: table; content: ""; =
+}
+
+.modal-footer::after { clear: both; }
+
+.modal-footer .btn { float: right; margin-left: 5px; margin-bottom: 0px; }
+
+.tooltip { position: absolute; z-index: 1020; display: block; visibility: v=
+isible; padding: 5px; font-size: 11px; opacity: 0; }
+
+.tooltip.in { opacity: 0.8; }
+
+.tooltip.top { margin-top: -2px; }
+
+.tooltip.right { margin-left: 2px; }
+
+.tooltip.bottom { margin-top: 2px; }
+
+.tooltip.left { margin-left: -2px; }
+
+.tooltip.top .tooltip-arrow { bottom: 0px; left: 50%; margin-left: -5px; bo=
+rder-left: 5px solid transparent; border-right: 5px solid transparent; bord=
+er-top: 5px solid rgb(0, 0, 0); }
+
+.tooltip.left .tooltip-arrow { top: 50%; right: 0px; margin-top: -5px; bord=
+er-top: 5px solid transparent; border-bottom: 5px solid transparent; border=
+-left: 5px solid rgb(0, 0, 0); }
+
+.tooltip.bottom .tooltip-arrow { top: 0px; left: 50%; margin-left: -5px; bo=
+rder-left: 5px solid transparent; border-right: 5px solid transparent; bord=
+er-bottom: 5px solid rgb(0, 0, 0); }
+
+.tooltip.right .tooltip-arrow { top: 50%; left: 0px; margin-top: -5px; bord=
+er-top: 5px solid transparent; border-bottom: 5px solid transparent; border=
+-right: 5px solid rgb(0, 0, 0); }
+
+.tooltip-inner { max-width: 200px; padding: 3px 8px; color: rgb(255, 255, 2=
+55); text-align: center; text-decoration: none; background-color: rgb(0, 0,=
+ 0); border-radius: 4px; }
+
+.tooltip-arrow { position: absolute; width: 0px; height: 0px; }
+
+.popover { position: absolute; top: 0px; left: 0px; z-index: 1010; display:=
+ none; padding: 5px; }
+
+.popover.top { margin-top: -5px; }
+
+.popover.right { margin-left: 5px; }
+
+.popover.bottom { margin-top: 5px; }
+
+.popover.left { margin-left: -5px; }
+
+.popover.top .arrow { bottom: 0px; left: 50%; margin-left: -5px; border-lef=
+t: 5px solid transparent; border-right: 5px solid transparent; border-top: =
+5px solid rgb(0, 0, 0); }
+
+.popover.right .arrow { top: 50%; left: 0px; margin-top: -5px; border-top: =
+5px solid transparent; border-bottom: 5px solid transparent; border-right: =
+5px solid rgb(0, 0, 0); }
+
+.popover.bottom .arrow { top: 0px; left: 50%; margin-left: -5px; border-lef=
+t: 5px solid transparent; border-right: 5px solid transparent; border-botto=
+m: 5px solid rgb(0, 0, 0); }
+
+.popover.left .arrow { top: 50%; right: 0px; margin-top: -5px; border-top: =
+5px solid transparent; border-bottom: 5px solid transparent; border-left: 5=
+px solid rgb(0, 0, 0); }
+
+.popover .arrow { position: absolute; width: 0px; height: 0px; }
+
+.popover-inner { padding: 3px; width: 280px; overflow: hidden; background: =
+rgba(0, 0, 0, 0.8); border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.298039)=
+ 0px 3px 7px; }
+
+.popover-title { padding: 9px 15px; line-height: 1; background-color: rgb(2=
+45, 245, 245); border-bottom: 1px solid rgb(238, 238, 238); border-radius: =
+3px 3px 0px 0px; }
+
+.popover-content { padding: 14px; background-color: rgb(255, 255, 255); bor=
+der-radius: 0px 0px 3px 3px; -webkit-background-clip: padding-box; backgrou=
+nd-clip: padding-box; }
+
+.popover-content p, .popover-content ul, .popover-content ol { margin-botto=
+m: 0px; }
+
+.thumbnails { margin-left: -20px; list-style: none; }
+
+.thumbnails::before, .thumbnails::after { display: table; content: ""; }
+
+.thumbnails::after { clear: both; }
+
+.thumbnails > li { float: left; margin: 0px 0px 18px 20px; }
+
+.thumbnail { display: block; padding: 4px; line-height: 1; border: 1px soli=
+d rgb(221, 221, 221); border-radius: 4px; box-shadow: rgba(0, 0, 0, 0.07450=
+98) 0px 1px 1px; }
+
+a.thumbnail:hover { border-color: rgb(0, 136, 204); box-shadow: rgba(0, 105=
+, 214, 0.247059) 0px 1px 4px; }
+
+.thumbnail > img { display: block; max-width: 100%; margin-left: auto; marg=
+in-right: auto; }
+
+.thumbnail .caption { padding: 9px; }
+
+.label { padding: 2px 4px 3px; font-size: 11.05px; font-weight: bold; color=
+: rgb(255, 255, 255); text-shadow: rgba(0, 0, 0, 0.247059) 0px -1px 0px; ba=
+ckground-color: rgb(153, 153, 153); border-radius: 3px; }
+
+.label:hover { color: rgb(255, 255, 255); text-decoration: none; }
+
+.label-important { background-color: rgb(185, 74, 72); }
+
+.label-important:hover { background-color: rgb(149, 59, 57); }
+
+.label-warning { background-color: rgb(248, 148, 6); }
+
+.label-warning:hover { background-color: rgb(198, 118, 5); }
+
+.label-success { background-color: rgb(70, 136, 71); }
+
+.label-success:hover { background-color: rgb(53, 102, 53); }
+
+.label-info { background-color: rgb(58, 135, 173); }
+
+.label-info:hover { background-color: rgb(45, 105, 135); }
+
+@-webkit-keyframes progress-bar-stripes {=20
+  0% { background-position: 0px 0px; }
+  100% { background-position: 40px 0px; }
+}
+
+@keyframes progress-bar-stripes {=20
+  0% { background-position: 0px 0px; }
+  100% { background-position: 40px 0px; }
+}
+
+.progress { overflow: hidden; height: 18px; margin-bottom: 18px; background=
+-color: rgb(247, 247, 247); background-image: -webkit-linear-gradient(top, =
+rgb(245, 245, 245), rgb(249, 249, 249)); background-repeat: repeat-x; box-s=
+hadow: rgba(0, 0, 0, 0.0980392) 0px 1px 2px inset; border-radius: 4px; }
+
+.progress .bar { width: 0%; height: 18px; color: rgb(255, 255, 255); font-s=
+ize: 12px; text-align: center; text-shadow: rgba(0, 0, 0, 0.247059) 0px -1p=
+x 0px; background-color: rgb(14, 144, 210); background-image: -webkit-linea=
+r-gradient(top, rgb(20, 155, 223), rgb(4, 128, 190)); background-repeat: re=
+peat-x; box-shadow: rgba(0, 0, 0, 0.14902) 0px -1px 0px inset; box-sizing: =
+border-box; transition: width 0.6s ease; }
+
+.progress-striped .bar { background-color: rgb(98, 196, 98); background-ima=
+ge: linear-gradient(-45deg, rgba(255, 255, 255, 0.14902) 25%, transparent 2=
+5%, transparent 50%, rgba(255, 255, 255, 0.14902) 50%, rgba(255, 255, 255, =
+0.14902) 75%, transparent 75%, transparent); background-size: 40px 40px; }
+
+.progress.active .bar { animation: progress-bar-stripes 2s linear infinite;=
+ }
+
+.progress-danger .bar { background-color: rgb(221, 81, 76); background-imag=
+e: -webkit-linear-gradient(top, rgb(238, 95, 91), rgb(196, 60, 53)); backgr=
+ound-repeat: repeat-x; }
+
+.progress-danger.progress-striped .bar { background-color: rgb(238, 95, 91)=
+; background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.14902) 25=
+%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.14902) 50%, rgba=
+(255, 255, 255, 0.14902) 75%, transparent 75%, transparent); }
+
+.progress-success .bar { background-color: rgb(94, 185, 94); background-ima=
+ge: -webkit-linear-gradient(top, rgb(98, 196, 98), rgb(87, 169, 87)); backg=
+round-repeat: repeat-x; }
+
+.progress-success.progress-striped .bar { background-color: rgb(98, 196, 98=
+); background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.14902) 2=
+5%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.14902) 50%, rgb=
+a(255, 255, 255, 0.14902) 75%, transparent 75%, transparent); }
+
+.progress-info .bar { background-color: rgb(75, 177, 207); background-image=
+: -webkit-linear-gradient(top, rgb(91, 192, 222), rgb(51, 155, 185)); backg=
+round-repeat: repeat-x; }
+
+.progress-info.progress-striped .bar { background-color: rgb(91, 192, 222);=
+ background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.14902) 25%=
+, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.14902) 50%, rgba(=
+255, 255, 255, 0.14902) 75%, transparent 75%, transparent); }
+
+.accordion { margin-bottom: 18px; }
+
+.accordion-group { margin-bottom: 2px; border: 1px solid rgb(229, 229, 229)=
+; border-radius: 4px; }
+
+.accordion-heading { border-bottom: 0px; }
+
+.accordion-heading .accordion-toggle { display: block; padding: 8px 15px; }
+
+.accordion-inner { padding: 9px 15px; border-top: 1px solid rgb(229, 229, 2=
+29); }
+
+.carousel { position: relative; margin-bottom: 18px; line-height: 1; }
+
+.carousel-inner { overflow: hidden; width: 100%; position: relative; }
+
+.carousel .item { display: none; position: relative; transition: left 0.6s =
+ease-in-out; }
+
+.carousel .item > img { display: block; line-height: 1; }
+
+.carousel .active, .carousel .next, .carousel .prev { display: block; }
+
+.carousel .active { left: 0px; }
+
+.carousel .next, .carousel .prev { position: absolute; top: 0px; width: 100=
+%; }
+
+.carousel .next { left: 100%; }
+
+.carousel .prev { left: -100%; }
+
+.carousel .next.left, .carousel .prev.right { left: 0px; }
+
+.carousel .active.left { left: -100%; }
+
+.carousel .active.right { left: 100%; }
+
+.carousel-control { position: absolute; top: 40%; left: 15px; width: 40px; =
+height: 40px; margin-top: -20px; font-size: 60px; font-weight: 100; line-he=
+ight: 30px; color: rgb(255, 255, 255); text-align: center; background: rgb(=
+34, 34, 34); border: 3px solid rgb(255, 255, 255); border-radius: 23px; opa=
+city: 0.5; }
+
+.carousel-control.right { left: auto; right: 15px; }
+
+.carousel-control:hover { color: rgb(255, 255, 255); text-decoration: none;=
+ opacity: 0.9; }
+
+.carousel-caption { position: absolute; left: 0px; right: 0px; bottom: 0px;=
+ padding: 10px 15px 5px; background: rgba(0, 0, 0, 0.74902); }
+
+.carousel-caption h4, .carousel-caption p { color: rgb(255, 255, 255); }
+
+.hero-unit { padding: 20px; margin-top: 10px; margin-bottom: 30px; backgrou=
+nd-color: rgb(245, 245, 245); border-radius: 6px; }
+
+.hero-unit h1 { margin-bottom: 0px; font-size: 50px; line-height: 1; letter=
+-spacing: -1px; }
+
+.hero-unit p { font-size: 18px; font-weight: 200; line-height: 27px; }
+
+.pull-right { float: right; }
+
+.pull-left { float: left; }
+
+.hide { display: none; }
+
+.show { display: block; }
+
+.invisible { visibility: hidden; }
+------MultipartBoundary--TJ96w9fUA7yjllh1YuJK8WyLDucvOglwcwQdigSjPm----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://aosabook.org/en/500L/theme/css/bootstrap-responsive.css
+
+@charset "utf-8";
+
+.clearfix { }
+
+.clearfix::before, .clearfix::after { display: table; content: ""; }
+
+.clearfix::after { clear: both; }
+
+.hidden { display: none; visibility: hidden; }
+
+@media (max-width: 480px) {=20
+  .nav-collapse { transform: translate3d(0px, 0px, 0px); }
+  .page-header h1 small { display: block; line-height: 18px; }
+  input[class*=3D"span"], select[class*=3D"span"], textarea[class*=3D"span"=
+], .uneditable-input { display: block; width: 100%; min-height: 28px; box-s=
+izing: border-box; }
+  .input-prepend input[class*=3D"span"], .input-append input[class*=3D"span=
+"] { width: auto; }
+  input[type=3D"checkbox"], input[type=3D"radio"] { border: 1px solid rgb(2=
+04, 204, 204); }
+  .form-horizontal .control-group > label { float: none; width: auto; paddi=
+ng-top: 0px; text-align: left; }
+  .form-horizontal .controls { margin-left: 0px; }
+  .form-horizontal .control-list { padding-top: 0px; }
+  .form-horizontal .form-actions { padding-left: 10px; padding-right: 10px;=
+ }
+  .modal { position: absolute; top: 10px; left: 10px; right: 10px; width: a=
+uto; margin: 0px; }
+  .modal.fade.in { top: auto; }
+  .modal-header .close { padding: 10px; margin: -10px; }
+  .carousel-caption { position: static; }
+}
+
+@media (max-width: 767px) {=20
+  .container { width: auto; padding: 0px 20px; }
+  .row-fluid { width: 100%; }
+  .row { margin-left: 0px; }
+  .row > [class*=3D"span"], .row-fluid > [class*=3D"span"] { float: none; d=
+isplay: block; width: auto; margin: 0px; }
+}
+
+@media (max-width: 979px) and (min-width: 768px) {=20
+  .row { margin-left: -20px; }
+  .row::before, .row::after { display: table; content: ""; }
+  .row::after { clear: both; }
+  [class*=3D"span"] { float: left; margin-left: 20px; }
+  .span1 { width: 42px; }
+  .span2 { width: 104px; }
+  .span3 { width: 166px; }
+  .span4 { width: 228px; }
+  .span5 { width: 290px; }
+  .span6 { width: 352px; }
+  .span7 { width: 414px; }
+  .span8 { width: 476px; }
+  .span9 { width: 538px; }
+  .span10 { width: 600px; }
+  .span11 { width: 662px; }
+  .span12, .container { width: 724px; }
+  .offset1 { margin-left: 82px; }
+  .offset2 { margin-left: 144px; }
+  .offset3 { margin-left: 206px; }
+  .offset4 { margin-left: 268px; }
+  .offset5 { margin-left: 330px; }
+  .offset6 { margin-left: 392px; }
+  .offset7 { margin-left: 454px; }
+  .offset8 { margin-left: 516px; }
+  .offset9 { margin-left: 578px; }
+  .offset10 { margin-left: 640px; }
+  .offset11 { margin-left: 702px; }
+  .row-fluid { width: 100%; }
+  .row-fluid::before, .row-fluid::after { display: table; content: ""; }
+  .row-fluid::after { clear: both; }
+  .row-fluid > [class*=3D"span"] { float: left; margin-left: 2.76243%; }
+  .row-fluid > [class*=3D"span"]:first-child { margin-left: 0px; }
+  .row-fluid > .span1 { width: 5.8011%; }
+  .row-fluid > .span2 { width: 14.3646%; }
+  .row-fluid > .span3 { width: 22.9282%; }
+  .row-fluid > .span4 { width: 31.4917%; }
+  .row-fluid > .span5 { width: 40.0552%; }
+  .row-fluid > .span6 { width: 48.6188%; }
+  .row-fluid > .span7 { width: 57.1823%; }
+  .row-fluid > .span8 { width: 65.7459%; }
+  .row-fluid > .span9 { width: 74.3094%; }
+  .row-fluid > .span10 { width: 82.8729%; }
+  .row-fluid > .span11 { width: 91.4365%; }
+  .row-fluid > .span12 { width: 100%; }
+  input.span1, textarea.span1, .uneditable-input.span1 { width: 32px; }
+  input.span2, textarea.span2, .uneditable-input.span2 { width: 94px; }
+  input.span3, textarea.span3, .uneditable-input.span3 { width: 156px; }
+  input.span4, textarea.span4, .uneditable-input.span4 { width: 218px; }
+  input.span5, textarea.span5, .uneditable-input.span5 { width: 280px; }
+  input.span6, textarea.span6, .uneditable-input.span6 { width: 342px; }
+  input.span7, textarea.span7, .uneditable-input.span7 { width: 404px; }
+  input.span8, textarea.span8, .uneditable-input.span8 { width: 466px; }
+  input.span9, textarea.span9, .uneditable-input.span9 { width: 528px; }
+  input.span10, textarea.span10, .uneditable-input.span10 { width: 590px; }
+  input.span11, textarea.span11, .uneditable-input.span11 { width: 652px; }
+  input.span12, textarea.span12, .uneditable-input.span12 { width: 714px; }
+}
+
+@media (max-width: 979px) {=20
+  body { padding-top: 0px; }
+  .navbar-fixed-top { position: static; margin-bottom: 18px; }
+  .navbar-fixed-top .navbar-inner { padding: 5px; }
+  .navbar .container { width: auto; padding: 0px; }
+  .navbar .brand { padding-left: 10px; padding-right: 10px; margin: 0px 0px=
+ 0px -5px; }
+  .navbar .nav-collapse { clear: left; }
+  .navbar .nav { float: none; margin: 0px 0px 9px; }
+  .navbar .nav > li { float: none; }
+  .navbar .nav > li > a { margin-bottom: 2px; }
+  .navbar .nav > .divider-vertical { display: none; }
+  .navbar .nav .nav-header { color: rgb(153, 153, 153); text-shadow: none; =
+}
+  .navbar .nav > li > a, .navbar .dropdown-menu a { padding: 6px 15px; font=
+-weight: bold; color: rgb(153, 153, 153); border-radius: 3px; }
+  .navbar .dropdown-menu li + li a { margin-bottom: 2px; }
+  .navbar .nav > li > a:hover, .navbar .dropdown-menu a:hover { background-=
+color: rgb(34, 34, 34); }
+  .navbar .dropdown-menu { position: static; top: auto; left: auto; float: =
+none; display: block; max-width: none; margin: 0px 15px; padding: 0px; back=
+ground-color: transparent; border: none; border-radius: 0px; box-shadow: no=
+ne; }
+  .navbar .dropdown-menu::before, .navbar .dropdown-menu::after { display: =
+none; }
+  .navbar .dropdown-menu .divider { display: none; }
+  .navbar-form, .navbar-search { float: none; padding: 9px 15px; margin: 9p=
+x 0px; border-top: 1px solid rgb(34, 34, 34); border-bottom: 1px solid rgb(=
+34, 34, 34); box-shadow: rgba(255, 255, 255, 0.0980392) 0px 1px 0px inset, =
+rgba(255, 255, 255, 0.0980392) 0px 1px 0px; }
+  .navbar .nav.pull-right { float: none; margin-left: 0px; }
+  .navbar-static .navbar-inner { padding-left: 10px; padding-right: 10px; }
+  .btn-navbar { display: block; }
+  .nav-collapse { overflow: hidden; height: 0px; }
+}
+
+@media (min-width: 980px) {=20
+  .nav-collapse.collapse { height: auto !important; }
+}
+
+@media (min-width: 1200px) {=20
+  .row { margin-left: -30px; }
+  .row::before, .row::after { display: table; content: ""; }
+  .row::after { clear: both; }
+  [class*=3D"span"] { float: left; margin-left: 30px; }
+  .span1 { width: 70px; }
+  .span2 { width: 170px; }
+  .span3 { width: 270px; }
+  .span4 { width: 370px; }
+  .span5 { width: 470px; }
+  .span6 { width: 570px; }
+  .span7 { width: 670px; }
+  .span8 { width: 770px; }
+  .span9 { width: 870px; }
+  .span10 { width: 970px; }
+  .span11 { width: 1070px; }
+  .span12, .container { width: 1170px; }
+  .offset1 { margin-left: 130px; }
+  .offset2 { margin-left: 230px; }
+  .offset3 { margin-left: 330px; }
+  .offset4 { margin-left: 430px; }
+  .offset5 { margin-left: 530px; }
+  .offset6 { margin-left: 630px; }
+  .offset7 { margin-left: 730px; }
+  .offset8 { margin-left: 830px; }
+  .offset9 { margin-left: 930px; }
+  .offset10 { margin-left: 1030px; }
+  .offset11 { margin-left: 1130px; }
+  .row-fluid { width: 100%; }
+  .row-fluid::before, .row-fluid::after { display: table; content: ""; }
+  .row-fluid::after { clear: both; }
+  .row-fluid > [class*=3D"span"] { float: left; margin-left: 2.5641%; }
+  .row-fluid > [class*=3D"span"]:first-child { margin-left: 0px; }
+  .row-fluid > .span1 { width: 5.98291%; }
+  .row-fluid > .span2 { width: 14.5299%; }
+  .row-fluid > .span3 { width: 23.0769%; }
+  .row-fluid > .span4 { width: 31.6239%; }
+  .row-fluid > .span5 { width: 40.1709%; }
+  .row-fluid > .span6 { width: 48.7179%; }
+  .row-fluid > .span7 { width: 57.265%; }
+  .row-fluid > .span8 { width: 65.812%; }
+  .row-fluid > .span9 { width: 74.359%; }
+  .row-fluid > .span10 { width: 82.906%; }
+  .row-fluid > .span11 { width: 91.453%; }
+  .row-fluid > .span12 { width: 100%; }
+  input.span1, textarea.span1, .uneditable-input.span1 { width: 60px; }
+  input.span2, textarea.span2, .uneditable-input.span2 { width: 160px; }
+  input.span3, textarea.span3, .uneditable-input.span3 { width: 260px; }
+  input.span4, textarea.span4, .uneditable-input.span4 { width: 360px; }
+  input.span5, textarea.span5, .uneditable-input.span5 { width: 460px; }
+  input.span6, textarea.span6, .uneditable-input.span6 { width: 560px; }
+  input.span7, textarea.span7, .uneditable-input.span7 { width: 660px; }
+  input.span8, textarea.span8, .uneditable-input.span8 { width: 760px; }
+  input.span9, textarea.span9, .uneditable-input.span9 { width: 860px; }
+  input.span10, textarea.span10, .uneditable-input.span10 { width: 960px; }
+  input.span11, textarea.span11, .uneditable-input.span11 { width: 1060px; =
+}
+  input.span12, textarea.span12, .uneditable-input.span12 { width: 1160px; =
+}
+  .thumbnails { margin-left: -30px; }
+  .thumbnails > li { margin-left: 30px; }
+}
+------MultipartBoundary--TJ96w9fUA7yjllh1YuJK8WyLDucvOglwcwQdigSjPm----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://aosabook.org/en/500L/theme/css/code.css
+
+@charset "utf-8";
+
+.sourceCode span.kw { color: rgb(0, 112, 32); font-weight: bold; }
+
+.sourceCode span.dt { color: rgb(144, 32, 0); }
+
+.sourceCode span.dv { color: rgb(64, 160, 112); }
+
+.sourceCode span.bn { color: rgb(64, 160, 112); }
+
+.sourceCode span.fl { color: rgb(64, 160, 112); }
+
+.sourceCode span.ch { color: rgb(64, 112, 160); }
+
+.sourceCode span.st { color: rgb(64, 112, 160); }
+
+.sourceCode span.co { color: rgb(96, 160, 176); font-style: italic; }
+
+.sourceCode span.al { color: red; font-weight: bold; }
+
+.sourceCode span.fu { color: rgb(6, 40, 126); }
+
+.sourceCode span.re { }
+
+.sourceCode span.er { color: red; font-weight: bold; }
+------MultipartBoundary--TJ96w9fUA7yjllh1YuJK8WyLDucvOglwcwQdigSjPm----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://aosabook.org/en/500L/theme/css/500L.css
+
+@charset "utf-8";
+
+img.cover { display: block; margin-left: auto; margin-right: auto; padding-=
+bottom: 2em; }
+
+body.help { margin-left: auto; margin-right: auto; }
+
+div.box { display: block; margin-left: auto; margin-right: auto; outline: g=
+ray solid 1px; padding: 1px 10px; }
+
+div.figure { display: block; margin-left: auto; margin-right: auto; padding=
+: 1px 10px; text-align: center; }
+
+div.footnotes { border-top: 1px solid gray; }
+
+div.footnotes h2 { font-style: italic; }
+
+div.sect h2 { font-style: italic; }
+
+div.subsect h3 { font-style: italic; }
+
+div.table { display: block; margin-left: auto; margin-right: auto; padding:=
+ 1px 10px; text-align: center; }
+
+div.table table { font-size: small; margin-left: auto; margin-right: auto; =
+outline: gray solid 1px; }
+
+dl.faq dt { font-style: italic; }
+
+dl.faq dd { margin-bottom: 10px; }
+
+h1.chaptertitle { font-style: italic; font-size: xx-large; }
+
+h1.chapterauthor { font-style: italic; font-size: x-large; }
+
+p.boxtitle { text-align: center; font-style: italic; font-weight: bold; }
+
+p.pullquote { font-style: italic; }
+
+table.bibtable td { text-align: center; }
+
+table.tasks th { vertical-align: top; }
+
+td { vertical-align: top; }
+
+td.center { vertical-align: top; text-align: center; }
+
+th { text-align: left; }
+
+th.center { text-align: center; }
+
+.table-striped tbody tr:nth-child(2n+1) td, table.table-striped tbody tr:nt=
+h-child(2n+1) th { background-color: rgb(211, 229, 240); }
+
+.hero-unit { background-color: rgb(200, 217, 227); }
+
+.center { text-align: center; }
+
+* + table { border-style: solid; border-width: 1px; border-color: rgb(231, =
+227, 231); }
+
+* + table th, * + table td { border-style: dashed; border-width: 1px; borde=
+r-color: rgb(231, 227, 231); padding-left: 3px; padding-right: 3px; }
+
+* + table th { border-style: solid; font-weight: bold; background: url("/im=
+ages/noise.png?1330434582") left top repeat scroll rgb(247, 243, 247); }
+
+* + table th[align=3D"left"], * + table td[align=3D"left"] { text-align: le=
+ft; }
+
+* + table th[align=3D"right"], * + table td[align=3D"right"] { text-align: =
+right; }
+
+* + table th[align=3D"center"], * + table td[align=3D"center"] { text-align=
+: center; }
+------MultipartBoundary--TJ96w9fUA7yjllh1YuJK8WyLDucvOglwcwQdigSjPm----
+Content-Type: text/html
+Content-ID: <frame-118-c9957e7e-9b2b-4b59-9dbb-daed47adc904@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
+=3DUTF-8"></head><body></body></html>
+------MultipartBoundary--TJ96w9fUA7yjllh1YuJK8WyLDucvOglwcwQdigSjPm------
