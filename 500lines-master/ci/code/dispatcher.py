@@ -19,6 +19,8 @@ import threading
 
 import helpers
 
+# detailed comments refer to my cloud note 500 Lines or Less
+
 
 # Shared dispatcher code
 def dispatch_tests(server, commit_id):

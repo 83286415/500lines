@@ -21,6 +21,8 @@ import unittest
 
 import helpers
 
+# detailed comments refer to my cloud note 500 Lines or Less
+
 
 class ThreadingTCPServer(SocketServer.ThreadingMixIn, SocketServer.TCPServer):
     dispatcher_server = None # Holds the dispatcher server host/port information

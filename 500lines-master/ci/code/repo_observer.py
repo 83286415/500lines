@@ -16,6 +16,8 @@ import time
 
 import helpers
 
+# detailed comments refer to my cloud note 500 Lines or Less
+
 
 def poll():
     parser = argparse.ArgumentParser()
