@@ -34,7 +34,7 @@ JOIN_RETRANSMIT = 0.7
 CATCHUP_INTERVAL = 0.6
 ACCEPT_RETRANSMIT = 1.0
 PREPARE_RETRANSMIT = 1.0
-INVOKE_RETRANSMIT = 0.5
+INVOKE_RETRANSMIT = 0.5  # re send time delay
 LEADER_TIMEOUT = 1.0
 NULL_BALLOT = Ballot(-1, -1)  # sorts before all real ballots
 NOOP_PROPOSAL = Proposal(None, None, None)  # no-op to fill otherwise empty slots
@@ -67,6 +67,7 @@ class Node(object):
             fn(sender=sender, **message._asdict())
 
 class Timer(object):
+    # 具有heap操作，子节点大于父节点
 
     def __init__(self, expires, address, callback):
         self.expires = expires
@@ -82,8 +83,8 @@ class Timer(object):
 
 class Network(object):
     PROP_DELAY = 0.03
-    PROP_JITTER = 0.02
-    DROP_PROB = 0.05
+    PROP_JITTER = 0.02  # 抖动
+    DROP_PROB = 0.05  # 丢包
 
     def __init__(self, seed):
         self.nodes = {}
@@ -92,27 +93,27 @@ class Network(object):
         self.now = 1000.0
 
     def new_node(self, address=None):
-        node = Node(self, address=address)
+        node = Node(self, address=address)  # address是0~6整数
         self.nodes[node.address] = node
         return node
 
     def run(self):
-        while self.timers:
-            next_timer = self.timers[0]
-            if next_timer.expires > self.now:
+        while self.timers:  # 只要timers列表不空
+            next_timer = self.timers[0]  # next_timer最小
+            if next_timer.expires > self.now:  # expires = self.now + seconds
                 self.now = next_timer.expires
-            heapq.heappop(self.timers)
+            heapq.heappop(self.timers)  # 弹出最小timer
             if next_timer.cancelled:
                 continue
             if not next_timer.address or next_timer.address in self.nodes:
-                next_timer.callback()
+                next_timer.callback()  # Requester发出每轮的request
 
     def stop(self):
-        self.timers = []
+        self.timers = []  # 清空timer列表
 
     def set_timer(self, address, seconds, callback):
         timer = Timer(self.now + seconds, address, callback)
-        heapq.heappush(self.timers, timer)
+        heapq.heappush(self.timers, timer)  # 把timer插入timers列表
         return timer
 
     def send(self, sender, destinations, message):
@@ -129,14 +130,14 @@ class Network(object):
         for dest in (d for d in destinations if d in self.nodes):
             sendto(dest, copy.deepcopy(message))
 
-class SimTimeLogger(logging.LoggerAdapter):
+class SimTimeLogger(logging.LoggerAdapter):  # debugging support
 
-    def process(self, msg, kwargs):
+    def process(self, msg, kwargs):  # 处理message格式，让时间戳那一定格式显示
         return "T=%.3f %s" % (self.extra['network'].now, msg), kwargs
 
     def getChild(self, name):
         return self.__class__(self.logger.getChild(name),
-                              {'network': self.extra['network']})
+                              {'network': self.extra['network']})  # 返回子类logger的名字
 
 class Role(object):
 
@@ -217,10 +218,10 @@ class Replica(Role):
 
     def do_Decision(self, sender, slot, proposal):
         assert not self.decisions.get(self.slot, None), \
-                "next slot to commit is already decided"
+            "next slot to commit is already decided"  # 保证下一个slot的proposal不能是None，应该是decided的。
         if slot in self.decisions:
             assert self.decisions[slot] == proposal, \
-                "slot %d already decided with %r!" % (slot, self.decisions[slot])
+                "slot %d already decided with %r!" % (slot, self.decisions[slot])  # 这两个assert保证捕获slot已经decided
             return
         self.decisions[slot] = proposal
         self.next_slot = max(self.next_slot, slot + 1)
@@ -250,6 +251,7 @@ class Replica(Role):
         if proposal.caller is not None:
             # perform a client operation
             self.state, output = self.execute_fn(self.state, proposal.input)
+            # key_value_state_machine(state, input_value) in run.py
             self.node.send([proposal.caller], Invoked(client_id=proposal.client_id, output=output))
 
     # tracking the leader
@@ -428,8 +430,8 @@ class Bootstrap(Role):
                  replica_cls=Replica, acceptor_cls=Acceptor, leader_cls=Leader,
                  commander_cls=Commander, scout_cls=Scout):
         super(Bootstrap, self).__init__(node)
-        self.execute_fn = execute_fn
-        self.peers = peers
+        self.execute_fn = execute_fn  # key_value_state_machine(state, input_value)
+        self.peers = peers  # [N0, N1, N2, N3, N4, N5, N6]
         self.peers_cycle = itertools.cycle(peers)
         self.replica_cls = replica_cls
         self.acceptor_cls = acceptor_cls
@@ -455,10 +457,10 @@ class Bootstrap(Role):
 class Seed(Role):
 
     def __init__(self, node, initial_state, execute_fn, peers, bootstrap_cls=Bootstrap):
-        super(Seed, self).__init__(node)
-        self.initial_state = initial_state
-        self.execute_fn = execute_fn
-        self.peers = peers
+        super(Seed, self).__init__(node)  # node N0
+        self.initial_state = initial_state  # blank dict
+        self.execute_fn = execute_fn  # key_value_state_machine(state, input_value)
+        self.peers = peers  # [N0, N1, N2, N3, N4, N5, N6]
         self.bootstrap_cls = bootstrap_cls
         self.seen_peers = set([])
         self.exit_timer = None
@@ -491,14 +493,15 @@ class Requester(Role):
     def __init__(self, node, n, callback):
         super(Requester, self).__init__(node)
         self.client_id = self.client_ids.next()
-        self.n = n
+        self.n = n  # input: request
         self.output = None
-        self.callback = callback
+        self.callback = callback  # callback: req_done(output)
 
     def start(self):
         self.node.send([self.node.address], Invoke(caller=self.node.address,
                                                    client_id=self.client_id, input_value=self.n))
-        self.invoke_timer = self.set_timer(INVOKE_RETRANSMIT, self.start)
+        # send(sender, destination, message):
+        self.invoke_timer = self.set_timer(INVOKE_RETRANSMIT, self.start)  # INVOKE_RETRANSMIT: re-send time delay 0.5s
 
     def do_Invoked(self, sender, client_id, output):
         if client_id != self.client_id:
