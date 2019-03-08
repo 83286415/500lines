@@ -17,10 +17,10 @@ import reporting
 ARGS = argparse.ArgumentParser(description="Web crawler")
 ARGS.add_argument(
     '--iocp', action='store_true', dest='iocp',
-    default=False, help='Use IOCP event loop (Windows only)')
+    default=False, help='Use IOCP event loop (Windows only)')  # 支持多个同时进行的异步IO操作，高效
 ARGS.add_argument(
     '--select', action='store_true', dest='select',
-    default=False, help='Use Select event loop instead of default')
+    default=False, help='Use Select event loop instead of default')  # 低效，对检索长度有限制
 ARGS.add_argument(
     'roots', nargs='*',
     default=[], help='Root URL (may be repeated)')
@@ -41,14 +41,16 @@ ARGS.add_argument(
     default=True, help='Strict host matching (default)')
 ARGS.add_argument(
     '--lenient', action='store_false', dest='strict',
-    default=False, help='Lenient host matching')
+    default=False, help='Lenient host matching')  # 忽略掉url中的www.
 ARGS.add_argument(
     '-v', '--verbose', action='count', dest='level',
     default=2, help='Verbose logging (repeat for more verbose)')
 ARGS.add_argument(
     '-q', '--quiet', action='store_const', const=0, dest='level',
     default=2, help='Only log errors')
+    # levels = [logging.ERROR, logging.WARN, logging.INFO, logging.DEBUG] defalut=2 -> INFO
 
+# TODO: add a file args to output report
 
 def fix_url(url):
     """Prefix a schema-less URL with http://."""
@@ -67,20 +69,21 @@ def main():
         print('Use --help for command line help')
         return
 
-    levels = [logging.ERROR, logging.WARN, logging.INFO, logging.DEBUG]
+    levels = [logging.ERROR, logging.WARN, logging.INFO, logging.DEBUG]  # ERROR=0 WARN=1 越小越严重
     logging.basicConfig(level=levels[min(args.level, len(levels)-1)])
 
+    # 以下条件语句内区分了不同的循环方式，IOCP,select等，涉及系统底层socket操作，代码层面略。
     if args.iocp:
         from asyncio.windows_events import ProactorEventLoop
         loop = ProactorEventLoop()
         asyncio.set_event_loop(loop)
-    elif args.select:
+    elif args.select:  # 效率较低
         loop = asyncio.SelectorEventLoop()
         asyncio.set_event_loop(loop)
     else:
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_event_loop()  # 默认循环方式
 
-    roots = {fix_url(root) for root in args.roots}
+    roots = {fix_url(root) for root in args.roots}  # args.roots is a list
 
     crawler = crawling.Crawler(roots,
                                exclude=args.exclude,
@@ -92,17 +95,17 @@ def main():
     try:
         loop.run_until_complete(crawler.crawl())  # Crawler gonna crawl.
     except KeyboardInterrupt:
-        sys.stderr.flush()
+        sys.stderr.flush()  # 清理内存
         print('\nInterrupted\n')
     finally:
-        reporting.report(crawler)
-        crawler.close()
+        reporting.report(crawler)  # 打印爬取结果，或输出结果到文件
+        crawler.close()  # aiohttp loop close
 
         # next two lines are required for actual aiohttp resource cleanup
         loop.stop()
-        loop.run_forever()
+        loop.run_forever()  # clean up process
 
-        loop.close()
+        loop.close()  # 移除signal处理器
 
 
 if __name__ == '__main__':

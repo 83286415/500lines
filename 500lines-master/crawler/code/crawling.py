@@ -1,7 +1,9 @@
 """A simple web crawler -- class implementing crawling logic."""
 
-import asyncio
-import cgi
+import asyncio  # support to asyn IO operation
+# https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432090954004980bd351f2cd4cc18c
+# 9e6c06d855c498000
+import cgi  # parse header of web page
 from collections import namedtuple
 import logging
 import re
@@ -16,13 +18,16 @@ except ImportError:
     from asyncio import Queue
 
 import aiohttp  # Install with "pip install aiohttp".
+# support to single thread IO
+# aiohttp could concurrent with coroutines
 
-LOGGER = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)  # return a logger instance from factory method
+# logger's config is made in crawl.py. So just get it and use it. https://www.cnblogs.com/i-honey/p/8052579.html
 
 
 def lenient_host(host):
     parts = host.split('.')[-2:]
-    return ''.join(parts)
+    return ''.join(parts)  # 如果host是www.zhihu.com，那么返回的是zhihu.com，省略了www.
 
 
 def is_redirect(response):
@@ -58,28 +63,28 @@ class Crawler:
         self.max_redirect = max_redirect
         self.max_tries = max_tries
         self.max_tasks = max_tasks
-        self.q = Queue(loop=self.loop)
+        self.q = Queue(loop=self.loop)  # url执行队列，使用put将url放入队列供爬虫爬取
         self.seen_urls = set()
-        self.done = []
-        self.session = aiohttp.ClientSession(loop=self.loop)
+        self.done = []  # 完成列表，每个元素是访问url后的具名元组FetchStatistic
+        self.session = aiohttp.ClientSession(loop=self.loop)  # 单线程IO操作
         self.root_domains = set()
         for root in roots:
-            parts = urllib.parse.urlparse(root)
-            host, port = urllib.parse.splitport(parts.netloc)
+            parts = urllib.parse.urlparse(root)  # return 6 parts includes netloc(host+port)
+            host, port = urllib.parse.splitport(parts.netloc)  # www.baidu.com, 80
             if not host:
                 continue
-            if re.match(r'\A[\d\.]*\Z', host):
+            if re.match(r'\A[\d\.]*\Z', host):  # 如果url是全数字
                 self.root_domains.add(host)
             else:
                 host = host.lower()
                 if self.strict:
                     self.root_domains.add(host)
-                else:
+                else:  # 省略www.
                     self.root_domains.add(lenient_host(host))
         for root in roots:
-            self.add_url(root)
-        self.t0 = time.time()
-        self.t1 = None
+            self.add_url(root)  # add url to seen_urls set
+        self.t0 = time.time()  # bgn time
+        self.t1 = None  # end time
 
     def close(self):
         """Close resources."""
@@ -98,9 +103,9 @@ class Crawler:
         if re.match(r'\A[\d\.]*\Z', host):
             return False
         if self.strict:
-            return self._host_okay_strictish(host)
+            return self._host_okay_strictish(host)  # 带www.
         else:
-            return self._host_okay_lenient(host)
+            return self._host_okay_lenient(host)  # 不带www.
 
     def _host_okay_strictish(self, host):
         """Check if a host should be crawled, strict-ish version.
@@ -127,10 +132,10 @@ class Crawler:
         links = set()
         content_type = None
         encoding = None
-        body = yield from response.read()
+        body = yield from response.read()  # 返回网页代码的<body>内容
 
         if response.status == 200:
-            content_type = response.headers.get('content-type')
+            content_type = response.headers.get('content-type')  # 只分析头部有content-type的
             pdict = {}
 
             if content_type:
@@ -142,7 +147,7 @@ class Crawler:
 
                 # Replace href with (?:href|src) to follow image links.
                 urls = set(re.findall(r'''(?i)href=["']([^\s"'<>]+)''',
-                                      text))
+                                      text))  # 在href中找urls
                 if urls:
                     LOGGER.info('got %r distinct urls from %r',
                                 len(urls), response.url)
@@ -174,6 +179,7 @@ class Crawler:
             try:
                 response = yield from self.session.get(
                     url, allow_redirects=False)
+                # session是个单线程IO操作，访问url，返回response。结合@asyncio.coroutine达成多线程异步IO操作
 
                 if tries > 1:
                     LOGGER.info('try %r for %r success', tries, url)
@@ -202,7 +208,7 @@ class Crawler:
         try:
             if is_redirect(response):
                 location = response.headers['location']
-                next_url = urllib.parse.urljoin(url, location)
+                next_url = urllib.parse.urljoin(url, location)  # 是跳转下级连接，需要拼接出完整连接
                 self.record_statistic(FetchStatistic(url=url,
                                                      next_url=next_url,
                                                      status=response.status,
@@ -221,11 +227,11 @@ class Crawler:
                 else:
                     LOGGER.error('redirect limit reached for %r from %r',
                                  next_url, url)
-            else:
+            else:  # 不是跳转下级，是完整link，则需要分析link，即下一环的协程工作
                 stat, links = yield from self.parse_links(response)
                 self.record_statistic(stat)
-                for link in links.difference(self.seen_urls):
-                    self.q.put_nowait((link, self.max_redirect))
+                for link in links.difference(self.seen_urls):  # 在links里，但不在seen_urls里
+                    self.q.put_nowait((link, self.max_redirect))  # 放入执行队列
                 self.seen_urls.update(links)
         finally:
             yield from response.release()
@@ -236,7 +242,7 @@ class Crawler:
         try:
             while True:
                 url, max_redirect = yield from self.q.get()
-                assert url in self.seen_urls
+                assert url in self.seen_urls  # 如果url不在seen_urls里，则跳进except
                 yield from self.fetch(url, max_redirect)
                 self.q.task_done()
         except asyncio.CancelledError:
@@ -246,11 +252,11 @@ class Crawler:
         if self.exclude and re.search(self.exclude, url):
             return False
         parts = urllib.parse.urlparse(url)
-        if parts.scheme not in ('http', 'https'):
+        if parts.scheme not in ('http', 'https'):  # 过滤非法url
             LOGGER.debug('skipping non-http scheme in %r', url)
             return False
         host, port = urllib.parse.splitport(parts.netloc)
-        if not self.host_okay(host):
+        if not self.host_okay(host):  # 过滤那些root url不在roots列表里的，roots列表见crawl.py
             LOGGER.debug('skipping non-root host in %r', url)
             return False
         return True
@@ -263,13 +269,15 @@ class Crawler:
         self.seen_urls.add(url)
         self.q.put_nowait((url, max_redirect))
 
-    @asyncio.coroutine
+    @asyncio.coroutine  # 异步协程：爬取执行到yield from时并不会停止等待，而是立刻执行loop中的下一个爬取crawl函数
     def crawl(self):
         """Run the crawler until all finished."""
         workers = [asyncio.Task(self.work(), loop=self.loop)
-                   for _ in range(self.max_tasks)]
+                   for _ in range(self.max_tasks)]  # 创建100个workers的list，其中每个work就是一个task(thread)
         self.t0 = time.time()
-        yield from self.q.join()
+        yield from self.q.join()  # 等待所有线程worker完成工作
+        # yield from 解释见： https://www.cnblogs.com/wongbingming/p/9085268.html
+        # 每个耗时的动作都编写一个@asyncio.coroutine下的def，然后在这个def内用yield from连接另外一个耗时的同candy的def
         self.t1 = time.time()
         for w in workers:
-            w.cancel()
+            w.cancel()  # cancel this task
