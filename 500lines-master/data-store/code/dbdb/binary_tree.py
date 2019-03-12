@@ -70,13 +70,13 @@ class BinaryNodeRef(ValueRef):
         )
 
 
-class BinaryTree(LogicalBase):
+class BinaryTree(LogicalBase):  # 详见BasicPython 二叉树部分。二叉树的已有结构是不会发生改变的，而且搜索效率较高。
     node_ref_class = BinaryNodeRef
 
-    def _get(self, node, key):
+    def _get(self, node, key):  # # 这个具体实现在LogicalBase中被抽象get所调用
         while node is not None:
             if key < node.key:
-                node = self._follow(node.left_ref)
+                node = self._follow(node.left_ref)  # 沿着左孩子往下找
             elif node.key < key:
                 node = self._follow(node.right_ref)
             else:

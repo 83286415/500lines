@@ -1,7 +1,7 @@
 from __future__ import print_function
 import sys
 
-import dbdb
+import dbdb  # import一个文件夹，就是import这个文件夹下的__init__.py
 
 
 OK = 0
@@ -10,7 +10,7 @@ BAD_VERB = 2
 BAD_KEY = 3
 
 
-def usage():
+def usage():  # 这个usage的写法可以和argparse结合一下
     print("Usage:", file=sys.stderr)
     print("\tpython -m dbdb.tool DBNAME get KEY", file=sys.stderr)
     print("\tpython -m dbdb.tool DBNAME set KEY VALUE", file=sys.stderr)
@@ -21,11 +21,11 @@ def main(argv):
     if not (4 <= len(argv) <= 5):
         usage()
         return BAD_ARGS
-    dbname, verb, key, value = (argv[1:] + [None])[:4]
+    dbname, verb, key, value = (argv[1:] + [None])[:4]  # (DBNAME, get, Key, VALUE) None是有可能用get，delete时无value
     if verb not in {'get', 'set', 'delete'}:
         usage()
         return BAD_VERB
-    db = dbdb.connect(dbname)
+    db = dbdb.connect(dbname)  # import dbdb from dbdb.__init__.py
     try:
         if verb == 'get':
             sys.stdout.write(db[key])

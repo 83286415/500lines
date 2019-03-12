@@ -127,7 +127,7 @@ class Crawler:
         self.done.append(fetch_statistic)
 
     @asyncio.coroutine
-    def parse_links(self, response):
+    def parse_links(self, response):  # 这def里的内容好像和现在主流的网页代码不太match，需要使用，需修改
         """Return a FetchStatistic and list of links."""
         links = set()
         content_type = None
@@ -228,7 +228,7 @@ class Crawler:
                     LOGGER.error('redirect limit reached for %r from %r',
                                  next_url, url)
             else:  # 不是跳转下级，是完整link，则需要分析link，即下一环的协程工作
-                stat, links = yield from self.parse_links(response)
+                stat, links = yield from self.parse_links(response)  # 提取并分析link
                 self.record_statistic(stat)
                 for link in links.difference(self.seen_urls):  # 在links里，但不在seen_urls里
                     self.q.put_nowait((link, self.max_redirect))  # 放入执行队列
