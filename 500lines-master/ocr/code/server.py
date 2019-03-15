@@ -25,8 +25,8 @@ class JSONHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         response_code = 200
         response = ""
         var_len = int(s.headers.get('Content-Length'))
-        content = s.rfile.read(var_len);
-        payload = json.loads(content);
+        content = s.rfile.read(var_len)  # 读取json字符串
+        payload = json.loads(content)  # json->dict
 
         if payload.get('train'):
             nn.train(payload['trainArray'])
@@ -35,9 +35,9 @@ class JSONHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             try:
                 response = {"type":"test", "result":nn.predict(str(payload['image']))}
             except:
-                response_code = 500
+                response_code = 500  # 简单处理其他异常
         else:
-            response_code = 400
+            response_code = 400  # 简单处理其他异常
 
         s.send_response(response_code)
         s.send_header("Content-type", "application/json")
@@ -48,14 +48,14 @@ class JSONHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         return
 
 if __name__ == '__main__':
-    server_class = BaseHTTPServer.HTTPServer;
+    server_class = BaseHTTPServer.HTTPServer
     httpd = server_class((HOST_NAME, PORT_NUMBER), JSONHandler)
 
     try:
-        httpd.serve_forever()
+        httpd.serve_forever()  # 一直运行server监听POST请求
     except KeyboardInterrupt:
         pass
     else:
-        print "Unexpected server exception occurred."
+        print("Unexpected server exception occurred.")
     finally:
         httpd.server_close()

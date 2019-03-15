@@ -19,8 +19,11 @@ what a drawn digit is by calling predict().
 The weights that define the neural network can be saved to a file, NN_FILE_PATH,
 to be reloaded upon initilization.
 """
+
+
+# refer to my cloud note for more detailed info
 class OCRNeuralNetwork:
-    LEARNING_RATE = 0.1
+    LEARNING_RATE = 0.1  # LEARNING_RATE:0~1   1:fast but not accuracy     0: slot but more accuracy
     WIDTH_IN_PIXELS = 20
     NN_FILE_PATH = 'nn.json'
 
@@ -33,7 +36,7 @@ class OCRNeuralNetwork:
 
         if (not os.path.isfile(OCRNeuralNetwork.NN_FILE_PATH) or not use_file):
             # Step 1: Initialize weights to small numbers
-            self.theta1 = self._rand_initialize_weights(400, num_hidden_nodes)
+            self.theta1 = self._rand_initialize_weights(400, num_hidden_nodes)  # 400 = 20*20 pixels
             self.theta2 = self._rand_initialize_weights(num_hidden_nodes, 10)
             self.input_layer_bias = self._rand_initialize_weights(1, num_hidden_nodes)
             self.hidden_layer_bias = self._rand_initialize_weights(1, 10)
@@ -48,7 +51,7 @@ class OCRNeuralNetwork:
     def _rand_initialize_weights(self, size_in, size_out):
         return [((x * 0.12) - 0.06) for x in np.random.rand(size_out, size_in)]
 
-    # The sigmoid activation function. Operates on scalars.
+    # The sigmoid activation function. Operates on scalars. TODO: what's this used for?
     def _sigmoid_scalar(self, z):
         return 1 / (1 + math.e ** -z)
 
@@ -77,7 +80,7 @@ class OCRNeuralNetwork:
             output_errors = np.mat(actual_vals).T - np.mat(y2)
             hidden_errors = np.multiply(np.dot(np.mat(self.theta2).T, output_errors), self.sigmoid_prime(sum1))
 
-            # Step 4: Update weights
+            # Step 4: Update weights    LEARNING_RATE:0~1   1:fast but not accuracy     0: slot but more accuracy
             self.theta1 += self.LEARNING_RATE * np.dot(np.mat(hidden_errors), np.mat(data['y0']))
             self.theta2 += self.LEARNING_RATE * np.dot(np.mat(output_errors), np.mat(y1).T)
             self.hidden_layer_bias += self.LEARNING_RATE * output_errors
@@ -100,7 +103,7 @@ class OCRNeuralNetwork:
             return
 
         json_neural_network = {
-            "theta1":[np_mat.tolist()[0] for np_mat in self.theta1],
+            "theta1":[np_mat.tolist()[0] for np_mat in self.theta1],  # 数组转列表，且列表单元素
             "theta2":[np_mat.tolist()[0] for np_mat in self.theta2],
             "b1":self.input_layer_bias[0].tolist()[0],
             "b2":self.hidden_layer_bias[0].tolist()[0]
@@ -114,7 +117,7 @@ class OCRNeuralNetwork:
 
         with open(OCRNeuralNetwork.NN_FILE_PATH) as nnFile:
             nn = json.load(nnFile)
-        self.theta1 = [np.array(li) for li in nn['theta1']]
+        self.theta1 = [np.array(li) for li in nn['theta1']]  # 列表转数组
         self.theta2 = [np.array(li) for li in nn['theta2']]
         self.input_layer_bias = [np.array(nn['b1'][0])]
         self.hidden_layer_bias = [np.array(nn['b2'][0])]

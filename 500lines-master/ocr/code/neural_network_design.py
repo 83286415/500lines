@@ -14,7 +14,7 @@ from sklearn.cross_validation import train_test_split
 
 def test(data_matrix, data_labels, test_indices, nn):
     avg_sum = 0
-    for j in xrange(100):
+    for j in xrange(100):   # 测试100次预测（分类classification）
         correct_guess_count = 0
         for i in test_indices:
             test = data_matrix[i]
@@ -33,11 +33,24 @@ data_labels = np.loadtxt(open('dataLabels.csv', 'rb')).tolist()
 # Create training and testing sets.
 train_indices, test_indices = train_test_split(list(range(5000)))
 
-print "PERFORMANCE"
-print "-----------"
+print("PERFORMANCE")
+print("-----------")
 
 # Try various number of hidden nodes and see what performs best
-for i in xrange(5, 50, 5):
+for i in xrange(5, 50, 5):  # 隐藏点
     nn = OCRNeuralNetwork(i, data_matrix, data_labels, train_indices, False)
     performance = str(test(data_matrix, data_labels, test_indices, nn))
     print "{i} Hidden Nodes: {val}".format(i=i, val=performance)
+
+# output:
+# PERFORMANCE
+# -----------
+# 5 Hidden Nodes: 0.7792
+# 10 Hidden Nodes: 0.8704
+# 15 Hidden Nodes: 0.8808
+# 20 Hidden Nodes: 0.8864
+# 25 Hidden Nodes: 0.8808
+# 30 Hidden Nodes: 0.888
+# 35 Hidden Nodes: 0.8904
+# 40 Hidden Nodes: 0.8896
+# 45 Hidden Nodes: 0.8928
