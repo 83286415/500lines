@@ -6,6 +6,7 @@ class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     '''Respond to HTTP requests with info about the request.'''
 
     # Template for page to send back.
+    # Page is a class property which can be changed by class or instance, used in class's method with self.
     Page = '''\
 <html>
 <body>
@@ -35,8 +36,11 @@ class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             'client_port' : self.client_address[1],
             'command'     : self.command,
             'path'        : self.path
-        }
-        page = self.Page.format(**values)
+        }  # path is the /something.html following IP from request. We can return a 404 if it is a invalid url.
+        # path is the /something.html following IP from request.
+        # We can return a 404 if it is a invalid url. Or we can return whatever we want.
+
+        page = self.Page.format(**values)  # string.format(**dict) to map values into Page
         return page
 
     # Send the created page.

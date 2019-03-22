@@ -14,7 +14,7 @@ class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     If anything goes wrong, an error page is constructed.
     '''
 
-    # How to display an error.
+    # How to display an error. path and msg is passed into error_handler def
     Error_Page = """\
         <html>
         <body>

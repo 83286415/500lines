@@ -11,10 +11,10 @@ class ServerException(Exception):
 class case_no_file(object):
     '''File or directory does not exist.'''
 
-    def test(self, handler):
+    def test(self, handler):  # if file exists, return False. Because class name is 'case no file'
         return not os.path.exists(handler.full_path)
 
-    def act(self, handler):
+    def act(self, handler):  # if no file, raise exception
         raise ServerException("'{0}' not found".format(handler.path))
 
 #-------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
     Cases = [case_no_file(),
              case_existing_file(),
-             case_always_fail()]
+             case_always_fail()]  # classes list with class() which is ready to instantiation
 
     # How to display an error.
     Error_Page = """\
@@ -67,10 +67,11 @@ class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
             # Figure out what exactly is being requested.
             self.full_path = os.getcwd() + self.path
+            # print(case_no_file().test(self))
 
             # Figure out how to handle it.
-            for case in self.Cases:
-                if case.test(self):
+            for case in self.Cases:  # loop classes in self.Case and make each class into instance 'case'
+                if case.test(self):  # instance's method(this handler class as the parameter)
                     case.act(self)
                     break
 
@@ -89,7 +90,7 @@ class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
     # Handle unknown objects.
     def handle_error(self, msg):
-        content = self.Error_Page.format(path=self.path, msg=msg)
+        content = self.Error_Page.format(path=self.path, msg=msg)  # path is extracted from IP/path
         self.send_content(content, 404)
 
     # Send actual content.

@@ -24,10 +24,10 @@ class case_cgi_file(object):
 
     def test(self, handler):
         return os.path.isfile(handler.full_path) and \
-               handler.full_path.endswith('.py')
+               handler.full_path.endswith('.py')  # return True if py file in this full path
 
     def act(self, handler):
-        handler.run_cgi(handler.full_path)
+        handler.run_cgi(handler.full_path)  # run this py file
 
 #-------------------------------------------------------------------------------
 
@@ -154,7 +154,7 @@ class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             self.handle_error(msg)
 
     def run_cgi(self, full_path):
-        cmd = "python " + full_path
+        cmd = "python " + full_path  # cmd = "python C:\Python27\xxx.py"
         child_stdin, child_stdout = os.popen2(cmd)
         child_stdin.close()
         data = child_stdout.read()
